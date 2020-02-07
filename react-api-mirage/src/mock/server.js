@@ -1,4 +1,4 @@
-import { Server, Model } from 'miragejs'
+import { Server, Model, Factory } from 'miragejs'
 
 export function makeServer({ environment = "development" } = {}) {
   let server = new Server({
@@ -10,9 +10,9 @@ export function makeServer({ environment = "development" } = {}) {
     seeds(server) {
       server.create('user', { name: 'Bob' })
       server.create('user', { name: 'Alice' })
-      server.create('movie', { title: 'The Intern', year: 20151010, country: 'America' })
-      server.create('movie', { title: 'The Devil Wears Prada', year: 20061118, country: 'America' })
-      server.create('movie', { title: 'Les Miserables', year: 20151221, country: 'United Kingdom' })
+      server.create('movie', { title: 'The Intern', releaseDate: 20151010, country: 'America' })
+      server.create('movie', { title: 'The Devil Wears Prada', releaseDate: 20061118, country: 'America' })
+      server.create('movie', { title: 'Les Miserables', releaseDate: 20151221, country: 'United Kingdom' })
     },
     routes() {
       this.namespace = 'api'

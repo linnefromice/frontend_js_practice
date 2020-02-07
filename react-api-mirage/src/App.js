@@ -40,7 +40,7 @@ function App() {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            {movie.title} / {movie.year} / {movie.country}
+            {movie.title} / {movie.releaseDate} / {movie.country}
           </li>
         ))}
       </ul>
