@@ -8,6 +8,16 @@ export function makeServer({ environment = "development" } = {}) {
       movie: Model,
     },
     factories: {
+      user: Factory.extend({
+        name(i) {
+          return `sample name ${i}`
+        },
+        age() {
+          const min = 6;
+          const max = 30;
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+      }),
       movie: Factory.extend({
         title(i) {
           return `Movie Title ${i}`
@@ -34,8 +44,11 @@ export function makeServer({ environment = "development" } = {}) {
       }),
     },
     seeds(server) {
+      server.create('user', { name: 'Mike', age: 15 })
       server.create('user', { name: 'Bob' })
       server.create('user', { name: 'Alice' })
+      server.create('user')
+      server.create('user')
       server.create('movie', { title: 'The Intern', releaseDate: 20151010, country: 'America' })
       server.create('movie', { title: 'The Devil Wears Prada', releaseDate: 20061118, country: 'America' })
       server.create('movie', { title: 'Les Miserables', releaseDate: 20151221, country: 'United Kingdom' })
