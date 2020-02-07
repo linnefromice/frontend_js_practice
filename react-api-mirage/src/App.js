@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
   let [users, setUsers] = useState([])
+  let [movies, setMovies] = useState([])
 
-  const fetchData = () => {
+  const fetchUserData = () => {
     fetch('/api/users')
       .then(res => res.json())
       .then(json => {
@@ -11,12 +12,23 @@ function App() {
       })
   }
 
+  const fetchMovieData = () => {
+    fetch('/api/movies')
+      .then(res => res.json())
+      .then(json => {
+        setMovies(json.movies)
+      })
+  }
+
+
   useEffect(() => {
-    fetchData()
+    fetchUserData()
+    fetchMovieData()
   }, [])
 
   return (
     <div>
+      <h3>USER</h3>
       <ul>
         {users.map(user => (
           <li key={user.id}>
@@ -24,6 +36,15 @@ function App() {
           </li>
         ))}
       </ul>
+      <h3>MOVIE</h3>
+      <ul>
+        {movies.map(movie => (
+          <li key={movie.id}>
+            {movie.title} / {movie.year} / {movie.country}
+          </li>
+        ))}
+      </ul>
+
     </div>
   );
 }
