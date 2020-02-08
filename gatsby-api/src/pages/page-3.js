@@ -16,7 +16,7 @@ const ThirdPage = () => {
 
   return (
     <Layout>
-      <SEO title="Page three" />
+      <SEO title="Qiita Sample" />
       <div>
         {datas.map((data) => 
           <li>{data.id}</li>
