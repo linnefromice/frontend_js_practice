@@ -20,6 +20,9 @@ const IndexPage = () => (
     <div>
       <Link to="/page-qiita/">Go to Qiita page</Link>
     </div>
+    <div>
+      <Link to="/page-nytimes/">Go to New York Times page</Link>
+    </div>
   </Layout>
 )
 

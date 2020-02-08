@@ -4,22 +4,25 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const QiitaPage = () => {
+const url = "https://api.nytimes.com/svc/topstories/v2/home.json"
+const api_key = "XXXX"
+
+const NyTimesPage = () => {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
-    fetch(`https://qiita.com/api/v2/tags?sort=count`)
+    fetch(`${url}?api-key=${api_key}`)
       .then(response => response.json())
       .then(resultDatas => {
-        setDatas(resultDatas);
+        setDatas(resultDatas.results);
       })
-  }, [])
+    }, [])
 
   return (
     <Layout>
-      <SEO title="Qiita Page" />
+      <SEO title="New York Times Page" />
       <div>
         {datas.map((data) => 
-          <li>{data.id}</li>
+          <li>{data.title}</li>
         )}
       </div>
       <Link to="/">Go back to the homepage</Link>
@@ -27,4 +30,4 @@ const QiitaPage = () => {
   );
 }
 
-export default QiitaPage
+export default NyTimesPage
