@@ -1,16 +1,30 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const SecondPage = () => (
-  <Layout>
-    <SEO title="Page three" />
-    <h1>Hi from the third page</h1>
-    <p>Welcome to page 3</p>
-    <Link to="/">Go back to the homepage</Link>
-  </Layout>
-)
+const ThirdPage = () => {
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    fetch(`https://qiita.com/api/v2/tags?sort=count`)
+      .then(response => response.json())
+      .then(resultDatas => {
+        setDatas(resultDatas);
+      })
+  }, [])
 
-export default SecondPage
+  return (
+    <Layout>
+      <SEO title="Page three" />
+      <div>
+        {datas.map((data) => 
+          <li>{data.id}</li>
+        )}
+      </div>
+      <Link to="/">Go back to the homepage</Link>
+    </Layout>
+  );
+}
+
+export default ThirdPage
