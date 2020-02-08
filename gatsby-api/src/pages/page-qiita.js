@@ -17,12 +17,12 @@ const QiitaPage = () => {
   return (
     <Layout>
       <SEO title="Qiita Page" />
+      <Link to="/">Go back to the homepage</Link>
       <div>
         {datas.map((data) => 
           <li>{data.id}</li>
         )}
       </div>
-      <Link to="/">Go back to the homepage</Link>
     </Layout>
   );
 }

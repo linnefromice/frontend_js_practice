@@ -20,12 +20,12 @@ const NyTimesPage = () => {
   return (
     <Layout>
       <SEO title="New York Times Page" />
+      <Link to="/">Go back to the homepage</Link>
       <div>
         {datas.map((data) => 
           <li>{data.title}</li>
         )}
       </div>
-      <Link to="/">Go back to the homepage</Link>
     </Layout>
   );
 }
