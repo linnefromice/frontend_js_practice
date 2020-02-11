@@ -23,6 +23,9 @@ const IndexPage = () => (
     <div>
       <Link to="/page-nytimes/">Go to New York Times page</Link>
     </div>
+    <div>
+      <Link to="/page-marvel/">Go to Marvel page</Link>
+    </div>
   </Layout>
 )
 
