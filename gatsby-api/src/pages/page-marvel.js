@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
+import md5 from "md5";
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const url = "https://gateway.marvel.com/v1/public/characters" // hard coding "characters"
 const ts = "1"
-const api_key = "XXXX"
-const hash = "f8f8379e2c88e5b003b7765cb1c730ea"
+const public_key = "2897bec72a68cf322e6f4cba8b778ada"
+const private_key = "XXXX"
 
 const MarvelPage = () => {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
-    fetch(`${url}?ts=${ts}&apikey=${api_key}&hash=${hash}`)
+    const hash = md5(ts + private_key + public_key)
+    // const hash = "48239221234fde584946e8b0bf6141bd"
+    fetch(`${url}?ts=${ts}&apikey=${public_key}&hash=${hash}`)
       .then(response => response.json())
       .then(resultDatas => {
         setDatas(resultDatas.data.results);
+      })
+      .catch(err => {
+        console.log(err)
       })
     }, [])
 
@@ -33,3 +39,4 @@ const MarvelPage = () => {
 }
 
 export default MarvelPage
+
