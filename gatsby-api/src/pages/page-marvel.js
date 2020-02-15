@@ -13,17 +13,20 @@ const private_key = "XXXX"
 const MarvelPage = () => {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
+    callApi()
+  }, [])
+
+  const callApi = () => {
     const hash = md5(ts + private_key + public_key)
-    // const hash = "48239221234fde584946e8b0bf6141bd"
     fetch(`${url}?ts=${ts}&apikey=${public_key}&hash=${hash}`)
       .then(response => response.json())
       .then(resultDatas => {
-        setDatas(resultDatas.data.results);
+        setDatas(resultDatas.data.results)
       })
       .catch(err => {
         console.log(err)
       })
-    }, [])
+  }
 
   return (
     <Layout>
