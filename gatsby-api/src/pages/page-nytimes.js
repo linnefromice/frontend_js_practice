@@ -10,12 +10,16 @@ const api_key = "XXXX"
 const NyTimesPage = () => {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
+    callApi()
+  }, [])
+
+  const callApi = () => {
     fetch(`${url}?api-key=${api_key}`)
       .then(response => response.json())
       .then(resultDatas => {
-        setDatas(resultDatas.results);
+        setDatas(resultDatas.results)
       })
-    }, [])
+  }
 
   return (
     <Layout>
