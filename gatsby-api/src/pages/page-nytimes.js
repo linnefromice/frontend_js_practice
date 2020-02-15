@@ -19,6 +19,9 @@ const NyTimesPage = () => {
       .then(resultDatas => {
         setDatas(resultDatas.results)
       })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
