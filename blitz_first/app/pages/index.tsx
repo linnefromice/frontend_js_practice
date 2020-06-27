@@ -26,6 +26,13 @@ const Home = () => (
           <a>/projects</a>
         </Link>
       </p>
+
+      <p>
+        4. Go to{" "}
+        <Link href="/mypage">
+          <a>/mypage</a>
+        </Link>
+      </p>
       <div className="buttons">
         <a
           className="button"
