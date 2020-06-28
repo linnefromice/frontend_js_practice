@@ -13,6 +13,7 @@
 
 - yarn add @material-ui/core --save
 - yarn add @material-ui/styles --save
+- yarn add @material-ui/icons --save
 
 ## Original document
 
