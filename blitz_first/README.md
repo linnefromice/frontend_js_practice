@@ -11,8 +11,8 @@
 
 ### original
 
-- npm install @material-ui/core
-- npm install @material-ui/style
+- yarn add @material-ui/core --save
+- yarn add @material-ui/styles --save
 
 ## Original document
 
