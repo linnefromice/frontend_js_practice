@@ -1,11 +1,11 @@
 import React from "react"
-import { AppBar, Toolbar, Typography, Grid } from "@material-ui/core"
+import { AppBar, Toolbar, Typography, Grid, IconButton } from "@material-ui/core"
 import AdbIcon from "@material-ui/icons/Adb"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import MenuOpenIcon from "@material-ui/icons/MenuOpen"
 
-const Header = () => {
+const Header = ({ openDrawer }) => {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -31,7 +31,9 @@ const Header = () => {
             <GitHubIcon fontSize="large" />
           </Grid>
           <Grid item align="center" xs={1}>
-            <MenuOpenIcon fontSize="large" />
+            <IconButton color="inherit" onClick={openDrawer}>
+              <MenuOpenIcon fontSize="large" />
+            </IconButton>
           </Grid>
         </Grid>
       </Toolbar>

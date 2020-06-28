@@ -1,18 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import Header from "app/layouts/header"
-import {
-  Drawer,
-  Divider,
-  List,
-  ListSubheader,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core"
-import CodeIcon from "@material-ui/icons/Code"
-import GamesIcon from "@material-ui/icons/Games"
-import AppsIcon from "@material-ui/icons/Apps"
-import BookmarksIcon from "@material-ui/icons/Bookmarks"
+import SideDrawer from "app/layouts/side_drawer"
 
 const Content = () => (
   <div className="container">
@@ -23,47 +11,12 @@ const Content = () => (
 )
 
 const MyPage = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <div>
-      <Header />
-      <Drawer anchor={"right"} open={true}>
-        <List
-          component="nav"
-          subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              Blog
-            </ListSubheader>
-          }
-        >
-          <ListItem button>
-            <ListItemIcon>
-              <CodeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Development" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <GamesIcon />
-            </ListItemIcon>
-            <ListItemText primary="Game" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AppsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Various" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <BookmarksIcon />
-            </ListItemIcon>
-            <ListItemText primary="Bookmarks" />
-          </ListItem>
-        </List>
-      </Drawer>
+      <Header openDrawer={() => setIsOpen(true)} />
+      <SideDrawer isOpen={isOpen} closeDrawer={() => setIsOpen(false)} />
       <Content />
     </div>
   )
