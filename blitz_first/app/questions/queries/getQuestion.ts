@@ -10,7 +10,7 @@ export default async function getQuestion(
   { where /* include */ }: GetQuestionInput,
   ctx: Record<any, any> = {}
 ) {
-  const question = await db.question.findOne({ where })
+  const question = await db.question.findOne({ where, include: {choices: true} })
 
   return question
 }

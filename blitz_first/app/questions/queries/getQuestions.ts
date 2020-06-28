@@ -20,6 +20,7 @@ export default async function getQuestions(
     cursor,
     take,
     skip,
+    include: {choices: true},
   })
 
   return questions

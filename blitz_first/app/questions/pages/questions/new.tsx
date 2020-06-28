@@ -26,8 +26,8 @@ const NewQuestionPage: BlitzPage = () => {
                   choices: {
                     create: [
                       { text: event.target[1].value },
-                      { text: event.target[1].value },
-                      { text: event.target[1].value },
+                      { text: event.target[2].value },
+                      { text: event.target[3].value },
                     ],
                   }  
                 },
