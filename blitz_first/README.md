@@ -12,6 +12,7 @@
 ### original
 
 - npm install @material-ui/core
+- npm install @material-ui/style
 
 ## Original document
 
