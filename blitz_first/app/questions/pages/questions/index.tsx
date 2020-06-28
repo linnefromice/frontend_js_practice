@@ -11,7 +11,7 @@ export const QuestionsList = () => {
         <li key={question.id}>
           <Link href="/questions/[questionId]" as={`/questions/${question.id}`}>
             <a>{question.text}</a>
-          </Link>
+          </Link>        
         </li>
       ))}
     </ul>
@@ -32,7 +32,7 @@ const QuestionsPage: BlitzPage = () => {
         <p>
           {
             <Link href="/questions/new">
-              <a>Create Question</a>
+              <button>Create Question</button>
             </Link>
           }
         </p>

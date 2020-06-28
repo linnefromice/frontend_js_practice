@@ -33,11 +33,10 @@ export const Question = () => {
           </li>
         ))}
       </ul>
-      <pre>{JSON.stringify(question, null, 2)}</pre>
 
       {
         <Link href="/questions/[questionId]/edit" as={`/questions/${question.id}/edit`}>
-          <a>Edit</a>
+          <button>Edit</button>
         </Link>
       }
 
@@ -52,6 +51,12 @@ export const Question = () => {
       >
         Delete
       </button>
+
+      <p>
+        <pre>For Debug</pre>
+        <pre>{JSON.stringify(question, null, 2)}</pre>
+      </p>
+
     </div>
   )
 }
