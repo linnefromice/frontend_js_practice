@@ -1,6 +1,15 @@
 # blitz_first
 
-## Getting Started
+## Commands
+
+- blitz new blitz_first
+- cd blitz_first
+- blitz generate all question text hasMany:choices
+- blitz generate resource choice text votes:int:default[0] belongsTo:question
+
+## Original document
+
+### Getting Started
 
 1. Add this code to db/schema.prisma:
 
