@@ -20,7 +20,7 @@ export const EditQuestion = () => {
           try {
             const updated = await updateQuestion({
               where: { id: question.id },
-              data: { name: "MyNewName" },
+              data: { text: "Do you really love Blitz?" },
             })
             mutate(updated)
             alert("Success!" + JSON.stringify(updated))
