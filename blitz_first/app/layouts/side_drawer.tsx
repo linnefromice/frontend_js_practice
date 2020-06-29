@@ -1,4 +1,3 @@
-import React from "react"
 import {
   Drawer,
   Divider,
@@ -24,19 +23,19 @@ const SideDrawer = ({ isOpen, closeDrawer }) => {
           </ListSubheader>
         }
       >
-        <ListItem button>
+        <ListItem button onClick={() => window.location.replace("/questions")}>
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
           <ListItemText primary="Development" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => window.location.replace("/questions/new")}>
           <ListItemIcon>
             <GamesIcon />
           </ListItemIcon>
           <ListItemText primary="Game" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => window.location.replace("/")}>
           <ListItemIcon>
             <AppsIcon />
           </ListItemIcon>
@@ -45,7 +44,7 @@ const SideDrawer = ({ isOpen, closeDrawer }) => {
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => window.location.replace("/mypage")}>
           <ListItemIcon>
             <BookmarksIcon />
           </ListItemIcon>
