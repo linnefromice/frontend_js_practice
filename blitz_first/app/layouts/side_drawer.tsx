@@ -23,19 +23,19 @@ const SideDrawer = ({ isOpen, closeDrawer }) => {
           </ListSubheader>
         }
       >
-        <ListItem button onClick={() => window.location.replace("/questions")}>
+        <ListItem button onClick={() => window.location.replace("/blog/development")}>
           <ListItemIcon>
             <CodeIcon />
           </ListItemIcon>
           <ListItemText primary="Development" />
         </ListItem>
-        <ListItem button onClick={() => window.location.replace("/questions/new")}>
+        <ListItem button onClick={() => window.location.replace("/blog/game")}>
           <ListItemIcon>
             <GamesIcon />
           </ListItemIcon>
           <ListItemText primary="Game" />
         </ListItem>
-        <ListItem button onClick={() => window.location.replace("/")}>
+        <ListItem button onClick={() => window.location.replace("/blog/development")}>
           <ListItemIcon>
             <AppsIcon />
           </ListItemIcon>
@@ -44,7 +44,7 @@ const SideDrawer = ({ isOpen, closeDrawer }) => {
       </List>
       <Divider />
       <List>
-        <ListItem button onClick={() => window.location.replace("/mypage")}>
+        <ListItem button onClick={() => window.location.replace("/bookmark")}>
           <ListItemIcon>
             <BookmarksIcon />
           </ListItemIcon>
