@@ -24,10 +24,20 @@ const Header = ({ openDrawer }) => {
               MegaRed's Room
             </Typography>
           </Grid>
-          <Grid item align="center" xs={1}>
+          <Grid
+            item
+            align="center"
+            xs={1}
+            onClick={() => (window.location.href = "https://linnefromice-portfolio.web.app/")}
+          >
             <AccountCircleIcon fontSize="large" />
           </Grid>
-          <Grid item align="center" xs={1}>
+          <Grid
+            item
+            align="center"
+            xs={1}
+            onClick={() => (window.location.href = "https://github.com/linnefromice")}
+          >
             <GitHubIcon fontSize="large" />
           </Grid>
           <Grid item align="center" xs={1}>
