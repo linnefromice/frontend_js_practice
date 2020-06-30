@@ -28,7 +28,7 @@ const Header = ({ openDrawer }) => {
             item
             align="center"
             xs={1}
-            onClick={() => (window.location.href = "https://linnefromice-portfolio.web.app/")}
+            onClick={() => window.open("https://linnefromice-portfolio.web.app/")}
           >
             <AccountCircleIcon fontSize="large" />
           </Grid>
@@ -36,7 +36,7 @@ const Header = ({ openDrawer }) => {
             item
             align="center"
             xs={1}
-            onClick={() => (window.location.href = "https://github.com/linnefromice")}
+            onClick={() => window.open("https://github.com/linnefromice")}
           >
             <GitHubIcon fontSize="large" />
           </Grid>
