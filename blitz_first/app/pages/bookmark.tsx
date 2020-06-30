@@ -47,25 +47,29 @@ const articleLists = [
   },
 ]
 
+const BookmarkCard = ({ data }) => (
+  <Card>
+    <CardActionArea>
+      <CardMedia src={data.imageUrl} />
+      <CardContent>
+        <Typography>{data.title}</Typography>
+        <Typography>{data.date}</Typography>
+      </CardContent>
+      <CardActions>
+        <Chip label={data.tag} color="primary" />
+        <IconButton onClick={() => window.open(data.url)}>
+          <LinkIcon />
+        </IconButton>
+      </CardActions>
+    </CardActionArea>
+  </Card>
+)
+
 const Content = () => (
   <Grid container justify="flex-start" spacing={3}>
     {articleLists.map((data, index) => (
       <Grid item key={index} xs={3}>
-        <Card>
-          <CardActionArea>
-            <CardMedia src={data.imageUrl} />
-            <CardContent>
-              <Typography>{data.title}</Typography>
-              <Typography>{data.date}</Typography>
-            </CardContent>
-            <CardActions>
-              <Chip label={data.tag} color="primary" />
-              <IconButton onClick={() => window.open(data.url)}>
-                <LinkIcon />
-              </IconButton>
-            </CardActions>
-          </CardActionArea>
-        </Card>
+        <BookmarkCard data={data} />
       </Grid>
     ))}
   </Grid>
