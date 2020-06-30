@@ -12,8 +12,10 @@ import {
   Chip,
 } from "@material-ui/core"
 import LinkIcon from "@material-ui/icons/Link"
+import { Rating } from "@material-ui/lab"
 
 const randomImageUrl = "http://picsum.photos/400"
+const getRandomImageUrlSelectedId = (id) => `http://picsum.photos/id/${id}/400`
 const articleLists = [
   {
     imageUrl: randomImageUrl,
@@ -106,10 +108,10 @@ const articleLists = [
   },
 ]
 
-const BookmarkCard = ({ data }) => (
+const BookmarkCard = ({ data, index }) => (
   <Card>
     <CardActionArea>
-      <CardMedia component="img" image={data.imageUrl} />
+      <CardMedia component="img" image={getRandomImageUrlSelectedId(index)} />
       <CardContent>
         <Typography>{data.title}</Typography>
         <Typography>{data.date}</Typography>
@@ -119,6 +121,7 @@ const BookmarkCard = ({ data }) => (
         <IconButton onClick={() => window.open(data.url)}>
           <LinkIcon />
         </IconButton>
+        <Rating name="favorite" value={data.rating} max={3} readOnly />
       </CardActions>
     </CardActionArea>
   </Card>
@@ -128,7 +131,7 @@ const Content = () => (
   <Grid container justify="flex-start" spacing={3}>
     {articleLists.map((data, index) => (
       <Grid item key={index} xs={3}>
-        <BookmarkCard data={data} />
+        <BookmarkCard data={data} index={index} />
       </Grid>
     ))}
   </Grid>
