@@ -1,3 +1,4 @@
+import React from "react"
 import BaseContainer from "app/layouts/base_container"
 import {
   Grid,
@@ -12,9 +13,10 @@ import {
 } from "@material-ui/core"
 import LinkIcon from "@material-ui/icons/Link"
 
+const randomImageUrl = "http://picsum.photos/400"
 const articleLists = [
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "ProductHunt - Blitz.js",
     date: 20200701,
     tag: "Blitz.js",
@@ -22,7 +24,7 @@ const articleLists = [
     rating: 1,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Building a fullstack React application with Blitz.js",
     date: 20200701,
     tag: "Blitz.js",
@@ -30,7 +32,7 @@ const articleLists = [
     rating: 3,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Github - Blitz.js",
     date: 20200701,
     tag: "Blitz.js",
@@ -38,7 +40,7 @@ const articleLists = [
     rating: 2,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Introduction to Blitz.js",
     date: 20200701,
     tag: "Blitz.js",
@@ -46,7 +48,7 @@ const articleLists = [
     rating: 2,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Build an isomorphic application with Nuxt.js and Node",
     date: 20200701,
     tag: "Nuxt.js",
@@ -54,7 +56,7 @@ const articleLists = [
     rating: 2,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Creating Dynamic Routes in a Nuxt Application",
     date: 20200701,
     tag: "Nuxt.js",
@@ -62,7 +64,7 @@ const articleLists = [
     rating: 2,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "How to set up and code Nuxt.js apps fully in TypeScript",
     date: 20200701,
     tag: "Nuxt.js",
@@ -70,7 +72,7 @@ const articleLists = [
     rating: 3,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Getting Started with Nuxt.js",
     date: 20200701,
     tag: "Nuxt.js",
@@ -78,7 +80,7 @@ const articleLists = [
     rating: 3,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "7 Frontend Architecture Lessons From Nuxt.js",
     date: 20200701,
     tag: "Nuxt.js",
@@ -86,7 +88,7 @@ const articleLists = [
     rating: 3,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "How to Use Flat-File Data in a Static Nuxt App",
     date: 20200701,
     tag: "Nuxt.js",
@@ -94,7 +96,7 @@ const articleLists = [
     rating: 1,
   },
   {
-    imageUrl: "https://picsum.photos/200",
+    imageUrl: randomImageUrl,
     title: "Deep dive into Gatsby — Building a static blog using Gatsby, React and GraphQL",
     date: 20200701,
     tag: "Gatsby.js",
@@ -107,7 +109,7 @@ const articleLists = [
 const BookmarkCard = ({ data }) => (
   <Card>
     <CardActionArea>
-      <CardMedia src={data.imageUrl} />
+      <CardMedia component="img" image={data.imageUrl} />
       <CardContent>
         <Typography>{data.title}</Typography>
         <Typography>{data.date}</Typography>
