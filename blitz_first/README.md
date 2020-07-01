@@ -2,14 +2,27 @@
 
 ## Commands
 
-### tutorial
+### Launch
+
+- blitz start
+- (if no global install) ./node_modules/.bin/blitz start
+
+### Setup
+
+- yarn install
+- blitz db migrate
+- (if no global install) ./node_modules/.bin/blitz db migrate
+
+### Related Construction
+
+#### tutorial
 
 - blitz new blitz_first
 - cd blitz_first
 - blitz generate all question text hasMany:choices
 - blitz generate resource choice text votes:int:default[0] belongsTo:question
 
-### original
+#### original
 
 - yarn add @material-ui/core --save
 - yarn add @material-ui/styles --save
