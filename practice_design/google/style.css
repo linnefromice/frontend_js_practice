@@ -1,0 +1,50 @@
+header {
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 5vh;
+}
+.header-container {
+  float: right;
+}
+.header-container a {
+  display: inline-block;
+  height: 100%;
+  margin: 0 auto;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-title {
+  font-weight: bold;
+  font-size: 10rem;
+  letter-spacing: 0em;
+}
+.main-title-red {
+  color: red;
+  margin: 0;
+}
+.main-title-green {
+  color: green;
+  margin: 0;
+}
+.main-title-blue {
+  color: blue;
+  margin: 0;
+}
+.main-title-yellow {
+  color: yellow;
+  margin: 0;
+}
+
+footer {
+  position: fixed;
+  background-color: grey;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 10vh;
+}
