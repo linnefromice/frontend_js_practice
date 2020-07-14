@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.header-container {
+  height: 16vh;
+  width: 100%;
+  background: linear-gradient(90deg, #154284 0, #cd122d);
+  display: flex;
+  flex-direction: row;
+}
+.header-title {
+  height: 100%;
+  width: 22.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-title img {
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+.header-title div {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: white;
+}
+.header-separator {
+  border-left: 2px solid lightgray;
+}
+.header-contents {
+  height: 100%;
+  width: 80%;
+}
+.header-first-contents {
+  height: 30%;
+}
+.header-contents-separator {
+  border: 1px solid lightgray;
+}
+.header-second-contents {
+  height: 70%;
+}
