@@ -34,12 +34,63 @@ body {
   height: 100%;
   width: 80%;
 }
-.header-first-contents {
+.header-first-line {
   height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-sns-links {
+  display: flex;
+  flex-direction: row;
+}
+.header-sns-links-title {
+  display: inline-block;
+  text-align: center;
+  padding: 0 0.5vw;
+  color: white;
+  font-weight: bold;
+  font-size: 0.5rem;
+}
+.sns-link {
+  display: inline-block;
+  padding: 0 0.25vw;
+  height: 100%;
+}
+.sns-link a {
+  text-decoration: none;
+  color: white;
+}
+.header-first-contents {
+  display: flex;
+  flex-direction: row;
+  right: 0;
+}
+.login-link-container {
+  display: inline-block;
+  padding: 0 0.1vw;
+  color: white;
+}
+.culer-link-container {
+  display: inline-block;
+  padding: 0 0.1vw;
+  color: white;
+}
+.select-language-container {
+  display: inline-block;
+  padding: 0 0.1vw;
+  color: white;
+}
+.barcelona-sites-links {
+  display: inline-block;
+  padding: 0 0.1vw;
+  color: white;
 }
 .header-contents-separator {
   border: 1px solid lightgray;
 }
-.header-second-contents {
+.header-second-line {
   height: 70%;
 }
