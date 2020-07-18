@@ -4,6 +4,7 @@ body {
   background: linear-gradient(90deg, #154284 0, #cd122d);
 }
 .header-container {
+  position: fixed;
   height: 16vh;
   width: 100%;
   background: #181733;
@@ -137,4 +138,28 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
+}
+.content-container {
+  padding-top: 16vh;
+}
+.content-members-container {
+  display: flex;
+  flex-direction: row;
+}
+.content-members-list {
+  width: 13%;
+  padding: 0 0.25vw;
+}
+.content-members-list-header {
+  color: white;
+  font-weight: 2rem;
+  font-weight: bold;
+  margin: 1.5vh 0;
+}
+.content-members-list-content {
+  color: gray;
+  margin: 0.5vh 0;
+}
+.content-members-list-content:hover {
+  text-decoration: underline;
 }
