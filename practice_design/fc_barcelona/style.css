@@ -3,6 +3,7 @@ body {
   padding: 0;
   background: linear-gradient(90deg, #154284 0, #cd122d);
 }
+/* Header */
 .header-container {
   position: fixed;
   height: 16vh;
@@ -139,9 +140,87 @@ body {
   align-items: center;
   color: white;
 }
+
+/* Content */
 .content-container {
   padding-top: 16vh;
 }
+/* Content - Media */
+.content-medias-container {
+  margin: 2vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.content-medias-title {
+  color: white;
+  font-weight: bold;
+  margin: 2vh 0;
+}
+.content-medias-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.content-media-box {
+  margin: 0.25vh 0.25vw;
+  padding: 2vh 1vw;
+  height: 6vw;
+  width: 16vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+.content-media-box i {
+  height: 60%;
+}
+.media-viber {
+  background-color: #665cac;
+}
+.media-facebook {
+  background-color: #4267b2;
+}
+.media-twitter {
+  background-color: #1da1f2;
+}
+.media-youtube {
+  background-color: #ff0000;
+}
+.media-instagram {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
+}
+.media-dugout {
+  background-color: gainsboro;
+  color: black;
+}
+.content-media-dugout-icon {
+  padding: 1vh 0;
+  font-size: 3rem;
+  font-weight: bold;
+  height: 60%;
+}
+.media-tictok {
+  background-color: black;
+}
+.content-media-box-subtitle {
+  font-size: 0.25rem;
+  height: 20%;
+}
+.content-media-box-title {
+  height: 20%;
+}
+
+/* Content - Member */
 .content-members-container {
   display: flex;
   flex-direction: row;
@@ -152,7 +231,6 @@ body {
 }
 .content-members-list-header {
   color: white;
-  font-weight: 2rem;
   font-weight: bold;
   margin: 1.5vh 0;
 }
