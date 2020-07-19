@@ -3,6 +3,7 @@ import "office-ui-fabric-react/dist/css/fabric.css";
 import "./App.css";
 import Navigation from "./components/Navigation";
 import CardsSection from "./components/CardSection";
+import OperationsTable from "./components/OperationsTable";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
           <div className="ms-Grid-row">
             <CardsSection />
           </div>
-          <div className="ms-Grid-row"></div>
+          <div className="ms-Grid-row">
+            <OperationsTable />
+          </div>
         </div>
       </div>
     </div>
