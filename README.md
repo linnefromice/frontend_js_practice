@@ -18,3 +18,7 @@ Try some apis with Gatsby.
 ## gatsby-material-ui-marvelapi
 
 Practice design using material-ui & api using marvel api.
+
+## react-fluentui
+
+[dev.to - Getting started with Microsoft Fluent UI and React.js by building a fintech dashboard](https://dev.to/duomly/getting-started-with-microsoft-fluent-ui-and-react-js-by-building-a-fintech-dashboard-6li)
