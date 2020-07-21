@@ -17,12 +17,15 @@ body {
 /* Main */
 .main-container {
 }
+/* Main - Each Country */
 .main-residence-title {
   text-align: center;
   font-size: 1.25rem;
   margin: 3vh 0;
 }
 .main-residence-area {
+  background-image: url("img/bg_region.jpg");
+  background-size: cover;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 4vw;
@@ -52,6 +55,31 @@ body {
   justify-content: left;
   align-items: center;
 }
+.main-residence-country-link {
+  text-decoration: none;
+  color: black;
+}
+.main-residence-country-link:hover {
+  color: red;
+}
+.main-residence-country-area {
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+.main-residence-country-icon {
+  margin: 0 0.25vw;
+  height: 50%;
+}
+.main-residence-country-name {
+  margin: 0 0.25vw;
+  align-self: center;
+  font-weight: bold;
+}
+
+/* Main - Group Corporate */
 .main-group-corporate-title {
   text-align: center;
   font-size: 1.25rem;
