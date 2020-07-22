@@ -56,6 +56,7 @@ body {
   align-items: center;
 }
 .main-residence-country-link {
+  width: 100%;
   text-decoration: none;
   color: black;
 }
@@ -77,6 +78,19 @@ body {
   margin: 0 0.25vw;
   align-self: center;
   font-weight: bold;
+}
+.main-residence-multi-countries {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+.main-residence-country-link-half {
+  width: 50%;
+  text-decoration: none;
+  color: black;
+}
+.main-residence-country-link-half:hover {
+  color: red;
 }
 
 /* Main - Group Corporate */
