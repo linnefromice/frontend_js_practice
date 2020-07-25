@@ -114,11 +114,33 @@
 }
 
 .title-right-figures {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.title-right-figures__half-circle {
+  position: absolute;
   right: 0;
-  width: 50vh;
+  width: 45vh;
   height: 60vh;
   border-radius: 100% 0 0 100%;
   background-color: #80ea6e;
+}
+.title-right-figures__horizontal-bar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 30vh;
+  width: 40vw;
+  background-color: #262a2d;
+}
+.title-right-figures__vertical-bar {
+  position: absolute;
+  right: 0;
+  height: 60vh;
+  width: 4vw;
+  background-color: #1f2327;
+  opacity: 0.6;
 }
 
 .title-center-factors {
