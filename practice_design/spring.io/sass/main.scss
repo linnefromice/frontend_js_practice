@@ -69,45 +69,50 @@ $title-background-color: #262a2d;
 .title-container {
   height: 60vh;
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  position: relative;
   background-color: $title-background-color;
   color: $color;
 
   %side-box {
-    width: 25%;
     height: 100%;
   }
 
   &__left {
     @extend %side-box;
-    background-color: $title-background-color;
+    position: absolute;
+    left: 0;
   }
 
   &__right {
     @extend %side-box;
-    background-color: $title-background-color;
+    position: absolute;
+    right: 0;
   }
 
   &__center {
-    width: 50%;
-    background-color: $title-background-color;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
   }
 }
 
 .title-left-figures {
-  left: 0%;
-  width: 120%;
-  height: 120%;
-  border-radius: 0 75% 75% 0;
+  left: 0;
+  width: 60vh;
+  height: 60vh;
+  border-radius: 0 100% 100% 0;
   background-color: #1b1f23;
 }
 
 .title-right-figures {
-  right: 0%;
-  width: 120%;
-  height: 120%;
-  border-radius: 75% 0 0 75%;
+  right: 0;
+  width: 60vh;
+  height: 60vh;
+  border-radius: 100% 0 0 100%;
   background-color: #80ea6e;
 }
 
