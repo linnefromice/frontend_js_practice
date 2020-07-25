@@ -101,19 +101,45 @@ $title-background-color: #262a2d;
 }
 
 .title-left-figures {
+  position: relative;
   left: 0;
-  width: 60vh;
+  width: 45vh;
   height: 60vh;
   border-radius: 0 100% 100% 0;
   background-color: #1b1f23;
+
+  &__first-triangle {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    border-top: 20vh solid transparent;
+    border-right: 20vh solid transparent;
+    border-left: 20vh solid #80ea6e;
+    border-bottom: 20vh solid #80ea6e;
+    background-color: transparent;
+  }
+
+  &__second-triangle {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 20vh;
+    border-top: 7.5vh solid transparent;
+    border-left: 7.5vh solid #6db33f;
+    border-bottom: 7.5vh solid transparent;
+  }
 }
 
 .title-right-figures {
   right: 0;
-  width: 60vh;
+  width: 50vh;
   height: 60vh;
   border-radius: 100% 0 0 100%;
   background-color: #80ea6e;
+}
+.title-right-horizontal-bar {
+}
+.title-right-vertical-bar {
 }
 
 .title-center-factors {
