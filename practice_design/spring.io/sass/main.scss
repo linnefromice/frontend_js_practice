@@ -206,3 +206,16 @@ $title-background-color: #262a2d;
     }
   }
 }
+
+.announce-container {
+  height: 12vh;
+  width: 100%;
+  background-color: $background-color;
+  text-align: center;
+  color: blue;
+  font-weight: bold;
+}
+
+.announce-divider {
+  border-bottom: 0.01rem solid #262a2d;
+}
