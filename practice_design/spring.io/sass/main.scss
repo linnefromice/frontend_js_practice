@@ -272,3 +272,37 @@ $title-background-color: #262a2d;
 .announce-divider {
   border-bottom: 0.01rem solid #262a2d;
 }
+
+.main-contents-container {
+  width: 100%;
+  background: $background-color;
+
+  &__contents-area {
+    margin: 0 auto;
+    width: 80%;
+  }
+}
+
+.main-contents-sentence {
+  padding: 5vh 0;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.main-contents-services {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__service-wrapper {
+    margin: 1% 1%;
+    padding: 1% 1%;
+    border: 0.01rem solid #262a2d;
+    border-radius: 1%;
+    width: 22.5%;
+    height: 50vh;
+  }
+}
