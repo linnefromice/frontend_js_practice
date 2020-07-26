@@ -8,7 +8,7 @@
   height: 8vh;
   display: flex;
   flex-direction: row;
-  background-color: black;
+  background-color: #1b1f23;
   color: white;
 }
 .header-area__left {
@@ -180,10 +180,55 @@
 .announce-container {
   height: 12vh;
   width: 100%;
-  background-color: black;
-  text-align: center;
-  color: blue;
+  background-color: #1b1f23;
+}
+.announce-container__content-wrapper {
+  margin: 0 auto;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+}
+.announce-container .announce-container__first-content,
+.announce-container .announce-container__second-content,
+.announce-container .announce-container__third-content,
+.announce-container .announce-container__fourth-content {
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.announce-container__first-content {
+  width: 10%;
+}
+.announce-container__second-content {
+  width: 50%;
+}
+.announce-container__third-content {
+  width: 10%;
+}
+.announce-container__fourth-content {
+  width: 50%;
+}
+
+.announce-content-icon {
+  background: #1f98ff;
+  border-radius: 1rem;
+  padding: 0.5vh 1vw;
+  color: white;
   font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.announce-content-link {
+  color: #1f98ff;
+}
+.announce-content-link:hover {
+  text-decoration: underline solid #1f98ff;
+}
+
+.announce-content-divider {
+  height: 30%;
+  border-right: 0.15rem solid #262a2d;
 }
 
 .announce-divider {

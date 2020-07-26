@@ -1,4 +1,4 @@
-$background-color: black !default;
+$background-color: #1b1f23 !default;
 $color: white !default;
 $title-background-color: #262a2d;
 
@@ -211,9 +211,62 @@ $title-background-color: #262a2d;
   height: 12vh;
   width: 100%;
   background-color: $background-color;
-  text-align: center;
-  color: blue;
+
+  &__content-wrapper {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  %common-style {
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__first-content {
+    @extend %common-style;
+    width: 10%;
+  }
+
+  &__second-content {
+    @extend %common-style;
+    width: 50%;
+  }
+
+  &__third-content {
+    @extend %common-style;
+    width: 10%;
+  }
+
+  &__fourth-content {
+    @extend %common-style;
+    width: 50%;
+  }
+}
+
+.announce-content-icon {
+  background: #1f98ff;
+  border-radius: 1rem;
+  padding: 0.5vh 1vw;
+  color: white;
   font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.announce-content-link {
+  color: #1f98ff;
+
+  &:hover {
+    text-decoration: underline solid #1f98ff;
+  }
+}
+
+.announce-content-divider {
+  height: 30%;
+  border-right: 0.15rem solid #262a2d;
 }
 
 .announce-divider {
