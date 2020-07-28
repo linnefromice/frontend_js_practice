@@ -392,6 +392,27 @@ $title-background-color: #262a2d;
   flex-direction: column;
 }
 
+.codes {
+  color: white;
+  font-size: 1.25rem;
+
+  &__terminal-blue {
+    color: #36bedb;
+  }
+  &__terminal-lime {
+    color: #a1d21b;
+  }
+  &__terminal-green {
+    color: #23c44c;
+  }
+  &__single-indent {
+    margin-left: 5%;
+  }
+  &__double-indent {
+    margin-left: 10%;
+  }
+}
+
 .main-content-second-section-sentence-area {
   height: 100%;
   padding: 0 20%;
