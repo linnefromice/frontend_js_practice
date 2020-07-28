@@ -366,7 +366,7 @@ $title-background-color: #262a2d;
 
   @extend %common-height;
 
-  margin: 5vh auto;
+  margin: 2.5vh auto;
   width: 80%;
   display: flex;
   flex-direction: row;
@@ -434,6 +434,67 @@ $title-background-color: #262a2d;
     @extend %common-style;
     color: #bbbcbe;
   }
+
+  &__link {
+    color: #1f98ff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.main-contents-third-section {
+  width: 50%;
+  padding: 2.5vh 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  %common-margin {
+    margin: 1vh 0;
+  }
+
+  &__big-quote {
+    @extend %common-margin;
+    width: 7.5%;
+    color: green;
+  }
+
+  &__sentence {
+    @extend %common-margin;
+    color: #6db33f;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__profile-area {
+    @extend %common-margin;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.third-section-icon {
+  margin: 1vw;
+  &__img {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 100%;
+    background-color: white;
+  }
+}
+.third-section-profiles {
+  margin: 1vw;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
 
   &__link {
     color: #1f98ff;
