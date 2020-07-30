@@ -533,16 +533,39 @@ $title-background-color: #262a2d;
   width: 80%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
 }
 
 .footer-first-information {
-  width: 27.5%;
-  margin: 0 2.5%;
+  width: 22.5%;
+  margin: 0 2%;
   height: 100%;
-  color: white;
-  font-weight: bold;
+
+  %common-margin {
+    margin: 1vh 0;
+  }
+
+  &__title {
+    @extend %common-margin;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__description {
+    @extend %common-margin;
+    color: rgb(187, 188, 190);
+  }
+
+  &__link {
+    @extend %common-margin;
+    color: rgb(31, 152, 255);
+  }
+
+  &__space {
+    height: 1vh;
+  }
 }
 
 .footer-first-circle {
@@ -551,7 +574,7 @@ $title-background-color: #262a2d;
   border-radius: 50%;
   height: 345px;
   width: 345px;
-  right: 0vw;
+  right: -2.5vw;
   bottom: -15vh;
 }
 
