@@ -580,12 +580,61 @@ $title-background-color: #262a2d;
 
 .footer-second-contents-wrapper {
   position: relative;
+  padding: 0 5%;
   width: 100%;
   height: 70vh;
   background-color: $background-color;
+  display: flex;
+  flex-direction: row;
 }
 
-.footer-second-contents {
-  width: 100%;
-  height: 100%;
+.footer-site-links-wrapper {
+  width: 60%;
+
+  &__content {
+    width: 80%;
+    margin: 3vh 10%;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.footer-site-links-container {
+  width: 20%;
+  margin: 0 2.5%;
+  flex-direction: column;
+
+  %common-color {
+    color: white;
+  }
+
+  &__title {
+    @extend %common-color;
+    font-weight: bold;
+    margin: 2vh 0;
+  }
+
+  &__factor {
+    @extend %common-color;
+    font-size: 0.8rem;
+    margin: 1vh 0;
+  }
+}
+
+.footer-newsletter-wrapper {
+  width: 40%;
+
+  &__content {
+    width: 100%;
+    margin: 3vh 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.footer-newsletter-container {
+  margin: 2vh 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
