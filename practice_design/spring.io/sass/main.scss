@@ -626,15 +626,76 @@ $title-background-color: #262a2d;
 
   &__content {
     width: 100%;
-    margin: 3vh 0;
+    margin: 4vh 0;
     display: flex;
     flex-direction: column;
   }
 }
 
-.footer-newsletter-container {
-  margin: 2vh 0;
+.footer-newsletter-title {
+  margin: 1vh 0;
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.footer-newsletter-form {
+  margin: 1vh 0;
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+
+  &__input-wrapper {
+    width: 40%;
+    border: 0.1rem solid white;
+    background-color: black;
+  }
+
+  &__input {
+    height: 100%;
+    width: 100%;
+    padding: 0.5vh 0.5vw;
+    background-color: black;
+    color: white;
+  }
+
+  &__submit {
+    width: 20%;
+    border: 0.1rem solid white;
+    background-color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      color: white;
+      border: 0.1rem solid #99c47c;
+      background-color: #99c47c;
+    }
+  }
+}
+
+.footer-newsletter-policy {
+  margin: 1vh 0;
+  display: flex;
+  flex-direction: row;
+
+  &__checkbox {
+    margin: 0.5vh 0.25vw;
+  }
+
+  &__sentence {
+    margin: 0 0.25vw;
+    width: 60%;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &__link {
+    color: rgb(31, 152, 255);
+    text-decoration: none;
+  }
 }
