@@ -726,8 +726,25 @@ $title-background-color: #262a2d;
 
 .footer-third-contents-icon {
   margin: 0 1vw;
-  height: 4vh;
-  width: 4vh;
+  height: 5vh;
+  width: 5vh;
   border-radius: 100% 100% 100% 100%;
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > svg {
+    /* TODO: svgが黒単色になっている */
+    height: 4vh;
+    width: 4vh;
+    flex-shrink: 0;
+  }
+}
+
+.footer-third-sentences {
+  margin: 3vh 0;
+  padding: 0 18%;
+  margin: 1vh 0;
+  color: rgba(255, 255, 255, 0.3);
 }
