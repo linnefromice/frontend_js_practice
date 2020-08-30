@@ -25,3 +25,10 @@ Practice design using material-ui & api using marvel api.
 
 - yarn add @fluentui/react
 - yarn add @uifabric/react-cards
+
+# nextjs-blog
+
+- Reference
+  - https://nextjs.org/learn/excel/typescript/setup
+- Command
+  - `npx create-next-app nextjs-blog --use-npm --example "https://github.com/vercel/next-learn-starter/tree/master/basics-final"`
