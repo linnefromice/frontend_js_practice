@@ -36,3 +36,14 @@ Practice design using material-ui & api using marvel api.
   - add typescript
     - `touch tsconfig.json`
     - `yarn add --dev typescript @types/react @types/node`
+
+# react-parcel
+
+- Reference
+  - http://kasheight.hatenablog.jp/entry/2019/12/01/190858
+- Command
+  - yarn init -y
+  - yarn add react react-dom
+  - yarn add --dev parcel-bundler
+  - gibo dump Node VisualStudioCode >> .gitignore
+  - yarn start
