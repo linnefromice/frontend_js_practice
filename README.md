@@ -1,5 +1,9 @@
 # front_js_practice
 
+- [フロントエンドのコーディング課題６選-このフロントエンドの課題、実装できますか？ - Qiita](https://qiita.com/baby-degu/items/d68e52a0727248ba2750)
+- [2020 年のフロントエンドマスターになりたければこの 9 プロジェクトを作れ - Qiita](https://qiita.com/rana_kualu/items/915345b8f3f870cfe2aa)
+- [JavaScript 30 — Build 30 things with vanilla JS in 30 days with 30 tutorials](https://javascript30.com/)
+
 ## react-api-mirage
 
 Practice using mock server.
@@ -47,3 +51,13 @@ Practice design using material-ui & api using marvel api.
   - yarn add --dev parcel-bundler
   - gibo dump Node VisualStudioCode >> .gitignore
   - yarn start
+
+# nextjs_credit_card_form
+
+- Reference
+  - https://github.com/muhammederdem/vue-interactive-paycard
+  - https://medium.com/@vladymyr.pylypchatin/the-simple-way-to-use-scoped-and-global-scss-with-next-js-67cdb2d0c676
+- Command
+  - npx create-next-app --example with-typescript nextjs_credit_card_form
+  - cd nextjs_credit_card_form
+  - yarn add @zeit/next-sass node-sass
