@@ -1,21 +1,14 @@
 .layout {
   height: 100vh;
   width: 100vw;
-}
-.header {
-  height: 5%;
-  width: 100%;
-}
-.main {
-  height: 85%;
-  width: 100%;
   background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff);
-}
-.footer {
-  height: 5%;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 
-  &__titleSentence {
-    font-weight: bold;
+  &__mainArea {
+    margin: 10vh 10vw;
+    height: 80vh;
+    width: 80vw;
   }
 }
