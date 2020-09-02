@@ -3,13 +3,29 @@
   height: 100%;
   position: relative;
 
-  &__contentArea {
+  &__cardArea {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: white;
+    z-index: 10;
+    top: 5vh;
+    right: 25vw;
+    left: 25vw;
+    height: 30vh;
+    width: 30vw;
+    background: linear-gradient(to right, #fbd3e9, #bb377d);
+    box-shadow: 2px 2px gray;
     border-radius: 40px;
+  }
+
+  &__formArea {
+    position: absolute;
+    z-index: 5;
+    top: 20vh;
+    right: 15vw;
+    left: 15vw;
+    height: 60vh;
+    width: 50vw;
+    background: white;
+    box-shadow: 2px 2px gray;
+    border-radius: 20px;
   }
 }
