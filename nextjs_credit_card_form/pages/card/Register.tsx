@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Register.module.scss";
+import View from "./View";
 
 const years = [...Array(20).keys()].map((i) => (i += 2020).toString());
 const months = [...Array(12).keys()].map((i) => (i += 1).toString());
@@ -10,7 +11,9 @@ const Register = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper__cardArea}>Credit Card</div>
+      <div className={styles.wrapper__cardArea}>
+        <View />
+      </div>
       <div className={styles.wrapper__formArea}>
         <div className={styles.card_form}>
           <div className={styles.card_form__inner}>
