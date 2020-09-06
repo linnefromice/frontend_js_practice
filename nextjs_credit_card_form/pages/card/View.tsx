@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./View.module.scss";
 
 const IcArea = () => (
@@ -11,6 +11,29 @@ const IcArea = () => (
   </div>
 );
 
+/*
+function useInterval(callback, delay) {
+  const savedCallback = useRef()
+
+  useEffect(() => {
+    savedCallback.current = callback
+  }, [callback])
+
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current()
+    }
+  })
+
+  if (delay != null) {
+    const id = setInterval(tick, delay)
+    return () => {
+      clearInterval(id)
+    }
+  }
+}
+*/
+
 const BrandNameArea = () => {
   const brandNames = [
     "VISA",
@@ -21,9 +44,21 @@ const BrandNameArea = () => {
   ];
   const [index, setIndex] = useState<number>(0);
 
-  setInterval(() => {
+  const callback = () => {
     index != brandNames.length - 1 ? setIndex(index + 1) : setIndex(0);
-  }, 2000);
+  };
+  const savedCallback = useRef<() => void>(() => callback());
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+
+    const intervalId = setInterval(tick, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return <>{brandNames[index]}</>;
 };
