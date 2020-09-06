@@ -51,7 +51,7 @@
     color: white;
   }
 
-  &__expired {
+  &__expires {
     @include common;
     width: 25%;
     color: white;
@@ -92,5 +92,39 @@
     border-radius: 10px;
     border: 1px solid lightgray;
     @include centering;
+  }
+}
+
+.holder_area {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  &__label {
+    margin: 0.1vh 1vw;
+    font-size: 0.5rem;
+    color: gray;
+  }
+
+  &__value {
+    margin: 0.1vh 1vw;
+  }
+}
+
+.expires_area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__label {
+    margin: 0.1vh 1vw;
+    font-size: 0.5rem;
+    color: gray;
+  }
+
+  &__value {
+    margin: 0.1vh 1vw;
   }
 }

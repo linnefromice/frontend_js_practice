@@ -11,29 +11,6 @@ const IcArea = () => (
   </div>
 );
 
-/*
-function useInterval(callback, delay) {
-  const savedCallback = useRef()
-
-  useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
-
-  useEffect(() => {
-    const tick = () => {
-      savedCallback.current()
-    }
-  })
-
-  if (delay != null) {
-    const id = setInterval(tick, delay)
-    return () => {
-      clearInterval(id)
-    }
-  }
-}
-*/
-
 const BrandNameArea = () => {
   const brandNames = [
     "VISA",
@@ -75,11 +52,17 @@ const View = () => {
         </div>
       </div>
       <div className={styles.wrapper__row}>
-        <div className={styles.card__number}>XXXX XXXX XXXX XXXX</div>
+        <div className={styles.card__number}>#### #### #### ####</div>
       </div>
       <div className={styles.wrapper__row}>
-        <div className={styles.card__brand_name}>Steiner</div>
-        <div className={styles.card__brand_name}>03/25</div>
+        <div className={`${styles.card__holder} ${styles.holder_area}`}>
+          <div className={styles.holder_area__label}>Card Holder</div>
+          <div className={styles.holder_area__value}>STEINER</div>
+        </div>
+        <div className={`${styles.card__expires} ${styles.expires_area}`}>
+          <div className={styles.expires_area__label}>Expires</div>
+          <div className={styles.expires_area__value}>03/25</div>
+        </div>
       </div>
     </div>
   );
