@@ -45,9 +45,22 @@ interface ViewProp {
   holderName: string;
   year: string;
   month: string;
+  focusCardNumber: boolean;
+  focusHolderName: boolean;
+  focusYear: boolean;
+  focusMonth: boolean;
 }
 const View = (prop: ViewProp) => {
-  const { cardNumber, holderName, year, month } = prop;
+  const {
+    cardNumber,
+    holderName,
+    year,
+    month,
+    focusCardNumber,
+    focusHolderName,
+    focusYear,
+    focusMonth,
+  } = prop;
   const displayedCardNumber = (value: string) =>
     [...Array(4)]
       .map((_, i) => (value.substring(i * 4, (i + 1) * 4) + "####").slice(0, 4))
@@ -57,6 +70,17 @@ const View = (prop: ViewProp) => {
     parseInt(value).toString() === "NaN" ? "YY" : ("00" + value).slice(-2);
   const displayedMonth = (value: string) =>
     parseInt(value).toString() === "NaN" ? "MM" : ("00" + value).slice(-2);
+
+  const cardNumberAreaStyle = focusCardNumber
+    ? `${styles.card__number} ${styles.card_area_active}`
+    : `${styles.card__number} ${styles.card_area}`;
+  const cardHolderAreaStyle = focusHolderName
+    ? `${styles.card__holder} ${styles.holder_area_active}`
+    : `${styles.card__holder} ${styles.holder_area}`;
+  const expiresAreaStyle =
+    focusYear || focusMonth
+      ? `${styles.card__expires} ${styles.expires_area_active}`
+      : `${styles.card__expires} ${styles.expires_area}`;
 
   return (
     <div className={styles.wrapper}>
@@ -69,18 +93,18 @@ const View = (prop: ViewProp) => {
         </div>
       </div>
       <div className={styles.wrapper__row}>
-        <div className={styles.card__number}>
+        <div className={cardNumberAreaStyle}>
           {displayedCardNumber(cardNumber)}
         </div>
       </div>
       <div className={styles.wrapper__row}>
-        <div className={`${styles.card__holder} ${styles.holder_area}`}>
+        <div className={cardHolderAreaStyle}>
           <div className={styles.holder_area__label}>Card Holder</div>
           <div className={styles.holder_area__value}>
             {displayedHolderName(holderName)}
           </div>
         </div>
-        <div className={`${styles.card__expires} ${styles.expires_area}`}>
+        <div className={expiresAreaStyle}>
           <div className={styles.expires_area__label}>Expires</div>
           <div className={styles.expires_area__value}>
             {displayedMonth(month)}/{displayedYear(year)}

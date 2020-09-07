@@ -20,7 +20,7 @@
 
 .card {
   @mixin common {
-    margin: 0.1vh 0.25vw;
+    margin: 0.1vh 0;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -65,8 +65,8 @@
     align-items: center;
   }
 
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
   @include centering;
 
   &__content {
@@ -95,7 +95,21 @@
   }
 }
 
+.card_area {
+  margin: 0.25vh 0.5vw;
+  border-radius: 10px;
+  border: 0.5px solid transparent;
+  width: 100%;
+}
+.card_area_active {
+  @extend .card_area;
+  border: 0.5px solid white;
+}
+
 .holder_area {
+  margin: 0.2vh 0.4vw;
+  border-radius: 10px;
+  border: 0.5px solid transparent;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -111,8 +125,15 @@
     margin: 0.1vh 1vw;
   }
 }
+.holder_area_active {
+  @extend .holder_area;
+  border: 0.5px solid white;
+}
 
 .expires_area {
+  margin: 0.2vh 0.4vw;
+  border-radius: 10px;
+  border: 0.5px solid transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,4 +148,8 @@
   &__value {
     margin: 0.1vh 1vw;
   }
+}
+.expires_area_active {
+  @extend .expires_area;
+  border: 0.5px solid white;
 }

@@ -11,6 +11,11 @@ const Register = () => {
   const [year, setYear] = useState<string>("YEAR");
   const [month, setMonth] = useState<string>("MONTH");
   const [cvv, setCvv] = useState<string>("");
+  const [focusCardNumber, setFocusCardNumber] = useState<boolean>(false);
+  const [focusHolderName, setFocusHolderName] = useState<boolean>(false);
+  const [focusYear, setFocusYear] = useState<boolean>(false);
+  const [focusMonth, setFocusMonth] = useState<boolean>(false);
+  const [focusCvv, setFocusCvv] = useState<boolean>(false);
 
   // for debug
   useEffect(() => {
@@ -43,6 +48,10 @@ const Register = () => {
           holderName={holderName}
           year={year}
           month={month}
+          focusCardNumber={focusCardNumber}
+          focusHolderName={focusHolderName}
+          focusYear={focusYear}
+          focusMonth={focusMonth}
         />
       </div>
       <div className={styles.wrapper__formArea}>
@@ -58,6 +67,8 @@ const Register = () => {
                   type="text"
                   value={processDisplayedCardNumber(cardNumber)}
                   onChange={(e) => saveCardNumber(e.target.value)}
+                  onFocus={() => setFocusCardNumber(true)}
+                  onBlur={() => setFocusCardNumber(false)}
                 />
               </div>
             </div>
@@ -71,6 +82,8 @@ const Register = () => {
                   type="text"
                   value={holderName}
                   onChange={(e) => setHolderName(e.target.value)}
+                  onFocus={() => setFocusHolderName(true)}
+                  onBlur={() => setFocusHolderName(false)}
                 />
               </div>
             </div>
@@ -84,6 +97,8 @@ const Register = () => {
                     className={styles.card_expiration_area__select}
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
+                    onFocus={() => setFocusYear(true)}
+                    onBlur={() => setFocusYear(false)}
                   >
                     <option value="YEAR">YEAR</option>
                     {years.map((value) => {
@@ -94,6 +109,8 @@ const Register = () => {
                     className={styles.card_expiration_area__select}
                     value={month}
                     onChange={(e) => setMonth(e.target.value)}
+                    onFocus={() => setFocusMonth(true)}
+                    onBlur={() => setFocusMonth(false)}
                   >
                     <option value="MONTH">MONTH</option>
                     {months.map((value) => {
@@ -110,6 +127,8 @@ const Register = () => {
                     type="text"
                     value={cvv}
                     onChange={(e) => setCvv(e.target.value)}
+                    onFocus={() => setFocusCvv(true)}
+                    onBlur={() => setFocusCvv(false)}
                   />
                 </div>
               </div>
