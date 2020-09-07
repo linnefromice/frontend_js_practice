@@ -45,10 +45,12 @@ interface ViewProp {
   holderName: string;
   year: string;
   month: string;
+  cvv: string;
   focusCardNumber: boolean;
   focusHolderName: boolean;
   focusYear: boolean;
   focusMonth: boolean;
+  focusCvv: boolean;
 }
 const View = (prop: ViewProp) => {
   const {
@@ -56,10 +58,12 @@ const View = (prop: ViewProp) => {
     holderName,
     year,
     month,
+    cvv,
     focusCardNumber,
     focusHolderName,
     focusYear,
     focusMonth,
+    focusCvv,
   } = prop;
   const displayedCardNumber = (value: string) =>
     [...Array(4)]
@@ -71,6 +75,9 @@ const View = (prop: ViewProp) => {
   const displayedMonth = (value: string) =>
     parseInt(value).toString() === "NaN" ? "MM" : ("00" + value).slice(-2);
 
+  const entireStyle = focusCvv
+    ? `${styles.entire} ${styles.entire_reverse}`
+    : `${styles.entire}`;
   const cardNumberAreaStyle = focusCardNumber
     ? `${styles.card__number} ${styles.card_area_active}`
     : `${styles.card__number} ${styles.card_area}`;
@@ -83,31 +90,34 @@ const View = (prop: ViewProp) => {
       : `${styles.card__expires} ${styles.expires_area}`;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.wrapper__row}>
-        <div className={styles.card__ic}>
-          <IcArea />
-        </div>
-        <div className={styles.card__brand_name}>
-          <BrandNameArea />
-        </div>
-      </div>
-      <div className={styles.wrapper__row}>
-        <div className={cardNumberAreaStyle}>
-          {displayedCardNumber(cardNumber)}
-        </div>
-      </div>
-      <div className={styles.wrapper__row}>
-        <div className={cardHolderAreaStyle}>
-          <div className={styles.holder_area__label}>Card Holder</div>
-          <div className={styles.holder_area__value}>
-            {displayedHolderName(holderName)}
+    <div className={entireStyle}>
+      <div className={styles.wrapper_back}>{(cvv + "###").slice(0, 3)}</div>
+      <div className={styles.wrapper}>
+        <div className={styles.wrapper__row}>
+          <div className={styles.card__ic}>
+            <IcArea />
+          </div>
+          <div className={styles.card__brand_name}>
+            <BrandNameArea />
           </div>
         </div>
-        <div className={expiresAreaStyle}>
-          <div className={styles.expires_area__label}>Expires</div>
-          <div className={styles.expires_area__value}>
-            {displayedMonth(month)}/{displayedYear(year)}
+        <div className={styles.wrapper__row}>
+          <div className={cardNumberAreaStyle}>
+            {displayedCardNumber(cardNumber)}
+          </div>
+        </div>
+        <div className={styles.wrapper__row}>
+          <div className={cardHolderAreaStyle}>
+            <div className={styles.holder_area__label}>Card Holder</div>
+            <div className={styles.holder_area__value}>
+              {displayedHolderName(holderName)}
+            </div>
+          </div>
+          <div className={expiresAreaStyle}>
+            <div className={styles.expires_area__label}>Expires</div>
+            <div className={styles.expires_area__value}>
+              {displayedMonth(month)}/{displayedYear(year)}
+            </div>
           </div>
         </div>
       </div>

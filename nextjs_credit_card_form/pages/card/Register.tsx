@@ -48,10 +48,12 @@ const Register = () => {
           holderName={holderName}
           year={year}
           month={month}
+          cvv={cvv}
           focusCardNumber={focusCardNumber}
           focusHolderName={focusHolderName}
           focusYear={focusYear}
           focusMonth={focusMonth}
+          focusCvv={focusCvv}
         />
       </div>
       <div className={styles.wrapper__formArea}>

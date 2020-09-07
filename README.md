@@ -57,6 +57,9 @@ Practice design using material-ui & api using marvel api.
 - Reference
   - https://github.com/muhammederdem/vue-interactive-paycard
   - https://medium.com/@vladymyr.pylypchatin/the-simple-way-to-use-scoped-and-global-scss-with-next-js-67cdb2d0c676
+  - 両面カードのサンプル
+    - https://codepen.io/Ossoona/pen/GJmvmJ
+    - https://qiita.com/yyzzyykk/items/b5a23a28e73e42bcc5a5
 - Command
   - npx create-next-app --example with-typescript nextjs_credit_card_form
   - cd nextjs_credit_card_form
