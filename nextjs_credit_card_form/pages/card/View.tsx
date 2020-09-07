@@ -40,7 +40,24 @@ const BrandNameArea = () => {
   return <>{brandNames[index]}</>;
 };
 
-const View = () => {
+interface ViewProp {
+  cardNumber: string;
+  holderName: string;
+  year: string;
+  month: string;
+}
+const View = (prop: ViewProp) => {
+  const { cardNumber, holderName, year, month } = prop;
+  const displayedCardNumber = (value: string) =>
+    [...Array(4)]
+      .map((_, i) => (value.substring(i * 4, (i + 1) * 4) + "####").slice(0, 4))
+      .join(" ");
+  const displayedHolderName = (value: string) => value.toUpperCase();
+  const displayedYear = (value: string) =>
+    parseInt(value).toString() === "NaN" ? "YY" : ("00" + value).slice(-2);
+  const displayedMonth = (value: string) =>
+    parseInt(value).toString() === "NaN" ? "MM" : ("00" + value).slice(-2);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapper__row}>
@@ -52,16 +69,22 @@ const View = () => {
         </div>
       </div>
       <div className={styles.wrapper__row}>
-        <div className={styles.card__number}>#### #### #### ####</div>
+        <div className={styles.card__number}>
+          {displayedCardNumber(cardNumber)}
+        </div>
       </div>
       <div className={styles.wrapper__row}>
         <div className={`${styles.card__holder} ${styles.holder_area}`}>
           <div className={styles.holder_area__label}>Card Holder</div>
-          <div className={styles.holder_area__value}>STEINER</div>
+          <div className={styles.holder_area__value}>
+            {displayedHolderName(holderName)}
+          </div>
         </div>
         <div className={`${styles.card__expires} ${styles.expires_area}`}>
           <div className={styles.expires_area__label}>Expires</div>
-          <div className={styles.expires_area__value}>03/25</div>
+          <div className={styles.expires_area__value}>
+            {displayedMonth(month)}/{displayedYear(year)}
+          </div>
         </div>
       </div>
     </div>

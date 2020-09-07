@@ -38,7 +38,12 @@ const Register = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapper__cardArea}>
-        <View />
+        <View
+          cardNumber={cardNumber}
+          holderName={holderName}
+          year={year}
+          month={month}
+        />
       </div>
       <div className={styles.wrapper__formArea}>
         <div className={styles.card_form}>
