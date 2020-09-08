@@ -1,6 +1,20 @@
-# TypeScript Next.js example
+# nextjs_credit_card_form
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+- Credit Card Form
+  - https://medium.com/better-programming/here-are-6-frontend-challenges-to-code-9952190c97cc
+- Use Technology
+  - nextjs (with typescript)
+    - React Hooks
+  - css modules
+  - sass
+
+```bash
+yarn dev
+```
+
+# Original
+
+- nextjs project's default README
 
 ## Deploy your own
 
