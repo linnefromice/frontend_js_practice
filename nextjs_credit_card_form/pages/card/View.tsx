@@ -91,7 +91,25 @@ const View = (prop: ViewProp) => {
 
   return (
     <div className={entireStyle}>
-      <div className={styles.wrapper_back}>{(cvv + "###").slice(0, 3)}</div>
+      <div className={styles.wrapper_back}>
+        <div className={`${styles.wrapper_back__row}`}>
+          <div className={styles.magnetic_stripe_area}></div>
+        </div>
+        <div className={`${styles.wrapper_back__row}`}>
+          <div className={styles.cvv_area}>
+            <div className={styles.cvv_area__content}>
+              {(cvv + "###").slice(0, 3)}
+            </div>
+          </div>
+        </div>
+        <div
+          className={`${styles.wrapper_back__row} ${styles.back_brand_name_area}`}
+        >
+          <div className={styles.back_brand_name_area__content}>
+            <BrandNameArea />
+          </div>
+        </div>
+      </div>
       <div className={styles.wrapper}>
         <div className={styles.wrapper__row}>
           <div className={styles.card__ic}>

@@ -49,13 +49,23 @@
   transform: rotateY(180deg);
   width: 100%;
   height: 100%;
-  background: gray;
-  color: white;
+  background: linear-gradient(to right, #414345, #232526);
   font-weight: bold;
   border-radius: 20px;
+
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
+
+  &__row {
+    margin: auto 0;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
 }
 
 .card {
@@ -200,5 +210,39 @@
   }
   100% {
     border: 0.5px solid white;
+  }
+}
+
+.magnetic_stripe_area {
+  margin: 0.75vh 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+}
+.cvv_area {
+  margin: 0.25vh 0;
+  height: 100%;
+  width: 90%;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+
+  &__content {
+    margin: 0 1vw;
+  }
+}
+.back_brand_name_area {
+  margin: 0.75vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+
+  &__content {
+    margin: 0 1vw;
+    color: white;
   }
 }
