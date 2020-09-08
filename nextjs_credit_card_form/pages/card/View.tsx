@@ -97,6 +97,7 @@ const View = (prop: ViewProp) => {
         </div>
         <div className={`${styles.wrapper_back__row}`}>
           <div className={styles.cvv_area}>
+            <div className={styles.cvv_area__label}>CVV</div>
             <div className={styles.cvv_area__content}>
               {(cvv + "###").slice(0, 3)}
             </div>
