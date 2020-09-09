@@ -64,3 +64,11 @@ Practice design using material-ui & api using marvel api.
   - npx create-next-app --example with-typescript nextjs_credit_card_form
   - cd nextjs_credit_card_form
   - yarn add @zeit/next-sass node-sass
+
+# react-chat-example
+
+- Reference
+  - https://codetree.dev/react-websocket-chat-application/
+- Command
+  - npx create-react-app react-chat-example --typescript
+  - npm i express express-ws
