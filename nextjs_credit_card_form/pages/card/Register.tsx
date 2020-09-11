@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./Register.module.scss";
 import View from "./View";
 
@@ -16,11 +16,6 @@ const Register = () => {
   const [focusYear, setFocusYear] = useState<boolean>(false);
   const [focusMonth, setFocusMonth] = useState<boolean>(false);
   const [focusCvv, setFocusCvv] = useState<boolean>(false);
-
-  // for debug
-  useEffect(() => {
-    console.log(`cardNumber: ${cardNumber}`);
-  }, [cardNumber]);
 
   const processDisplayedCardNumber = (value: string): string => {
     return Array.from(value)
