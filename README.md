@@ -72,3 +72,13 @@ Practice design using material-ui & api using marvel api.
 - Command
   - npx create-react-app react-chat-example --typescript
   - npm i express express-ws
+
+# react-redux-01
+
+- Reference
+  - https://qiita.com/ragnar1904/items/72631e4476f94057c630
+- Command
+  - npx create-react-app react-redux-01 --template typescript
+  - cd react-redux-01
+  - yarn add redux react-redux
+  - 
