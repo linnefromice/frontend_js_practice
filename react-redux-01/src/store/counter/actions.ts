@@ -8,7 +8,7 @@ export const incrementAction = (): CounterActionTypes => {
 };
 export const decrementAction = (): CounterActionTypes => {
   return {
-    type: ActionTypes.increment, // "DECREMENT"
+    type: ActionTypes.decrement, // "DECREMENT"
   };
 };
 export const resetAction = (): CounterActionTypes => {
