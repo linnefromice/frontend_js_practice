@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 
+import { TaskBoard } from "./layouts/TaskBoard"
+
 function App() {
   return (
     <div className="App">
@@ -8,7 +10,9 @@ function App() {
         <div className="header__title">TASK MANAGEMENT</div>
       </div>
       <div className="main">
-        <div className="main__no_content">NO CONTENT</div>
+        <div className="main__content">
+          <TaskBoard/>
+        </div>
       </div>
     </div>
   );

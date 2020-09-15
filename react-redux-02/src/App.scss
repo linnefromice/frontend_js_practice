@@ -4,7 +4,7 @@
 }
 
 .header {
-    height: 10vh;
+    height: 5vh;
     width: 100vw;
     background: white;
 
@@ -22,11 +22,16 @@
 }
 
 .main {
-    height: 90vh;
+    height: 95vh;
     width: 100vw;
-    background: linear-gradient(to right bottom, #fbd3e9, #bb377d);
 
-    &__no_content {
-        text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &__content {
+        height: 95%;
+        width: 95%;
+        background: linear-gradient(to right bottom, #fbd3e9, #bb377d);
     }
 }
