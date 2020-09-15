@@ -6,7 +6,7 @@ import { TaskList } from "../components/task/TaskList"
 
 export const TaskBoard: React.FC = () => {
     return (
-        <div className="wrapper">
+        <div className="TaskBoard">
             <div className="summary_area">
                 <div className="summary_area__content">
                     SUMMARY
