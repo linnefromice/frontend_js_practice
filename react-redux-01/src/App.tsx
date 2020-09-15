@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Counter } from "./components/Counter";
+import { TodoForm } from "./components/TodoForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </a>
       </header>
       <Counter />
+      <TodoForm />
     </div>
   );
 }
