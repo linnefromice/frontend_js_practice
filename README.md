@@ -83,3 +83,8 @@ Practice design using material-ui & api using marvel api.
   - yarn add redux react-redux
   - yarn add --dev @types/react-redux
   - yarn add --dev husky lint-staged prettier
+
+# react-redux-02
+
+- Purpose
+  - Task management
