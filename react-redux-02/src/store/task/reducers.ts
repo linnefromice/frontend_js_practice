@@ -34,6 +34,7 @@ export const taskReducer = (state = initialState, action: TaskActionTypes) => {
                 status: action.payload.status,
                 title: action.payload.title,
             })
+            console.log(state)
             return state
         case ActionTypes.updateTask:
             return state.filter((data) => {
