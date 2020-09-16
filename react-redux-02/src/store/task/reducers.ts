@@ -29,13 +29,11 @@ export const taskReducer = (state = initialState, action: TaskActionTypes) => {
             return state
         case ActionTypes.createTask:
             const latestId = state.length
-            state.push({
+            return [...state, {
                 id: latestId + 1,
                 status: action.payload.status,
                 title: action.payload.title,
-            })
-            console.log(state)
-            return state
+            }]
         case ActionTypes.updateTask:
             return state.filter((data) => {
                 if (data.id === action.payload.id) {
