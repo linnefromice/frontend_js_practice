@@ -1,7 +1,7 @@
 import React from "react"
 import "./Task.scss"
 
-export const Task = () => {
+export const Task = ({id, status, title}: {id: number, status: string, title: string}) => {
     return (
         <div className="Task">
             <div className="view_task_update_area">
@@ -11,10 +11,10 @@ export const Task = () => {
                 DELETE
             </div>
             <div className="view_task_status_area">
-                STATUS
+                {status}
             </div>
             <div className="view_task_input_area">
-                TITLE
+                {title}
             </div>
         </div>
     )
