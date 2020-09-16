@@ -1,8 +1,8 @@
-import { create } from "core-js/fn/object";
 import { combineReducers, createStore } from "redux"
+import { taskReducer } from "./task/reducers"
 
 const rootReducer = combineReducers({
-    // TODO
+    task: taskReducer
 });
 export type RootState = ReturnType<typeof rootReducer>
 const store = createStore(rootReducer)
