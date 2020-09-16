@@ -27,7 +27,7 @@ interface CreateTaskAction extends Action {
 interface UpdateTaskAction extends Action {
     type: typeof ActionTypes.updateTask;
     payload: {
-        id: string;
+        id: number;
         status: string;
         title: string;
     }
@@ -35,7 +35,7 @@ interface UpdateTaskAction extends Action {
 interface DeleteTaskAction extends Action {
     type: typeof ActionTypes.deleteTask;
     payload: {
-        id: string;
+        id: number;
     }
 }
 export type TaskActionTypes = SelectTaskAction | CreateTaskAction | UpdateTaskAction | DeleteTaskAction
