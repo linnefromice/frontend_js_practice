@@ -1,0 +1,45 @@
+.CreateTask {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create_task_submit_button {
+    height: 100%;
+    width: 20%;
+    background-color: silver;
+    border: 1px solid dimgray;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+        background-color: dimgray;
+    }
+
+    &__label {
+        color: white;
+        font-weight: bold;
+    }
+}
+
+.create_task_status_select_area {
+    height: 100%;
+    width: 10%;
+    background-color: white;
+    border: 1px solid dimgray;
+    border-radius: 10px;
+}
+
+.create_task_input_area {
+    height: 100%;
+    width: 65%;
+    background-color: white;
+    border: 1px solid dimgray;
+    border-radius: 10px;
+}

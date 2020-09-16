@@ -1,0 +1,65 @@
+.Task {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.view_task_update_area {
+    height: 100%;
+    width: 9%;
+    background-color: lightskyblue;
+    border: 1px solid deepskyblue;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+        background-color: deepskyblue;
+    }
+
+    &__label {
+        color: white;
+        font-weight: bold;
+    }
+}
+.view_task_delete_area {
+    height: 100%;
+    width: 9%;
+    background-color: lightsalmon;
+    border: 1px solid darksalmon;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+        background-color: darksalmon;
+    }
+
+    &__label {
+        color: white;
+        font-weight: bold;
+    }
+}
+.view_task_status_area {
+    height: 100%;
+    width: 10%;
+    height: 100%;
+    width: 10%;
+    background-color: white;
+    border: 1px solid dimgray;
+    border-radius: 10px;
+}
+.view_task_input_area {
+    height: 100%;
+    width: 65%;
+    background-color: white;
+    border: 1px solid dimgray;
+    border-radius: 10px;
+}

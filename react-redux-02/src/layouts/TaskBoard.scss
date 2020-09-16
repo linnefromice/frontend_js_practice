@@ -1,0 +1,43 @@
+.TaskBoard {
+    height: 100%;
+    width: 100%;
+}
+.summary_area {
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        height: 95%;
+        width: 95%;
+    }
+}
+.create_area {
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        height: 95%;
+        width: 95%;
+    }
+}
+.list_area {
+    height: 80%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        height: 95%;
+        width: 95%;
+    }
+}
