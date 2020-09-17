@@ -14,7 +14,6 @@ export const CreateTask = () => {
     const handleSelectStatus = useCallback((event: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectStatus(event.target.value)
     }, [])
-
     const handleCreateTask = () => {
         dispatch(createTaskAction(selectStatus, inputTitle))
         setInputTitle("")
