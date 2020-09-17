@@ -40,6 +40,7 @@ export const taskReducer = (state = initialState, action: TaskActionTypes) => {
                     data.status = action.payload.status
                     data.title = action.payload.title
                 }
+                return data
             })
         case ActionTypes.deleteTask:
             return state.filter((data) => data.id !== action.payload.id)

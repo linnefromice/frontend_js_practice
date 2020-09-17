@@ -2,6 +2,8 @@ import React, { useState, useCallback } from "react"
 import { useDispatch } from "react-redux"
 import "./Task.scss"
 
+import { updateTaskAction, deleteTaskAction } from "../../store/task/actions"
+
 export const Task = ({id, status, title}: {id: number, status: string, title: string}) => {
     const dispatch = useDispatch()
     const [inputTitle, setInputTitle] = useState(title)
@@ -12,13 +14,25 @@ export const Task = ({id, status, title}: {id: number, status: string, title: st
     const handleSelectStatus = useCallback((event: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectStatus(event.target.value)
     }, [])
+    const handleUpdateTask = () => {
+        dispatch(updateTaskAction(id, selectStatus, inputTitle))
+    }
+    const handleDeleteTask = () => {
+        dispatch(deleteTaskAction(id))
+    }
 
     return (
         <div className="Task">
-            <div className="view_task_update_area">
+            <div
+                className="view_task_update_area"
+                onClick={handleUpdateTask}
+            >
                 UPDATE
             </div>
-            <div className="view_task_delete_area">
+            <div
+                className="view_task_delete_area"
+                onClick={handleDeleteTask}
+            >
                 DELETE
             </div>
             <select
