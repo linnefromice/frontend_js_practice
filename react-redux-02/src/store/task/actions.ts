@@ -1,10 +1,5 @@
 import { ActionTypes, TaskActionTypes } from "./types"
 
-export const selectTaskAction = (): TaskActionTypes => {
-    return {
-        type: ActionTypes.selectTasks,
-    }
-}
 export const createTaskAction = (status: string, title: string): TaskActionTypes => {
     return {
         type: ActionTypes.createTask,

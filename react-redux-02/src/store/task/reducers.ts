@@ -25,8 +25,6 @@ const initialState: Tasks = [
 
 export const taskReducer = (state = initialState, action: TaskActionTypes) => {
     switch (action.type) {
-        case ActionTypes.selectTasks:
-            return state
         case ActionTypes.createTask:
             const latestId = state.length
             return [...state, {

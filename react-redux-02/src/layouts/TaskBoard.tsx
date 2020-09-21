@@ -1,6 +1,7 @@
 import React from "react"
 import "./TaskBoard.scss"
 
+import { Summary } from "../components/Summary"
 import { CreateTask } from "../components/task/CreateTask"
 import { TaskList } from "../components/task/TaskList"
 
@@ -9,7 +10,7 @@ export const TaskBoard: React.FC = () => {
         <div className="TaskBoard">
             <div className="summary_area">
                 <div className="summary_area__content">
-                    SUMMARY
+                    <Summary/>
                 </div>
             </div>
             <div className="create_area">
