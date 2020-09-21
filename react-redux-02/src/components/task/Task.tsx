@@ -39,12 +39,9 @@ export const Task = ({id, status, title}: {id: number, status: string, title: st
             <select
                 className="view_task_status_area"
                 onChange={handleSelectStatus}
+                defaultValue={status}
             >
-                {Object.keys(TASK_STATUSES).map(key =>
-                    status === key
-                    ? <option key={`status-option-${key}`} value={key} selected>{TASK_STATUSES[key]}</option>
-                    : <option key={`status-option-${key}`} value={key}>{TASK_STATUSES[key]}</option>
-                )}
+                {Object.keys(TASK_STATUSES).map(key => <option key={`status-option-${key}`} value={key}>{TASK_STATUSES[key]}</option>)}
             </select>
             <input
                 className="view_task_input_area"
