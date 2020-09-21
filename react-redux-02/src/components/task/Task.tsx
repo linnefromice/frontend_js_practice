@@ -27,13 +27,13 @@ export const Task = ({id, status, title}: {id: number, status: string, title: st
                 className="view_task_update_area"
                 onClick={handleUpdateTask}
             >
-                UPDATE
+                <div className="view_task_update_area__label">UPDATE</div>
             </div>
             <div
                 className="view_task_delete_area"
                 onClick={handleDeleteTask}
             >
-                DELETE
+                <div className="view_task_delete_area__label">DELETE</div>
             </div>
             <select
                 className="view_task_status_area"

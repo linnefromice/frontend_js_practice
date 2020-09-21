@@ -25,7 +25,7 @@ export const CreateTask = () => {
                 className="create_task_submit_button"
                 onClick={handleCreateTask}
             >
-                SUBMIT
+                <div className="create_task_submit_button__label">SUBMIT</div>
             </div>
             <select
                 className="create_task_status_select_area"
