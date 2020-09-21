@@ -3,11 +3,12 @@ import { useDispatch } from "react-redux"
 import "./CreateTask.scss"
 
 import { createTaskAction } from "../../store/task/actions"
+import { TASK_STATUSES } from "../../global/Constants"
 
 export const CreateTask = () => {
     const dispatch = useDispatch()
     const [inputTitle, setInputTitle] = useState("")
-    const [selectStatus, setSelectStatus] = useState("PENDING")
+    const [selectStatus, setSelectStatus] = useState(Object.keys(TASK_STATUSES)[0])
     const handleInputTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
         setInputTitle(event.target.value)
     }, [])
@@ -31,10 +32,7 @@ export const CreateTask = () => {
                 className="create_task_status_select_area"
                 onChange={handleSelectStatus}
             >
-                <option value="PENDING">着手不可</option>
-                <option value="READY">未着手</option>
-                <option value="DOING">着手中</option>
-                <option value="DONE">完了</option>
+                {Object.keys(TASK_STATUSES).map(key => <option key={`status-option-${key}`} value={key}>{TASK_STATUSES[key]}</option>)}
             </select>
             <input
                 className="create_task_input_area"

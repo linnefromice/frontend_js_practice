@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react"
 import { useDispatch } from "react-redux"
 import "./Task.scss"
 
+import { TASK_STATUSES } from "../../global/Constants"
 import { updateTaskAction, deleteTaskAction } from "../../store/task/actions"
 
 export const Task = ({id, status, title}: {id: number, status: string, title: string}) => {
@@ -39,10 +40,11 @@ export const Task = ({id, status, title}: {id: number, status: string, title: st
                 className="view_task_status_area"
                 onChange={handleSelectStatus}
             >
-                {status === "PENDING" ? <option value="PENDING" selected>着手不可</option> : <option value="PENDING">着手不可</option>}
-                {status === "READY" ? <option value="READY" selected>未着手</option> : <option value="READY">未着手</option>}
-                {status === "DOING" ? <option value="DOING" selected>着手中</option> : <option value="DOING">着手中</option>}
-                {status === "DONE" ? <option value="DONE" selected>完了</option> : <option value="DONE">完了</option>}
+                {Object.keys(TASK_STATUSES).map(key =>
+                    status === key
+                    ? <option key={`status-option-${key}`} value={key} selected>{TASK_STATUSES[key]}</option>
+                    : <option key={`status-option-${key}`} value={key}>{TASK_STATUSES[key]}</option>
+                )}
             </select>
             <input
                 className="view_task_input_area"
