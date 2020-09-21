@@ -11,3 +11,24 @@
         margin: 0 0.5vw;
     }
 }
+
+.SummaryTitle {
+    color: white;
+    font-size: 2.0rem;
+    font-weight: bold;
+}
+
+.SummaryContentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__label {
+        color: white;    
+    }
+    &__value {
+        color: gray;
+        font-weight: bold;
+    }
+}

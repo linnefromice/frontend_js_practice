@@ -9,23 +9,31 @@ export const Summary = () => {
     return (
         <div className="Summary">
             <div className="Summary__content">
-                Summary
+                <div className="SummaryTitle">Summary</div>
             </div>
             <div className="Summary__content">
-                PENDING<br/>
-                {tasks.filter(task => task.status === "PENDING").length}
+                <div className="SummaryContentWrapper">
+                    <div className="SummaryContentWrapper__label">PENDING</div>
+                    <div className="SummaryContentWrapper__value">{tasks.filter(task => task.status === "PENDING").length}</div>
+                </div>
             </div>
             <div className="Summary__content">
-                READY<br/>
-                {tasks.filter(task => task.status === "READY").length}
+                <div className="SummaryContentWrapper">
+                    <div className="SummaryContentWrapper__label">READY</div>
+                    <div className="SummaryContentWrapper__value">{tasks.filter(task => task.status === "READY").length}</div>
+                </div>
             </div>
             <div className="Summary__content">
-                DOING<br/>
-                {tasks.filter(task => task.status === "DOING").length}
+                <div className="SummaryContentWrapper">
+                    <div className="SummaryContentWrapper__label">DOING</div>
+                    <div className="SummaryContentWrapper__value">{tasks.filter(task => task.status === "DOING").length}</div>
+                </div>
             </div>
             <div className="Summary__content">
-                DONE<br/>
-                {tasks.filter(task => task.status === "DONE").length}
+                <div className="SummaryContentWrapper">
+                    <div className="SummaryContentWrapper__label">DONE</div>
+                    <div className="SummaryContentWrapper__value">{tasks.filter(task => task.status === "DONE").length}</div>
+                </div>
             </div>
         </div>
     )
