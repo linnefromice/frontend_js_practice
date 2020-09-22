@@ -93,3 +93,16 @@ Practice design using material-ui & api using marvel api.
   - cd react-redux-02
   - yarn add redux react-redux
   - yarn add --dev node-sass @types/react-redux husky lint-staged prettier
+
+# next-redux-spectrum-01
+
+- Purpose
+  - Design Framework ... Spectrum
+  - State Management Framework ... Redux
+  - Base ... Next
+- Command
+  - npx create-next-app --example with-typescript next-redux-spectrum-01
+  - cd next-redux-spectrum-01
+  - yarn add redux react-redux @reduxjs/toolkit redux-logger
+  - yarn add --dev @types/react-redux @types/redux-logger
+  - yarn add next-compose-plugins @zeit/next-css next-transpile-modules
