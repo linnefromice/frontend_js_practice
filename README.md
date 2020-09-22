@@ -105,4 +105,6 @@ Practice design using material-ui & api using marvel api.
   - cd next-redux-spectrum-01
   - yarn add redux react-redux @reduxjs/toolkit redux-logger
   - yarn add --dev @types/react-redux @types/redux-logger
+  - yarn add @adobe/react-spectrum
   - yarn add next-compose-plugins @zeit/next-css next-transpile-modules
+  - yarn add @spectrum-icons/workflow
