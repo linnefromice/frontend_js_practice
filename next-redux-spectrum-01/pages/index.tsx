@@ -1,11 +1,11 @@
+import { CreateTask } from '../components/CreateTask'
 import Layout from '../components/Layout'
+import { TaskList } from '../components/TaskList'
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      This is Content
-    </p>
+    <CreateTask/>
+    <TaskList/>
   </Layout>
 )
 
