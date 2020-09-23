@@ -4,7 +4,7 @@ import {Provider, defaultTheme } from '@adobe/react-spectrum';
 import { TaskList } from '../components/TaskList'
 
 const IndexPage = () => (
-  <Provider theme={defaultTheme}>
+  <Provider colorScheme="dark" theme={defaultTheme}>
     <Layout title="Home | Next.js + TypeScript Example">
       <CreateTask/>
       <TaskList/>
