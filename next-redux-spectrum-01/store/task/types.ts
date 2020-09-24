@@ -2,7 +2,7 @@ import { Action } from "redux"
 
 export const ActionTypes = {
     createTask: "CREATE_TASK",
-    updatgeTask: "UPDATE_TASK",
+    updateTask: "UPDATE_TASK",
     deleteTask: "DELETE_TASK",
 } as const
 
@@ -21,7 +21,7 @@ interface CreateTaskAction extends Action {
     }
 }
 interface UpdateTaskAction extends Action {
-    type: typeof ActionTypes.updatgeTask
+    type: typeof ActionTypes.updateTask
     payload: {
         id: number
         status: string
