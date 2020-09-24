@@ -3,7 +3,9 @@ import { ViewTask } from "./ViewTask"
 
 export const TaskList = () => {
     return (
-        <Flex direction="column" gap="size-100">
+        <Flex
+            direction="column"
+        >
             <ViewTask/>
             <ViewTask/>
             <ViewTask/>

@@ -1,15 +1,15 @@
-import { CreateTask } from '../components/CreateTask'
 import Layout from '../components/Layout'
-import {Provider, defaultTheme } from '@adobe/react-spectrum';
-import { TaskList } from '../components/TaskList'
+import { SSRProvider, Provider, defaultTheme } from '@adobe/react-spectrum';
+import MainContent from '../components/MainContent';
 
 const IndexPage = () => (
-  <Provider colorScheme="dark" theme={defaultTheme}>
-    <Layout title="Home | Next.js + TypeScript Example">
-      <CreateTask/>
-      <TaskList/>
-    </Layout>
-  </Provider>
+  <SSRProvider>
+    <Provider colorScheme="dark" theme={defaultTheme}>
+      <Layout title="Home | Next.js / React Spectrum / Redux">
+        <MainContent/>
+      </Layout>
+    </Provider>
+  </SSRProvider>
 )
 
 export default IndexPage
