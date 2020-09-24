@@ -1,6 +1,11 @@
 import { Flex, View, Button, Text, TextField } from '@adobe/react-spectrum'
 
-export const ViewTask = () => {
+interface TaskInterface {
+    id: number
+    status: string
+    title: string
+}
+export const ViewTask = (props: TaskInterface) => {
     return (
         <Flex
             direction="row"
@@ -14,10 +19,10 @@ export const ViewTask = () => {
                 <Button variant="negative">DELETE</Button>
             </View>
             <View width="size-1000">
-                <Text>着手中</Text>
+                <Text>{props.status}</Text>
             </View>
             <View width="size-2000">
-                <TextField label="title" placeholder="Input your new task!"/>
+                <TextField label="title" defaultValue={props.title}/>
             </View>
         </Flex>
     )
