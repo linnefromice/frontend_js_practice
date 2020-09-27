@@ -31,6 +31,7 @@ export const ViewTask = (props: TaskInterface) => {
             direction="row"
             justifyContent="center"
             alignItems="center"
+            width="size-10000"
         >
             <View width="size-2000">
                 <Button
@@ -44,8 +45,9 @@ export const ViewTask = (props: TaskInterface) => {
                     onPress={handleDeleteTask}
                 >DELETE</Button>
             </View>
-            <View width="size-1000">
+            <View>
                 <RadioGroup
+                    orientation="horizontal"
                     label="Status"
                     onChange={handleSelectStatus}
                     defaultValue={props.status}

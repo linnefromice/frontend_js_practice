@@ -32,7 +32,7 @@ export const CreateTask = () => {
             direction="row"
             justifyContent="center"
             alignItems="center"
-            width="size-6000"
+            width="size-10000"
             gap="size-100"
         >
             <View>
@@ -42,8 +42,9 @@ export const CreateTask = () => {
                     onChange={handleInputTitle}
                 />
             </View>
-            <View width="size-2000">
+            <View>
                 <RadioGroup
+                    orientation="horizontal"
                     label="Status"
                     onChange={handleSelectStatus}
                 >
