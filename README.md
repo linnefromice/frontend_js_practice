@@ -117,3 +117,4 @@ Practice design using material-ui & api using marvel api.
   - [GraphQL & React tutorial (part 1/6)](https://www.chromatic.com/blog/graphql-react-tutorial-part-1-6/)
 - Command
   - npx create-react-app storybook-tutorial
+  - npx -p @storybook/cli sb init
