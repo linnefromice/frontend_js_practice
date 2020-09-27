@@ -118,3 +118,5 @@ Practice design using material-ui & api using marvel api.
 - Command
   - npx create-react-app storybook-tutorial
   - npx -p @storybook/cli sb init
+  - npx degit chromaui/learnstorybook-code/public/font public/font
+  - npx degit chromaui/learnstorybook-code/public/icon public/icon
