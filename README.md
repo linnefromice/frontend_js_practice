@@ -108,3 +108,15 @@ Practice design using material-ui & api using marvel api.
   - yarn add @adobe/react-spectrum
   - yarn add next-compose-plugins @zeit/next-css next-transpile-modules
   - yarn add @spectrum-icons/workflow
+
+# storybook-tutorial
+
+- Reference
+  - [Storybook for React tutorial | Storybook Tutorials](https://www.learnstorybook.com/intro-to-storybook/react/en/get-started/)
+  - [ReactでStorybook チュートリアルをやってみました。 - Qiita](https://qiita.com/fufujimoto/items/112fafc332df8bf3a55d)
+  - [GraphQL & React tutorial (part 1/6)](https://www.chromatic.com/blog/graphql-react-tutorial-part-1-6/)
+- Command
+  - npx create-react-app storybook-tutorial
+  - npx -p @storybook/cli sb init
+  - npx degit chromaui/learnstorybook-code/public/font public/font
+  - npx degit chromaui/learnstorybook-code/public/icon public/icon
