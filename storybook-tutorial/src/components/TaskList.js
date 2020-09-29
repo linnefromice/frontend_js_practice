@@ -7,12 +7,13 @@ export default function TaskList({ loading, tasks, onPinTask, onArchiveTask }) {
         onArchiveTask,
     }
     if (loading) return <div className="list-items">loading</div>;
-    if (task.length === 0) return <div className="list-items">empty</div>;
+    if (tasks.length === 0) return <div className="list-items">empty</div>;
 
     return (
         <div className="list-items">
             {tasks.map(task => {
-                <Task key={task.id} task={task} {...events} />
+                // eslint-disable-next-line no-unused-expressions
+                return <Task key={task.id} task={task} {...events} />
             })}
         </div>
     );
