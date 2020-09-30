@@ -24,6 +24,7 @@ export function PureInboxScreen ({ error }) {
                     <span className="title-wrapper">Taskbox</span>
                 </h1>
             </nav>
+            <TaskList/>
         </div>
     )
 }
