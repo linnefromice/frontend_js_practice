@@ -12,7 +12,8 @@ function taskStateReducer(taskState) {
         return {
             ...state,
             tasks: state.tasks.map(task => {
-                task.id === action.id ? { ...task, state: taskState } : task
+                // eslint-disable-next-line no-unused-expressions
+                return task.id === action.id ? { ...task, state: taskState } : task
             })
         }
     }
