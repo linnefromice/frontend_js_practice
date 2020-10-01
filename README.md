@@ -120,3 +120,8 @@ Practice design using material-ui & api using marvel api.
   - npx -p @storybook/cli sb init
   - npx degit chromaui/learnstorybook-code/public/font public/font
   - npx degit chromaui/learnstorybook-code/public/icon public/icon
+
+# next_01
+
+- Command
+  - npx create-next-app --example with-typescript next-01
