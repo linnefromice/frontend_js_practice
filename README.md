@@ -125,3 +125,19 @@ Practice design using material-ui & api using marvel api.
 
 - Command
   - npx create-next-app --example with-typescript next-01
+
+# tailwind_01
+
+- Reference
+  - [TailwindCSS入門 ~ Utility First + デザインシステムの構築 ~ - Qiita](https://qiita.com/oedkty/items/68461080515ec1012980)
+  - [最小手数で始めるTailwind CSS - メドピア開発者ブログ](https://tech.medpeer.co.jp/entry/better-tailwind-css)
+- Command
+  - yarn init -y
+  - yarn add tailwindcss
+  - npx tailswindcss init
+  - gibo dump VisualStudio Node > .gitignore
+  - touch tailwind.css
+  - mkdir public
+  - touch public/index.html
+  - yarn build:css
+  - npx http-server ./public
