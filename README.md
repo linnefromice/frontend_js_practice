@@ -123,8 +123,16 @@ Practice design using material-ui & api using marvel api.
 
 # next_01
 
+- Reference
+  - [Getting started with Tailwind CSS in Next.js | Akhila Ariyachandra](https://akhilaariyachandra.com/getting-started-with-tailwind-css-in-next-js/)
 - Command
   - npx create-next-app --example with-typescript next-01
+  - setting tailwindcss
+    - yarn add tailwindcss postcss-preset-env --dev
+    - npx tailwindcss init
+    - mkdir -p src/styles
+    - touch src/styles/index.css
+    - touch pages/_app.js
 
 # tailwind_01
 
