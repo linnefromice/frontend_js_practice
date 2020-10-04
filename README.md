@@ -136,3 +136,8 @@ Practice design using material-ui & api using marvel api.
   - yarn add tailwindcss
   - npx tailswindcss init
   - gibo dump VisualStudio Node > .gitignore
+  - touch tailwind.css
+  - mkdir public
+  - touch public/index.html
+  - yarn build:css
+  - npx http-server ./public
