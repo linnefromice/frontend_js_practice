@@ -14,18 +14,44 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
-      <nav>
+    <div>
+      <ul className="flex">
         <Link href="/">
-          <a>Overview</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/repository">
-          <a>Repository</a>
+          <li className="mr-6">
+            <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
+          </li>
         </Link>
-      </nav>
-    </header>
-    {children}
+        <Link href="/repository">
+          <li className="mr-6">
+            <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
+          </li>
+          </Link>
+      </ul>
+    </div>
+    <div className="flex flex-row">
+      <div className="w-2/12">
+        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+          <img className="w-full" src="https://avatars1.githubusercontent.com/u/13592640" alt="Sunset in the mountains"/>
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">linnefromice</div>
+            <div className="text-l mb-2">linnefromice</div>
+            <p className="text-gray-700 text-base">
+              work at manager.
+            </p>
+          </div>
+          <div className="px-6 pt-4 pb-2">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Flutter</span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#React</span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Kotlin</span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Soccer</span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Movie</span>
+          </div>
+        </div>
+      </div>
+      <div className="w-10/12 bg-teal-200">
+        {children}
+      </div>
+    </div>
     <footer>
       <hr />
       <span>I'm here to stay (Footer)</span>
