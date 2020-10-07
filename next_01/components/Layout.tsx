@@ -28,9 +28,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           </Link>
       </ul>
     </div>
-    <div className="flex flex-row">
-      <div className="w-2/12">
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="flex flex-row max-w-screen-xl mx-auto">
+      <div className="w-3/12 mx-1">
+        <div className="rounded overflow-hidden shadow-lg">
           <img className="w-full" src="https://avatars1.githubusercontent.com/u/13592640" alt="Sunset in the mountains"/>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">linnefromice</div>
@@ -48,8 +48,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           </div>
         </div>
       </div>
-      <div className="w-10/12 bg-teal-200">
-        {children}
+      <div className="w-9/12 mx-1">
+        <div className="rounded overflow-hidden shadow-lg">
+          {children}
+        </div>
       </div>
     </div>
     <footer>
