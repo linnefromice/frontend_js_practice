@@ -1,19 +1,26 @@
-import Link from 'next/link'
 import Layout from '../components/Layout'
 
 const RepositoryPage = () => (
   <Layout title="Repository | Next.js + TypeScript Example">
-    <h1 className="text-6xl font-bold">Repsoitory Page</h1>
-    <p className="m-2 text-l font-semibold italic">
-      <Link href="/repository">
-        <a>Go Home</a>
-      </Link>
-    </p>
-    <div className="m-2 flex flex-col">
-      <p className="font-serif text-lg text-gray-800 italic">front_js_practice</p>
-      <p className="font-serif text-lg text-gray-800 italic">ruby_practice_basic</p>
-      <p className="font-serif text-lg text-gray-800 italic">practice_design</p>
-      <p className="font-serif text-lg text-gray-800 italic">portfolio_one</p>
+    <div className="my-2 flex flex-row">
+      <div className="w-7/12 p-1">
+        <input className="w-full h-full border border-gray-500 rounded border-opacity-50 p-1" type="text" placeholder="Find a repository..."></input>
+      </div>
+      <div className="w-2/12 p-1">
+        <div className="border border-gray-500 rounded border-opacity-50 p-1">
+          <span className="text-gray-700 text-sm">Type: All ▼</span>
+        </div>
+      </div>
+      <div className="w-2/12 p-1">
+        <div className="border border-gray-500 rounded border-opacity-50 p-1">
+          <span className="text-gray-700 text-sm">Language: All ▼</span>
+        </div>
+      </div>
+      <div className="w-1/12 p-1">
+        <div className="rounded bg-green-500 hover:bg-green-700 p-1">
+          <span className="text-white">New</span>
+        </div>
+      </div>
     </div>
   </Layout>
 )

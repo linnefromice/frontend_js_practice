@@ -10,7 +10,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">Quiz Application of FFIX created by Flutter</div>
           <div className="text-sm">
             <span className="text-teal-500">●</span>
-            <span className="text-gray-500">Dart</span>
+            <span className="text-gray-500 mx-1">Dart</span>
           </div>
         </div>
         <div className="border border-gray-600 rounded border-solid border-opacity-75 py-4 px-2 grid grid-cols-1 gap-1">
@@ -18,7 +18,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">A study record application version 1.0</div>
           <div className="text-sm">
             <span className="text-teal-500">●</span>
-            <span className="text-gray-500">Dart</span>
+            <span className="text-gray-500 mx-1">Dart</span>
           </div>
         </div>
         <div className="border border-gray-600 rounded border-solid border-opacity-75 py-4 px-2 grid grid-cols-1 gap-1">
@@ -26,7 +26,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">portfolio / 1st work</div>
           <div className="text-sm">
             <span className="text-yellow-500">●</span>
-            <span className="text-gray-500">JavaScript</span>
+            <span className="text-gray-500 mx-1">JavaScript</span>
           </div>
         </div>
         <div className="border border-gray-600 rounded border-solid border-opacity-75 py-4 px-2 grid grid-cols-1 gap-1">
@@ -34,7 +34,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">news app using vuetify / new york times api.</div>
           <div className="text-sm">
             <span className="text-indigo-700">●</span>
-            <span className="text-gray-500">Vue</span>
+            <span className="text-gray-500 mx-1">Vue</span>
           </div>
         </div>
         <div className="border border-gray-600 rounded border-solid border-opacity-75 py-4 px-2 grid grid-cols-1 gap-1">
@@ -42,7 +42,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">tweet app 01 / react, rails</div>
           <div className="text-sm">
             <span className="text-green-800">●</span>
-            <span className="text-gray-500">TypeScript</span>
+            <span className="text-gray-500 mx-1">TypeScript</span>
           </div>
         </div>
         <div className="border border-gray-600 rounded border-solid border-opacity-75 py-4 px-2 grid grid-cols-1 gap-1">
@@ -50,7 +50,7 @@ const IndexPage = () => (
           <div className="text-gray-500 text-xs">design training repository (Site projection)</div>
           <div className="text-sm">
             <span className="text-red-700">●</span>
-            <span className="text-gray-500">HTML</span>
+            <span className="text-gray-500 mx-1">HTML</span>
           </div>
         </div>
       </div>
