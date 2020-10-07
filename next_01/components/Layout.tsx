@@ -28,7 +28,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           </Link>
       </ul>
     </div>
-    <div className="flex flex-row max-w-screen-lg mx-auto">
+    <div className="flex flex-row max-w-screen-xl mx-auto">
       <div className="w-3/12 mx-1">
         <div className="rounded overflow-hidden shadow-lg">
           <img className="w-full" src="https://avatars1.githubusercontent.com/u/13592640" alt="Sunset in the mountains"/>
