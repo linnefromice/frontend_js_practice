@@ -39,35 +39,54 @@ const RepositoryPage = () => (
       <div className="divide-y divide-gray-300">
         <div className="p-1 m-1">
           <div className="flex flex-row justify-between">
-            <div className="p-1">front_js_practice</div>
-            <div className="p-1 w-1/12">★ Star</div>
+            <div className="p-1 text-xl text-blue-500 font-semibold">front_js_practice</div>
+            <div className="p-1 w-1/12 border border-solid border-gray-500 rounded-lg flex justify-between items-center">
+              <div>★ Star</div>
+            </div>
           </div>
-          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="p-1 text-gray-700 text-sm">Frontend development practice repository with JavaScript frameworks.</div>
           <div className="flex flex-row">
-            <div className="p-1">CSS</div>
-            <div className="p-1">Updated 2 days ago</div>
+            <div className="p-1 text-gray-700 text-sm">○ CSS</div>
+            <div className="p-1 text-gray-700 text-sm">Updated 2 days ago</div>
           </div>
         </div>
         <div className="p-1 m-1">
           <div className="flex flex-row justify-between">
-            <div className="p-1">front_js_practice</div>
-            <div className="p-1 w-1/12">★ Star</div>
+            <div className="p-1 text-xl text-blue-500 font-semibold">docker_practice</div>
+            <div className="p-1 w-1/12 border border-solid border-gray-500 rounded-lg flex justify-between items-center">
+              <div>★ Star</div>
+            </div>
           </div>
-          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="p-1 text-gray-700 text-sm"></div>
           <div className="flex flex-row">
-            <div className="p-1">CSS</div>
-            <div className="p-1">Updated 2 days ago</div>
+            <div className="p-1 text-gray-700 text-sm">○ Go</div>
+            <div className="p-1 text-gray-700 text-sm">Updated 26 days ago</div>
           </div>
         </div>
         <div className="p-1 m-1">
           <div className="flex flex-row justify-between">
-            <div className="p-1">front_js_practice</div>
-            <div className="p-1 w-1/12">★ Star</div>
+            <div className="p-1 text-xl text-blue-500 font-semibold">ruby_practice_basic</div>
+            <div className="p-1 w-1/12 border border-solid border-gray-500 rounded-lg flex justify-between items-center">
+              <div>★ Star</div>
+            </div>
           </div>
-          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="p-1 text-gray-700 text-sm">ruby_practice_basic</div>
           <div className="flex flex-row">
-            <div className="p-1">CSS</div>
-            <div className="p-1">Updated 2 days ago</div>
+            <div className="p-1 text-gray-700 text-sm">○ Ruby</div>
+            <div className="p-1 text-gray-700 text-sm">Updated 28 days ago</div>
+          </div>
+        </div>
+        <div className="p-1 m-1">
+          <div className="flex flex-row justify-between">
+            <div className="p-1 text-xl text-blue-500 font-semibold">practice_design</div>
+            <div className="p-1 w-1/12 border border-solid border-gray-500 rounded-lg flex justify-between items-center">
+              <div>★ Star</div>
+            </div>
+          </div>
+          <div className="p-1 text-gray-700 text-sm">design training repository (Site projection)</div>
+          <div className="flex flex-row">
+            <div className="p-1 text-gray-700 text-sm">○ HTML</div>
+            <div className="p-1 text-gray-700 text-sm">Updated on 29 Aug</div>
           </div>
         </div>
       </div>
