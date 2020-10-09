@@ -36,6 +36,41 @@ const RepositoryPage = () => (
           <div className="mx-1 text-gray-700">Clear filter</div>
         </div>
       </div>
+      <div className="divide-y divide-gray-300">
+        <div className="p-1 m-1">
+          <div className="flex flex-row justify-between">
+            <div className="p-1">front_js_practice</div>
+            <div className="p-1 w-1/12">★ Star</div>
+          </div>
+          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="flex flex-row">
+            <div className="p-1">CSS</div>
+            <div className="p-1">Updated 2 days ago</div>
+          </div>
+        </div>
+        <div className="p-1 m-1">
+          <div className="flex flex-row justify-between">
+            <div className="p-1">front_js_practice</div>
+            <div className="p-1 w-1/12">★ Star</div>
+          </div>
+          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="flex flex-row">
+            <div className="p-1">CSS</div>
+            <div className="p-1">Updated 2 days ago</div>
+          </div>
+        </div>
+        <div className="p-1 m-1">
+          <div className="flex flex-row justify-between">
+            <div className="p-1">front_js_practice</div>
+            <div className="p-1 w-1/12">★ Star</div>
+          </div>
+          <div className="p-1">Frontend development practice repository with JavaScript frameworks.</div>
+          <div className="flex flex-row">
+            <div className="p-1">CSS</div>
+            <div className="p-1">Updated 2 days ago</div>
+          </div>
+        </div>
+      </div>
     </div>
   </Layout>
 )
