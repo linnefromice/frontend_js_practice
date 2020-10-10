@@ -64,30 +64,15 @@ const RepositoryPage = () => (
         </div>
       </div>
       <div className="divide-y divide-gray-300">
-        <Project
-          title={datas[0].title}
-          description={datas[0].description}
-          language={datas[0].langurage}
-          update_context={datas[0].update_context}
-        />
-        <Project
-          title={datas[1].title}
-          description={datas[1].description}
-          language={datas[1].langurage}
-          update_context={datas[1].update_context}
-        />
-        <Project
-          title={datas[2].title}
-          description={datas[2].description}
-          language={datas[2].langurage}
-          update_context={datas[2].update_context}
-        />
-        <Project
-          title={datas[3].title}
-          description={datas[3].description}
-          language={datas[3].langurage}
-          update_context={datas[3].update_context}
-        />
+        {datas.map((data, index) =>
+          <Project
+            key={`repository-project.${index}`}
+            title={data.title}
+            description={data.description}
+            language={data.langurage}
+            update_context={data.update_context}
+          />
+        )}
       </div>
     </div>
   </Layout>

@@ -38,36 +38,14 @@ const IndexPage = () => (
     <div className="m-1">
       <div className="m-2 text-gray-700">Pinned</div>
       <div className="grid grid-cols-2 gap-4">
-        <Project
-          title={datas[0].title}
-          description={datas[0].description}
-          language={datas[0].language}
-        />
-        <Project
-          title={datas[1].title}
-          description={datas[1].description}
-          language={datas[1].language}
-        />
-        <Project
-          title={datas[2].title}
-          description={datas[2].description}
-          language={datas[2].language}
-        />
-        <Project
-          title={datas[3].title}
-          description={datas[3].description}
-          language={datas[3].language}
-        />
-        <Project
-          title={datas[4].title}
-          description={datas[4].description}
-          language={datas[4].language}
-        />
-        <Project
-          title={datas[5].title}
-          description={datas[5].description}
-          language={datas[5].language}
-        />
+        {datas.map((data, index) =>
+          <Project
+            key={`index-project.${index}`}
+            title={data.title}
+            description={data.description}
+            language={data.language}
+          />
+        )}
       </div>
     </div>
   </Layout>
