@@ -13,4 +13,4 @@ const Project = (props: ProjectInterface) => (
     </div>
   </div>
 )
-export default Project;
+export default Project
