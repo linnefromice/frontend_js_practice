@@ -149,3 +149,11 @@ Practice design using material-ui & api using marvel api.
   - touch public/index.html
   - yarn build:css
   - npx http-server ./public
+
+# react-recoil-01
+
+- Reference
+  - [Getting Started | Recoil](https://recoiljs.org/docs/introduction/getting-started)
+- Command
+  - npx create-react-app react-recoil-01
+  - yarn add recoil
