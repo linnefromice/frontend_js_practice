@@ -113,7 +113,7 @@ Practice design using material-ui & api using marvel api.
 
 - Reference
   - [Storybook for React tutorial | Storybook Tutorials](https://www.learnstorybook.com/intro-to-storybook/react/en/get-started/)
-  - [ReactでStorybook チュートリアルをやってみました。 - Qiita](https://qiita.com/fufujimoto/items/112fafc332df8bf3a55d)
+  - [React で Storybook チュートリアルをやってみました。 - Qiita](https://qiita.com/fufujimoto/items/112fafc332df8bf3a55d)
   - [GraphQL & React tutorial (part 1/6)](https://www.chromatic.com/blog/graphql-react-tutorial-part-1-6/)
 - Command
   - npx create-react-app storybook-tutorial
@@ -132,13 +132,13 @@ Practice design using material-ui & api using marvel api.
     - npx tailwindcss init
     - mkdir -p src/styles
     - touch src/styles/index.css
-    - touch pages/_app.js
+    - touch pages/\_app.js
 
 # tailwind_01
 
 - Reference
-  - [TailwindCSS入門 ~ Utility First + デザインシステムの構築 ~ - Qiita](https://qiita.com/oedkty/items/68461080515ec1012980)
-  - [最小手数で始めるTailwind CSS - メドピア開発者ブログ](https://tech.medpeer.co.jp/entry/better-tailwind-css)
+  - [TailwindCSS 入門 ~ Utility First + デザインシステムの構築 ~ - Qiita](https://qiita.com/oedkty/items/68461080515ec1012980)
+  - [最小手数で始める Tailwind CSS - メドピア開発者ブログ](https://tech.medpeer.co.jp/entry/better-tailwind-css)
 - Command
   - yarn init -y
   - yarn add tailwindcss
@@ -156,4 +156,12 @@ Practice design using material-ui & api using marvel api.
   - [Getting Started | Recoil](https://recoiljs.org/docs/introduction/getting-started)
 - Command
   - npx create-react-app react-recoil-01
+  - yarn add recoil
+
+# react-recoil-02
+
+- Reference
+  - [Intro | Recoil](https://recoiljs.org/docs/basic-tutorial/intro)
+- Command
+  - npx create-react-app react-recoil-02
   - yarn add recoil
