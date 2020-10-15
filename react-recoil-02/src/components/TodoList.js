@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   atom,
+  selector,
   useRecoilValue,
   useRecoilState,
   useSetRecoilState,
@@ -10,6 +11,40 @@ const todoListState = atom({
   key: "todoListState",
   default: [],
 });
+const todoListFilterState = atom({
+  key: "todoListFilterState",
+  default: "Show All",
+});
+const filteredTodoListState = selector({
+  key: "filteredTodoListState",
+  get: ({ get }) => {
+    const filter = get(todoListFilterState);
+    const list = get(todoListState);
+    switch (filter) {
+      case "Show Completed":
+        return list.filter((item) => item.isComplete);
+      case "Show Uncompleted":
+        return list.filter((item) => !item.isComplete);
+      default:
+        return list;
+    }
+  },
+});
+const TodoListFilters = () => {
+  const [filter, setFilter] = useRecoilState(todoListFilterState);
+  const updateFilter = ({ target: { value } }) => setFilter(value);
+
+  return (
+    <>
+      Filter:
+      <select value={filter} onChange={updateFilter}>
+        <option value="Show All">All</option>
+        <option value="Show Completed">Completed</option>
+        <option value="Show Uncompleted">Uncompleted</option>
+      </select>
+    </>
+  );
+};
 
 let id = 1;
 const getId = () => id++;
@@ -72,6 +107,7 @@ const TodoItem = ({ item }) => {
 
   return (
     <div>
+      <span>{item.id}</span>
       <input type="text" value={item.text} onChange={editItemText} />
       <input
         type="checkbox"
@@ -84,9 +120,10 @@ const TodoItem = ({ item }) => {
 };
 
 const TodoList = () => {
-  const todoList = useRecoilValue(todoListState);
+  const todoList = useRecoilValue(filteredTodoListState);
   return (
     <>
+      <TodoListFilters />
       <TodoItemCreator />
       {todoList.map((todoItem) => (
         <TodoItem key={todoItem.id} item={todoItem} />
