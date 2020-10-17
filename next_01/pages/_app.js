@@ -1,11 +1,10 @@
 import "../src/styles/index.css";
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
-const AUTH_TOKEN = "XXXX"
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
   headers: {
-    Authorization: `token ${AUTH_TOKEN}`,
+    Authorization: `token ${process.env.APP_GITHUB_KEY}`,
   },
   cache: new InMemoryCache()
 })
