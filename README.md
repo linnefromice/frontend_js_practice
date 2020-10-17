@@ -136,6 +136,8 @@ Practice design using material-ui & api using marvel api.
     - touch pages/\_app.js
   - setting graphql
     - yarn add @apollo/client graphql
+  - setting for using dotenv
+    - yarn add dotenv-webpack --dev
 
 # tailwind_01
 
