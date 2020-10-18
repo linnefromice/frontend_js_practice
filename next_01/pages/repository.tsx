@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client'
+import dayjs from 'dayjs'
 import Layout from '../components/Layout'
 import Project from '../components/repository/project'
 
@@ -100,7 +101,7 @@ const RepositoryPage = () => {
               description={edge.node.description}
               language={`LANGUAGE`}
               // language={edge.node.languages.edges[0].node.name}
-              update_context={edge.node.updatedAt}
+              update_context={dayjs(edge.node.updatedAt).format('YY/MM/DD HH:mm:ss')}
             />
           )}
         </div>
