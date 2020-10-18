@@ -94,16 +94,19 @@ const RepositoryPage = () => {
           </div>
         </div>
         <div className="divide-y divide-gray-300">
-          {data.viewer.repositories.edges.map((edge, index) =>
-            <Project
-              key={`repository-project.${index}`}
-              title={edge.node.name}
-              description={edge.node.description}
-              language={`LANGUAGE`}
-              // language={edge.node.languages.edges[0].node.name}
-              update_context={dayjs(edge.node.updatedAt).format('YY/MM/DD HH:mm:ss')}
-            />
-          )}
+          {data.viewer.repositories.edges.map((edge, index) => {
+            const language = edge.node.languages.edges[0] ? edge.node.languages.edges[0].node.name : "NOTHING"
+            return (
+              <Project
+                key={`repository-project.${index}`}
+                title={edge.node.name}
+                description={edge.node.description}
+                language={language}
+                // language={edge.node.languages.edges[0].node.name}
+                update_context={dayjs(edge.node.updatedAt).format('YY/MM/DD HH:mm:ss')}
+              />
+            )
+          })}
         </div>
       </div>
     </Layout>
