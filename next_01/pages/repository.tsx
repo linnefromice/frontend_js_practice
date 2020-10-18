@@ -37,6 +37,7 @@ const QUERY = gql`
             url
             name
             description
+            updatedAt
             languages(orderBy: {field: SIZE, direction: ASC}, last: 1) {
               edges {
                 node {
