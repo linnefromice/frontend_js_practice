@@ -1,7 +1,8 @@
+import { useQuery, gql } from '@apollo/client'
 import Layout from '../components/Layout'
 import Project from '../components/repository/project'
 
-const datas = [
+const dummyDatas = [
   {
     title: "front_js_practice",
     description: "Frontend development practice repository with JavaScript frameworks.",
@@ -27,55 +28,84 @@ const datas = [
     update_context: "Updated on 29 Aug",
   },
 ]
-const RepositoryPage = () => (
-  <Layout title="Repository | Next.js + TypeScript Example">
-    <div className="divide-y divide-gray-300">
-      <div className="my-2 flex flex-row">
-        <div className="w-7/12 p-1">
-          <input className="w-full h-full border border-gray-500 rounded border-opacity-50 p-1" type="text" placeholder="Find a repository..."></input>
-        </div>
-        <div className="w-2/12 p-1">
-          <div className="border border-gray-500 rounded border-opacity-50 p-1">
-            <span className="text-gray-700 text-sm">Type: All ▼</span>
-          </div>
-        </div>
-        <div className="w-2/12 p-1">
-          <div className="border border-gray-500 rounded border-opacity-50 p-1">
-            <span className="text-gray-700 text-sm">Language: All ▼</span>
-          </div>
-        </div>
-        <div className="w-1/12 p-1">
-          <div className="rounded bg-green-500 hover:bg-green-700 p-1">
-            <span className="text-white">New</span>
-          </div>
-        </div>
-      </div>
-      <div className="my-2 flex flex-row">
-        <div className="w-5/6 p-1 flex flex-row items-center">
-          <div>
-            <span className="font-semibold">30</span>
-            <span className="text-gray-700 text-sm"> results for repositories matching </span>
-            <span>practice</span>
-          </div>
-        </div>
-        <div className="w-1/6 p-1 flex flex-row justify-center items-center">
-          <div className="mx-1 px-2 bg-gray-700 border rounded-lg border-solid text-white text-lg">×</div>
-          <div className="mx-1 text-gray-700">Clear filter</div>
-        </div>
-      </div>
+const QUERY = gql`
+  query {
+    viewer {
+      repositories(last: 50, isFork: false, orderBy: {field: CREATED_AT, direction: DESC}) {
+        edges {
+          node {
+            url
+            name
+            description
+            languages(orderBy: {field: SIZE, direction: ASC}, last: 1) {
+              edges {
+                node {
+                  name
+                }
+              }
+            }  
+          }
+        }
+      }
+    }
+  }
+`
+const RepositoryPage = () => {
+  const { loading, error, data } = useQuery(QUERY)
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error!!</div>
+
+  return (
+    <Layout title="Repository | Next.js + TypeScript Example">
       <div className="divide-y divide-gray-300">
-        {datas.map((data, index) =>
-          <Project
-            key={`repository-project.${index}`}
-            title={data.title}
-            description={data.description}
-            language={data.langurage}
-            update_context={data.update_context}
-          />
-        )}
+        <div className="my-2 flex flex-row">
+          <div className="w-7/12 p-1">
+            <input className="w-full h-full border border-gray-500 rounded border-opacity-50 p-1" type="text" placeholder="Find a repository..."></input>
+          </div>
+          <div className="w-2/12 p-1">
+            <div className="border border-gray-500 rounded border-opacity-50 p-1">
+              <span className="text-gray-700 text-sm">Type: All ▼</span>
+            </div>
+          </div>
+          <div className="w-2/12 p-1">
+            <div className="border border-gray-500 rounded border-opacity-50 p-1">
+              <span className="text-gray-700 text-sm">Language: All ▼</span>
+            </div>
+          </div>
+          <div className="w-1/12 p-1">
+            <div className="rounded bg-green-500 hover:bg-green-700 p-1">
+              <span className="text-white">New</span>
+            </div>
+          </div>
+        </div>
+        <div className="my-2 flex flex-row">
+          <div className="w-5/6 p-1 flex flex-row items-center">
+            <div>
+              <span className="font-semibold">30</span>
+              <span className="text-gray-700 text-sm"> results for repositories matching </span>
+              <span>practice</span>
+            </div>
+          </div>
+          <div className="w-1/6 p-1 flex flex-row justify-center items-center">
+            <div className="mx-1 px-2 bg-gray-700 border rounded-lg border-solid text-white text-lg">×</div>
+            <div className="mx-1 text-gray-700">Clear filter</div>
+          </div>
+        </div>
+        <div className="divide-y divide-gray-300">
+          {data.viewer.repositories.edges.map((edge, index) =>
+            <Project
+              key={`repository-project.${index}`}
+              title={edge.node.name}
+              description={edge.node.description}
+              language={`LANGUAGE`}
+              // language={edge.node.languages.edges[0].node.name}
+              update_context={edge.node.updatedAt}
+            />
+          )}
+        </div>
       </div>
-    </div>
-  </Layout>
-)
+    </Layout>
+  )
+}
 
 export default RepositoryPage
