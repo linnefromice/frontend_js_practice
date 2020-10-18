@@ -125,6 +125,7 @@ Practice design using material-ui & api using marvel api.
 
 - Reference
   - [Getting started with Tailwind CSS in Next.js | Akhila Ariyachandra](https://akhilaariyachandra.com/getting-started-with-tailwind-css-in-next-js/)
+  - [Documentation Home - Apollo Basics - Apollo GraphQL Docs](https://www.apollographql.com/docs/)
 - Command
   - npx create-next-app --example with-typescript next-01
   - setting tailwindcss
@@ -133,6 +134,10 @@ Practice design using material-ui & api using marvel api.
     - mkdir -p src/styles
     - touch src/styles/index.css
     - touch pages/\_app.js
+  - setting graphql
+    - yarn add @apollo/client graphql
+  - setting for using dotenv
+    - yarn add dotenv-webpack --dev
 
 # tailwind_01
 
