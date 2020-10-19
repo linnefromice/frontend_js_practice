@@ -39,10 +39,11 @@ const QUERY = gql`
             name
             description
             updatedAt
-            languages(orderBy: {field: SIZE, direction: ASC}, last: 1) {
+            languages(last: 10, orderBy: {field: SIZE, direction: ASC}) {
               edges {
                 node {
                   name
+                  color
                 }
               }
             }  
@@ -96,13 +97,19 @@ const RepositoryPage = () => {
         <div className="divide-y divide-gray-300">
           {data.viewer.repositories.edges.map((edge, index) => {
             const language = edge.node.languages.edges[0] ? edge.node.languages.edges[0].node.name : "NOTHING"
+            const languages = edge.node.languages.edges.map((item) => (
+              {
+                name: item.node.name,
+                color: item.node.color
+              }
+            ))
+            console.log(languages)
             return (
               <Project
                 key={`repository-project.${index}`}
                 title={edge.node.name}
                 description={edge.node.description}
-                language={language}
-                // language={edge.node.languages.edges[0].node.name}
+                languages={languages}
                 update_context={dayjs(edge.node.updatedAt).format('YY/MM/DD HH:mm:ss')}
               />
             )
