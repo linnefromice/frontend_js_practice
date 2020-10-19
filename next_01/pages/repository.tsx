@@ -39,13 +39,15 @@ const QUERY = gql`
             name
             description
             updatedAt
-            languages(last: 10, orderBy: {field: SIZE, direction: ASC}) {
+            languages(last: 10, orderBy: {field: SIZE, direction: DESC}) {
               edges {
                 node {
                   name
                   color
                 }
+                size
               }
+              totalSize
             }  
           }
         }
@@ -100,7 +102,8 @@ const RepositoryPage = () => {
             const languages = edge.node.languages.edges.map((item) => (
               {
                 name: item.node.name,
-                color: item.node.color
+                color: item.node.color,
+                size_percentage: (Math.floor(item.size / edge.node.languages.totalSize * Math.pow( 10, 2 ))).toString() + "%"
               }
             ))
             console.log(languages)

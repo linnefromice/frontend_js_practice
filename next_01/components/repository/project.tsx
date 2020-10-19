@@ -1,7 +1,7 @@
 interface ProjectInterface {
     title: string,
     description: string,
-    languages: { name: string, color: string }[]
+    languages: { name: string, color: string, size_percentage: string }[]
     update_context: string,
 }
 const Project = (props: ProjectInterface) => (
@@ -16,7 +16,7 @@ const Project = (props: ProjectInterface) => (
     <div className="flex flex-row justify-between">
       <div className="p-1 text-gray-700 text-sm">
         {props.languages.map((language) => (
-          <div><span style={{color: `${language.color}`}}>●</span>{language.name}</div>
+          <div><span style={{color: `${language.color}`}}>●</span>{language.name} {language.size_percentage}</div>
         ))}
       </div>
       <div className="p-1 text-gray-700 text-sm">{props.update_context}</div>
