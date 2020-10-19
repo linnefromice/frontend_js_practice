@@ -32,7 +32,7 @@ const dummyDatas = [
 const QUERY = gql`
   query {
     viewer {
-      repositories(last: 50, isFork: false, orderBy: {field: CREATED_AT, direction: DESC}) {
+      repositories(last: 100, isFork: false, orderBy: {field: CREATED_AT, direction: DESC}) {
         edges {
           node {
             url
@@ -83,7 +83,7 @@ const RepositoryPage = () => {
         <div className="my-2 flex flex-row">
           <div className="w-5/6 p-1 flex flex-row items-center">
             <div>
-              <span className="font-semibold">30</span>
+              <span className="font-semibold">{data.viewer.repositories.edges.length}</span>
               <span className="text-gray-700 text-sm"> results for repositories matching </span>
               <span>practice</span>
             </div>
