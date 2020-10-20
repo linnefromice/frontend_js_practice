@@ -10,6 +10,15 @@ const QUERY = gql`
       bio
       avatarUrl
       websiteUrl
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+      starredRepositories {
+        totalCount
+      }
     }
   }
 `
@@ -54,6 +63,15 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
               <p className="text-gray-700 text-base">
                 {data.viewer.bio}
               </p>
+            </div>
+            <div className="px-6 py-4">
+              <div className="text-sm">
+                <span className="font-bold">{data.viewer.followers.totalCount}</span>
+                <span className="text-gray-700"> followers ・ </span>
+                <span className="font-bold">{data.viewer.following.totalCount}</span>
+                <span className="text-gray-700"> following ・ ★ </span>
+                <span className="font-bold">{data.viewer.starredRepositories.totalCount}</span>
+              </div>
             </div>
             <div className="px-6 pt-4 pb-2">
               <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Flutter</span>
