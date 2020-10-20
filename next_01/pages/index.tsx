@@ -1,7 +1,8 @@
+import { useQuery, gql } from '@apollo/client'
 import Project from '../components/home/project'
 import Layout from '../components/Layout'
 
-const datas = [
+const dummyDatas = [
   {
     title: "ff_quiz_app_flutter_01",
     description: "Quiz Application of FFIX created by Flutter",
@@ -33,22 +34,54 @@ const datas = [
     language: "HTML",
   },
 ]
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <div className="m-1">
-      <div className="m-2 text-gray-700">Pinned</div>
-      <div className="grid grid-cols-2 gap-4">
-        {datas.map((data, index) =>
-          <Project
-            key={`index-project.${index}`}
-            title={data.title}
-            description={data.description}
-            language={data.language}
-          />
-        )}
+const QUERY = gql`
+  query {
+    viewer {
+      pinnedItems(last: 10) {
+        edges {
+          node {
+            ... on Repository {
+              id
+              name
+              description
+              languages(last: 10, orderBy: {field: SIZE, direction: DESC}) {
+                edges {
+                  node {
+                    name
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const IndexPage = () => {
+  const { loading, error, data } = useQuery(QUERY)
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error!!</div>
+
+  return (
+    <Layout title="Home | Next.js + TypeScript Example">
+      <div className="m-1">
+        <div className="m-2 text-gray-700">Pinned</div>
+        <div className="grid grid-cols-2 gap-4">
+          {data.viewer.pinnedItems.edges.map((item, index) =>
+            <Project
+              key={`index-project.${index}`}
+              title={item.node.name}
+              description={item.node.description}
+              language={`DUMMY`}
+            />
+          )}
+        </div>
       </div>
-    </div>
-  </Layout>
-)
+    </Layout>
+  )
+}
 
 export default IndexPage
