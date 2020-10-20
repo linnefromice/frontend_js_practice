@@ -98,7 +98,6 @@ const RepositoryPage = () => {
         </div>
         <div className="divide-y divide-gray-300">
           {data.viewer.repositories.edges.map((edge, index) => {
-            const language = edge.node.languages.edges[0] ? edge.node.languages.edges[0].node.name : "NOTHING"
             const languages = edge.node.languages.edges.map((item) => (
               {
                 name: item.node.name,
@@ -106,7 +105,6 @@ const RepositoryPage = () => {
                 size_percentage: (Math.floor(item.size / edge.node.languages.totalSize * Math.pow( 10, 2 ))).toString() + "%"
               }
             ))
-            console.log(languages)
             return (
               <Project
                 key={`repository-project.${index}`}

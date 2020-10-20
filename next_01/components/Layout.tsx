@@ -8,6 +8,8 @@ const QUERY = gql`
     viewer {
       name
       bio
+      avatarUrl
+      websiteUrl
     }
   }
 `
@@ -19,7 +21,7 @@ type Props = {
 const Layout = ({ children, title = 'This is the default title' }: Props) => {
   const { loading, error, data } = useQuery(QUERY)
   if (loading) return <div>Loading...</div>
-  if (error) return <div>Error!!</div>
+  if (error) return <div>Error!! {error}</div>
 
   return (
     <div>
@@ -59,6 +61,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
               <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Kotlin</span>
               <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Soccer</span>
               <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Movie</span>
+            </div>
+            <div className="px-6 py-4">
+              # <a className="text-gray-700 text-base" href={`https://${data.viewer.websiteUrl}`} target="_blank">{data.viewer.websiteUrl}</a>
             </div>
           </div>
         </div>
