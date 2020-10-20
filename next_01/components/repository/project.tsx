@@ -16,7 +16,7 @@ const Project = (props: ProjectInterface) => (
     <div className="flex flex-row justify-between">
       <div className="p-1 text-gray-700 text-sm">
         {props.languages.map((language) => (
-          <div><span style={{color: `${language.color}`}}>●</span>{language.name} {language.size_percentage}</div>
+          <div><span style={{color: `${language.color}`}}>●</span> {language.name} {language.size_percentage}</div>
         ))}
       </div>
       <div className="p-1 text-gray-700 text-sm">{props.update_context}</div>

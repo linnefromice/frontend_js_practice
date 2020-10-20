@@ -9,7 +9,7 @@ const Project = (props: ProjectInterface) => (
     <div className="text-gray-500 text-xs">{props.description}</div>
     <div className="p-1 text-gray-700 text-sm">
         {props.languages.map((language) => (
-          <div><span style={{color: `${language.color}`}}>●</span>{language.name} {language.size_percentage}</div>
+          <div><span style={{color: `${language.color}`}}>●</span> <span className="text-xs">{language.name}</span></div>
         ))}
     </div>
   </div>
