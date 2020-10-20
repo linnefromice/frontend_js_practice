@@ -70,14 +70,22 @@ const IndexPage = () => {
       <div className="m-1">
         <div className="m-2 text-gray-700">Pinned</div>
         <div className="grid grid-cols-2 gap-4">
-          {data.viewer.pinnedItems.edges.map((item, index) =>
-            <Project
-              key={`index-project.${index}`}
-              title={item.node.name}
-              description={item.node.description}
-              language={`DUMMY`}
-            />
-          )}
+          {data.viewer.pinnedItems.edges.map((item, index) => {
+            const languages = item.node.languages.edges.map((item) => (
+              {
+                name: item.node.name,
+                color: item.node.color
+              }
+            ))
+            return (
+              <Project
+                key={`index-project.${index}`}
+                title={item.node.name}
+                description={item.node.description}
+                languages={languages}
+              />
+            )
+          })}
         </div>
       </div>
     </Layout>
