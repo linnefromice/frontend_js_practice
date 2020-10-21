@@ -1,5 +1,6 @@
 import { useQuery, gql } from '@apollo/client'
-import dayjs from 'dayjs'
+import * as dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import Layout from '../components/Layout'
 import Project from '../components/repository/project'
 
@@ -56,6 +57,7 @@ const QUERY = gql`
   }
 `
 const RepositoryPage = () => {
+  dayjs.extend(relativeTime)
   const { loading, error, data } = useQuery(QUERY)
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error!!</div>
@@ -111,7 +113,7 @@ const RepositoryPage = () => {
                 title={edge.node.name}
                 description={edge.node.description}
                 languages={languages}
-                update_context={dayjs(edge.node.updatedAt).format('YY/MM/DD HH:mm:ss')}
+                update_context={dayjs().fromNow()}
               />
             )
           })}
