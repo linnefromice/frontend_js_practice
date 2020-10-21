@@ -1,13 +1,21 @@
+import { useState } from 'react'
 import Layout from '../components/Layout'
 import Projects from '../components/repository/projects'
 
 const RepositoryPage = () => {
+  const [searchText, setSearchText] = useState("")
+
   return (
     <Layout title="Repository | Next.js + TypeScript Example">
       <div className="divide-y divide-gray-300">
         <div className="my-2 flex flex-row">
           <div className="w-7/12 p-1">
-            <input className="w-full h-full border border-gray-500 rounded border-opacity-50 p-1" type="text" placeholder="Find a repository..."></input>
+            <input
+              className="w-full h-full border border-gray-500 rounded border-opacity-50 p-1"
+              type="text"
+              placeholder="Find a repository..."
+              onBlur={e => setSearchText(e.target.value)}
+            ></input>
           </div>
           <div className="w-2/12 p-1">
             <div className="border border-gray-500 rounded border-opacity-50 p-1">
@@ -27,7 +35,7 @@ const RepositoryPage = () => {
         </div>
       </div>
       <Projects
-        search_text=""
+        search_text={searchText}
       />
     </Layout>
   )

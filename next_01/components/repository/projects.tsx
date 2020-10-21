@@ -63,16 +63,19 @@ const Projects = (props: ProjectsInterface) => {
     const { loading, error, data } = useQuery(QUERY)
     if (loading) return <div>Loading...</div>
     if (error) return <div>Error!!</div>
-  
+    const filteredEdges = (props.search_text === '')
+        ? data.viewer.repositories.edges
+        : data.viewer.repositories.edges.filter(edge => edge.node.name.indexOf(props.search_text) != -1)
+
     return(
         <>
             <div className="divide-y divide-gray-300">
                 <div className="my-2 flex flex-row">
                     <div className="w-5/6 p-1 flex flex-row items-center">
                     <div>
-                        <span className="font-semibold">{data.viewer.repositories.edges.length}</span>
+                        <span className="font-semibold">{filteredEdges.length}</span>
                         <span className="text-gray-700 text-sm"> results for repositories matching </span>
-                        <span>practice</span>
+                        <span>{props.search_text}</span>
                     </div>
                     </div>
                     <div className="w-1/6 p-1 flex flex-row justify-center items-center">
@@ -82,7 +85,7 @@ const Projects = (props: ProjectsInterface) => {
                 </div>
                 <div>
                     <div className="divide-y divide-gray-300">
-                        {data.viewer.repositories.edges.map((edge, index) => {
+                        {filteredEdges.map((edge, index) => {
                         const languages = edge.node.languages.edges.map((item) => (
                             {
                             name: item.node.name,
