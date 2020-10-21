@@ -1,67 +1,7 @@
-import { useQuery, gql } from '@apollo/client'
-import * as dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import Layout from '../components/Layout'
-import Project from '../components/repository/project'
+import Projects from '../components/repository/projects'
 
-const dummyDatas = [
-  {
-    title: "front_js_practice",
-    description: "Frontend development practice repository with JavaScript frameworks.",
-    langurage: "CSS",
-    update_context: "Updated 2 days ago",
-  },
-  {
-    title: "docker_practice",
-    description: "",
-    langurage: "Go",
-    update_context: "Updated 2 days ago",
-  },
-  {
-    title: "ruby_practice_basic",
-    description: "ruby_practice_basic",
-    langurage: "Ruby",
-    update_context: "Updated 28 days ago",
-  },
-  {
-    title: "practice_design",
-    description: "design training repository (Site projection)",
-    langurage: "HTML",
-    update_context: "Updated on 29 Aug",
-  },
-]
-const QUERY = gql`
-  query {
-    viewer {
-      repositories(last: 100, isFork: false, orderBy: {field: CREATED_AT, direction: DESC}) {
-        edges {
-          node {
-            url
-            name
-            description
-            updatedAt
-            languages(last: 10, orderBy: {field: SIZE, direction: DESC}) {
-              edges {
-                node {
-                  name
-                  color
-                }
-                size
-              }
-              totalSize
-            }  
-          }
-        }
-      }
-    }
-  }
-`
 const RepositoryPage = () => {
-  dayjs.extend(relativeTime)
-  const { loading, error, data } = useQuery(QUERY)
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error!!</div>
-
   return (
     <Layout title="Repository | Next.js + TypeScript Example">
       <div className="divide-y divide-gray-300">
@@ -85,40 +25,10 @@ const RepositoryPage = () => {
             </div>
           </div>
         </div>
-        <div className="my-2 flex flex-row">
-          <div className="w-5/6 p-1 flex flex-row items-center">
-            <div>
-              <span className="font-semibold">{data.viewer.repositories.edges.length}</span>
-              <span className="text-gray-700 text-sm"> results for repositories matching </span>
-              <span>practice</span>
-            </div>
-          </div>
-          <div className="w-1/6 p-1 flex flex-row justify-center items-center">
-            <div className="mx-1 px-2 bg-gray-700 border rounded-lg border-solid text-white text-lg">×</div>
-            <div className="mx-1 text-gray-700">Clear filter</div>
-          </div>
-        </div>
-        <div className="divide-y divide-gray-300">
-          {data.viewer.repositories.edges.map((edge, index) => {
-            const languages = edge.node.languages.edges.map((item) => (
-              {
-                name: item.node.name,
-                color: item.node.color,
-                size_percentage: (Math.floor(item.size / edge.node.languages.totalSize * Math.pow( 10, 2 ))).toString() + "%"
-              }
-            ))
-            return (
-              <Project
-                key={`repository-project.${index}`}
-                title={edge.node.name}
-                description={edge.node.description}
-                languages={languages}
-                update_context={dayjs().fromNow()}
-              />
-            )
-          })}
-        </div>
       </div>
+      <Projects
+        search_text=""
+      />
     </Layout>
   )
 }
