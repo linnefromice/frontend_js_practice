@@ -181,3 +181,4 @@ Practice design using material-ui & api using marvel api.
   - gibo dump VisualStudio Node > .gitignore
   - yarn add react react-dom @types/react @types/react-dom
   - yarn add --dev parcel-bundler typescript
+  - yarn start
