@@ -178,5 +178,6 @@ Practice design using material-ui & api using marvel api.
   - [Parcel](https://parceljs.org/)
 - Command
   - yarn init -y
-  - yarn add react react-dom
-  - yarn add --dev parcel-bundler
+  - gibo dump VisualStudio Node > .gitignore
+  - yarn add react react-dom @types/react @types/react-dom
+  - yarn add --dev parcel-bundler typescript
