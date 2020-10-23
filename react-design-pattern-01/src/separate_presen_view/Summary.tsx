@@ -3,6 +3,7 @@ import TextButton from "../moleculars/TextButton"
 import LoggerChildrenProps from "./LoggerChildrenProps"
 import withLogger from "./LoggerHOC"
 import LoggerWithProps from "./LoggerWithProps"
+import MenuPage from "../compound_component/MenuPage"
 
 const LogTextButton = ({ log }: { log?: string }) => (
     <TextButton
@@ -30,6 +31,8 @@ const Summary = () => {
                 log="[LOG] with props"
                 component={LogTextButton}
             />
+            <h2>compound component</h2>
+            <MenuPage/>
         </div>
     )
 }
