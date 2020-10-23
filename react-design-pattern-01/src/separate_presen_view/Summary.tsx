@@ -2,6 +2,7 @@ import * as React from "react"
 import TextButton from "../moleculars/TextButton"
 import LoggerChildrenProps from "./LoggerChildrenProps"
 import withLogger from "./LoggerHOC"
+import LoggerWithProps from "./LoggerWithProps"
 
 const LogTextButton = ({ log }: { log?: string }) => (
     <TextButton
@@ -25,6 +26,10 @@ const Summary = () => {
                 ##文字列にはinjectionしない##
             </LoggerChildrenProps>
             <h2>componentのprops渡し</h2>
+            <LoggerWithProps
+                log="[LOG] with props"
+                component={LogTextButton}
+            />
         </div>
     )
 }
