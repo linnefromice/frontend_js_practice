@@ -177,8 +177,15 @@ Practice design using material-ui & api using marvel api.
   - [綺麗なReactコンポーネント設計でモノリシックなコンポーネントを爆殺する - Qiita](https://qiita.com/teradonburi/items/6828635d2e70dba6637d)
   - [Parcel](https://parceljs.org/)
 - Command
-  - yarn init -y
-  - gibo dump VisualStudio Node > .gitignore
-  - yarn add react react-dom @types/react @types/react-dom
-  - yarn add --dev parcel-bundler typescript
-  - yarn start
+  - Setup
+    - yarn init -y
+    - gibo dump VisualStudio Node > .gitignore
+    - yarn add react react-dom @types/react @types/react-dom
+    - yarn add --dev parcel-bundler typescript
+    - yarn start
+  - Setting TestTool
+    - yarn add jest ts-jest @types/jest babel-jest react-test-renderer @testing-library/react @testing-library/react-hooks
+  - Setting StoryBook
+    - yarn add --dev @storybook/cli
+    - npx -p @storybook/cli sb init
+    - npx start-storybook -p 6006
