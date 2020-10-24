@@ -185,3 +185,6 @@ Practice design using material-ui & api using marvel api.
     - yarn start
   - Setting TestTool
     - yarn add jest ts-jest @types/jest babel-jest react-test-renderer @testing-library/react @testing-library/react-hooks
+  - Setting StoryBook
+    - yarn add --dev @storybook/cli
+    - npx -p @storybook/cli sb init
