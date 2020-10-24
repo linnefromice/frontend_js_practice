@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "test": "jest"
   },
   "dependencies": {
     "@testing-library/react": "^11.1.0",
@@ -22,5 +23,23 @@
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "typescript": "^4.0.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-test": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ]
   }
 }
