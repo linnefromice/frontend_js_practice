@@ -188,3 +188,4 @@ Practice design using material-ui & api using marvel api.
   - Setting StoryBook
     - yarn add --dev @storybook/cli
     - npx -p @storybook/cli sb init
+    - npx start-storybook -p 6006
