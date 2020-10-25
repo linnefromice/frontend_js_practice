@@ -146,6 +146,7 @@ Practice design using material-ui & api using marvel api.
 - Command
   - npx create-next-app next_02 --use-npm --example https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss
   - gibo dump VisualStudio Node > .gitignore
+  - yarn add typescript @types/react @types/node --dev
 
 # tailwind_01
 
