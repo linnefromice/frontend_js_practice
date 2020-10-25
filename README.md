@@ -139,6 +139,14 @@ Practice design using material-ui & api using marvel api.
   - setting for using dotenv
     - yarn add dotenv-webpack --dev
 
+# next_02
+
+- Reference
+  - [Refactoring landing page with React, NextJS & TailwindCSS - DEV](https://dev.to/dkapanidis/refactoring-landing-page-with-react-nextjs-tailwindcss-2hk8)
+- Command
+  - npx create-next-app next_02 --use-npm --example https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss
+  - gibo dump VisualStudio Node > .gitignore
+
 # tailwind_01
 
 - Reference
