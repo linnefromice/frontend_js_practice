@@ -152,6 +152,7 @@ Practice design using material-ui & api using marvel api.
 
 - Command
   - npx create-next-app --example with-typescript next_03
+  - gibo dump VisualStudio Node > .gitignore
 
 # tailwind_01
 
