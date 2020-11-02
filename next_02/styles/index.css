@@ -1,0 +1,50 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write your own custom component styles here */
+.btn-blue {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
+/* Button */
+.btn {
+  @apply whitespace-no-wrap text-base font-medium items-center justify-center cursor-pointer;
+}
+.btn:focus {
+  @apply outline-none shadow-outline;
+}
+.btn:hover {
+  @apply shadow-lg;
+}
+
+/* Button Popup */
+.btn-popup {
+  @apply transition duration-300 ease-in-out transform;
+}
+.btn-popup:hover {
+  @apply -translate-y-px;
+}
+
+/* Button Green */
+.btn-green {
+  @apply text-white bg-green-500;
+}
+.btn-green:focus {
+  @apply border-green-700;
+}
+.btn-green:hover {
+  @apply text-white bg-green-400;
+}
+.btn-green:active {
+  @apply bg-green-700;
+}
