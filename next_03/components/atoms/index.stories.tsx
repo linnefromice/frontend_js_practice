@@ -6,28 +6,56 @@ import {
 export const primary: React.FC = () => (
     <>
         <h4>Base</h4>
-        <Button>PrimaryButton</Button>
-        <Button variant='outlined'>PrimaryButton Outlined</Button>
-        <Button variant='text'>PrimaryButton Text</Button>
-        <Button disabled>PrimaryButton Disabled</Button>
+        <p>
+            <Button>PrimaryButton</Button>
+        </p>
+        <p>
+            <Button variant='outlined'>PrimaryButton Outlined</Button>
+        </p>
+        <p>
+            <Button variant='text'>PrimaryButton Text</Button>
+        </p>
+        <p>
+            <Button disabled>PrimaryButton Disabled</Button>
+        </p>
         <h4>Size</h4>
-        <Button size='small'>Size Small</Button>
-        <Button size='medium'>Size Medium</Button>
-        <Button size='large'>Size Large</Button>
+        <p>
+            <Button size='small'>Size Small</Button>
+        </p>
+        <p>
+            <Button size='medium'>Size Medium</Button>
+        </p>
+        <p>
+            <Button size='large'>Size Large</Button>
+        </p>
     </>
 )
 
 export const secondary: React.FC = () => (
     <>
         <h4>Base</h4>
-        <SecondaryButton>SecondaryButton</SecondaryButton>
-        <SecondaryButton variant='outlined'>SecondaryButton Outlined</SecondaryButton>
-        <SecondaryButton variant='text'>SecondaryButton Text</SecondaryButton>
-        <SecondaryButton disabled>SecondaryButton Disabled</SecondaryButton>
+        <p>
+            <SecondaryButton>SecondaryButton</SecondaryButton>
+        </p>
+        <p>
+            <SecondaryButton variant='outlined'>SecondaryButton Outlined</SecondaryButton>
+        </p>
+        <p>
+            <SecondaryButton variant='text'>SecondaryButton Text</SecondaryButton>
+        </p>
+        <p>
+            <SecondaryButton disabled>SecondaryButton Disabled</SecondaryButton>
+        </p>
         <h4>Size</h4>
-        <SecondaryButton size='small'>Size Small</SecondaryButton>
-        <SecondaryButton size='medium'>Size Medium</SecondaryButton>
-        <SecondaryButton size='large'>Size Large</SecondaryButton>
+        <p>
+            <SecondaryButton size='small'>Size Small</SecondaryButton>
+        </p>
+        <p>
+            <SecondaryButton size='medium'>Size Medium</SecondaryButton>
+        </p>
+        <p>
+            <SecondaryButton size='large'>Size Large</SecondaryButton>
+        </p>
     </>
 )
 
