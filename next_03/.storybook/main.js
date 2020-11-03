@@ -1,8 +1,15 @@
 const path = require("path")
 
 module.exports = {
-  stories: ['../stories/**/*.stories.tsx'],  // どのstoryファイルを読み込むのか
+  stories: ['../components/**/*.stories.tsx'],  // どのstoryファイルを読み込むのか
   webpackFinal: async (config) => {
+    // 絶対パスの設定
+    /*
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "~": path.resolve(__dirname, "../src")
+    }
+    */
     config.module.rules = [
       // デフォルトのrulesに入っているCSS用の設定が悪さをするのでお帰りいただく
       ...config.module.rules.filter(rule => rule.test.source !== (/\.css$/).source),
@@ -12,9 +19,6 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-    config.resolve.alias = {
-      "@": path.resolve(__dirname, "..")      // こっちは私の趣味です
-    }
     return config
   }
 }
