@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
+import { _BaseButton } from "../components/atoms/_BaseButton"
 
 const AboutPage = () => (
   <Layout title="About | Next.js + TypeScript Example">
@@ -7,7 +8,7 @@ const AboutPage = () => (
     <p>This is the about page</p>
     <p>
       <Link href="/">
-        <a>Go home</a>
+        <_BaseButton>Go home</_BaseButton>
       </Link>
     </p>
   </Layout>
