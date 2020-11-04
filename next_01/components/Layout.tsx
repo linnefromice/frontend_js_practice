@@ -3,6 +3,29 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { useQuery, gql } from '@apollo/client';
 
+const Header: React.FC = () => (
+  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
+    <ul className="flex">
+      <Link href="/">
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
+        </li>
+      </Link>
+      <Link href="/repository">
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
+        </li>
+        </Link>
+    </ul>
+  </div>
+)
+
+const Footer: React.FC = () => (
+  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
+    <span>©️ 2020 linnefromice</span>
+  </div>
+)
+
 const QUERY = gql`
   query {
     viewer {
@@ -22,35 +45,7 @@ const QUERY = gql`
     }
   }
 `
-type Props = {
-  children?: ReactNode
-  title?: string
-}
-
-const Header = () => (
-  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
-    <ul className="flex">
-      <Link href="/">
-        <li className="mr-6">
-          <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
-        </li>
-      </Link>
-      <Link href="/repository">
-        <li className="mr-6">
-          <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
-        </li>
-        </Link>
-    </ul>
-  </div>
-)
-
-const Footer = () => (
-  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
-    <span>©️ 2020 linnefromice</span>
-  </div>
-)
-
-const Profile = () => {
+const Profile: React.FC = () => {
   const { loading, error, data } = useQuery(QUERY)
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error!! {error}</div>
@@ -58,7 +53,7 @@ const Profile = () => {
   return (
     <>
       <div className="rounded overflow-hidden shadow-lg">
-        <img className="w-full" src="https://avatars1.githubusercontent.com/u/13592640" alt="Sunset in the mountains"/>
+        <img className="w-full" src="https://avatars1.githubusercontent.com/u/13592640" alt="avator image"/>
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{data.viewer.name}</div>
           <div className="text-l mb-2">{data.viewer.name}</div>
@@ -90,7 +85,11 @@ const Profile = () => {
   )
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => {
+type LayoutProps = Partial<{
+  children: ReactNode
+  title: string
+}>
+const Layout: React.FC<LayoutProps> = ({ children, title = 'This is the default title' }) => {
   return (
     <>
       <Head>
