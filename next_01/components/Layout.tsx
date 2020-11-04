@@ -1,24 +1,30 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from "next/router";
 import { useQuery, gql } from '@apollo/client';
 
-const Header: React.FC = () => (
-  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
-    <ul className="flex">
-      <Link href="/">
-        <li className="mr-6">
-          <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
-        </li>
-      </Link>
-      <Link href="/repository">
-        <li className="mr-6">
-          <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
-        </li>
+const Header: React.FC = () => {
+  const router = useRouter();
+  const linkClassNames = "text-blue-500 hover:text-blue-800"
+
+  return (
+    <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
+      <ul className="flex">
+        <Link href="/">
+          <li className="mr-6">
+            <a className={router.pathname === '/' ? `font-bold ${linkClassNames}` : linkClassNames} href="#">Overview</a>
+          </li>
         </Link>
-    </ul>
-  </div>
-)
+        <Link href="/repository">
+          <li className="mr-6">
+            <a className={router.pathname === '/repository' ? `font-bold ${linkClassNames}` : linkClassNames} href="#">Repository</a>
+          </li>
+          </Link>
+      </ul>
+    </div>
+  )
+}
 
 const Footer: React.FC = () => (
   <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
