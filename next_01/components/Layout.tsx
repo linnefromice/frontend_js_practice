@@ -92,8 +92,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
         </div>
       </div>
       <footer>
-        <hr />
-        <span>I'm here to stay (Footer)</span>
+        <span>©️ 2020 linnefromice</span>
       </footer>
     </div>
   )
