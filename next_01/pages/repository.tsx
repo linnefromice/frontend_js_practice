@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Layout from '../components/Layout'
 import Projects from '../components/repository/projects'
 
-const RepositoryPage = () => {
+const RepositoryPage: React.FC = () => {
   const [searchText, setSearchText] = useState("")
 
   return (

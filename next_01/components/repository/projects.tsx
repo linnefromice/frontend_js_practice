@@ -58,14 +58,14 @@ const QUERY = gql`
 interface ProjectsInterface {
     search_text: string,
 }
-const Projects = (props: ProjectsInterface) => {
+const Projects: React.FC<ProjectsInterface> = ({search_text}) => {
     dayjs.extend(relativeTime)
     const { loading, error, data } = useQuery(QUERY)
     if (loading) return <div>Loading...</div>
     if (error) return <div>Error!!</div>
-    const filteredEdges = (props.search_text === '')
+    const filteredEdges = (search_text === '')
         ? data.viewer.repositories.edges
-        : data.viewer.repositories.edges.filter(edge => edge.node.name.indexOf(props.search_text) != -1)
+        : data.viewer.repositories.edges.filter(edge => edge.node.name.indexOf(search_text) != -1)
 
     return(
         <>
@@ -75,7 +75,7 @@ const Projects = (props: ProjectsInterface) => {
                     <div>
                         <span className="font-semibold">{filteredEdges.length}</span>
                         <span className="text-gray-700 text-sm"> results for repositories matching </span>
-                        <span>{props.search_text}</span>
+                        <span>{search_text}</span>
                     </div>
                     </div>
                     <div className="w-1/6 p-1 flex flex-row justify-center items-center">
