@@ -4,23 +4,38 @@ import Head from 'next/head'
 import { useRouter } from "next/router";
 import { useQuery, gql } from '@apollo/client';
 
+type LinkComponentProps = {
+  path: string,
+  label: string,
+  is_active: boolean,
+}
+const LinkComponent: React.FC<LinkComponentProps> = ({path, label, is_active}) => {
+  const linkClassNames = "text-blue-500 hover:text-blue-800"
+  return (
+    <Link href={path}>
+      <li className="mr-6">
+        <a className={is_active ? `font-bold ${linkClassNames}` : linkClassNames} href="#">{label}</a>
+      </li>
+    </Link>
+  )
+}
+
 const Header: React.FC = () => {
   const router = useRouter();
-  const linkClassNames = "text-blue-500 hover:text-blue-800"
 
   return (
     <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
       <ul className="flex">
-        <Link href="/">
-          <li className="mr-6">
-            <a className={router.pathname === '/' ? `font-bold ${linkClassNames}` : linkClassNames} href="#">Overview</a>
-          </li>
-        </Link>
-        <Link href="/repository">
-          <li className="mr-6">
-            <a className={router.pathname === '/repository' ? `font-bold ${linkClassNames}` : linkClassNames} href="#">Repository</a>
-          </li>
-          </Link>
+        <LinkComponent
+          path="/"
+          label="Overview"
+          is_active={router.pathname === '/'}
+        />
+        <LinkComponent
+          path="/repository"
+          label="Repository"
+          is_active={router.pathname === '/repository'}
+        />
       </ul>
     </div>
   )
