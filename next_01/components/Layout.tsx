@@ -27,6 +27,29 @@ type Props = {
   title?: string
 }
 
+const Header = () => (
+  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
+    <ul className="flex">
+      <Link href="/">
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
+        </li>
+      </Link>
+      <Link href="/repository">
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
+        </li>
+        </Link>
+    </ul>
+  </div>
+)
+
+const Footer = () => (
+  <div className="my-2 flex flex-row max-w-screen-xl mx-auto">
+    <span>©️ 2020 linnefromice</span>
+  </div>
+)
+
 const Layout = ({ children, title = 'This is the default title' }: Props) => {
   const { loading, error, data } = useQuery(QUERY)
   if (loading) return <div>Loading...</div>
@@ -39,20 +62,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div>
-        <ul className="flex">
-          <Link href="/">
-            <li className="mr-6">
-              <a className="text-blue-500 hover:text-blue-800" href="#">Overview</a>
-            </li>
-          </Link>
-          <Link href="/repository">
-            <li className="mr-6">
-              <a className="text-blue-500 hover:text-blue-800" href="#">Repository</a>
-            </li>
-            </Link>
-        </ul>
-      </div>
+      <Header />
       <div className="flex flex-row max-w-screen-xl mx-auto">
         <div className="w-3/12 mx-1">
           <div className="rounded overflow-hidden shadow-lg">
@@ -91,9 +101,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
           </div>
         </div>
       </div>
-      <footer>
-        <span>©️ 2020 linnefromice</span>
-      </footer>
+      <Footer />
     </div>
   )
 }
