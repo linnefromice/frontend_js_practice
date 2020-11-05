@@ -1,5 +1,4 @@
 import { Project } from "../../../interfaces/project"
-
 export const dummyDatas: Project[] = [
   {
     title: "ff_quiz_app_flutter_01",
