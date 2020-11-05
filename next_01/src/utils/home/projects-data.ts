@@ -5,9 +5,9 @@ export const dummyDatas = [
     language: "Dart",
   },
   {
-      title: "study_record_app_01",
-      description: "A study record application version 1.0",
-      language: "Dart",
+    title: "study_record_app_01",
+    description: "A study record application version 1.0",
+    language: "Dart",
   },
   {
     title: "portfolio_one",
