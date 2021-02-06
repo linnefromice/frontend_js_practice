@@ -1,3 +1,12 @@
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const templateContent = `
+<html>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+`;
+
 module.exports = {
     mode: "development",
     entry: "./src/main.tsx",
@@ -16,5 +25,6 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
+    plugins: [new HTMLWebpackPlugin({ templateContent: templateContent })],
     target: ["web", "es5"]
 };
