@@ -33,4 +33,30 @@ export const AspectRatio = styled(AspectRatioRaw)`
     border: 1px solid green;
     aspect-ratio: 16 / 9;
   }
+`;
+
+const AutobotRaw: React.FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <article className="autobot">
+        <div>
+          <h1>Autobot</h1>
+          <p>description</p>
+        </div>
+      </article>
+    </div>
+  )
+}
+
+export const Autobot = styled(AutobotRaw)`
+  .autobot {
+    display: flex;
+    border: 1px solid pink;
+    background-color: gray;
+  }
+  .autobot > * {
+    margin: auto;
+    border: 1px solid pink;
+    background-color: gray;
+  }
 `
