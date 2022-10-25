@@ -1,6 +1,7 @@
+import { FC } from "react";
 import styled from "styled-components"
 
-const AspectRatioRaw: React.FC<{ className?: string }> = (props) => {
+const AspectRatioRaw: FC<{ className?: string }> = (props) => {
   return (
     <div {...props}>
       <div className={`parent`}>
@@ -35,7 +36,7 @@ export const AspectRatio = styled(AspectRatioRaw)`
   }
 `;
 
-const AutobotRaw: React.FC<{ className?: string }> = (props) => {
+const AutobotRaw: FC<{ className?: string }> = (props) => {
   return (
     <div {...props}>
       <article className="autobot">
@@ -58,5 +59,40 @@ export const Autobot = styled(AutobotRaw)`
     margin: auto;
     border: 1px solid pink;
     background-color: gray;
+  }
+`
+
+const ClampingCardRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <div className="card">
+          <h1>Title here</h1>
+          <div className="visual"></div>
+          <p>Descriptive Text. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed est error repellat veritatis.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const ClampingCard = styled(ClampingCardRaw)`
+  .parent {
+    border: 1px solid blue;
+    background-color: lightblue;
+    display: grid;
+    place-items: center;
+  }
+  .card {
+    width: clamp(40ch, 60%, 46ch);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .visual {
+    border: 1px solid green;
+    background-color: lightgreen;
+    height: 125px;
+    width: 100%;
   }
 `
