@@ -96,3 +96,32 @@ export const ClampingCard = styled(ClampingCardRaw)`
     width: 100%;
   }
 `
+
+const DeconstructedPancakeRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <div className="box">1</div>
+        <div className="box">2</div>
+        <div className="box">3</div>
+      </div>
+    </div>
+  )
+}
+
+export const DeconstructedPancake = styled(DeconstructedPancakeRaw)`
+  .parent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .box {
+    background-color: plum;
+    border: 1px solid darkviolet;
+    text-align: center;
+    /* Stretching */
+    flex: 1 1 150px;
+    margin: 5px;
+    gap: 1rem;
+  }
+`

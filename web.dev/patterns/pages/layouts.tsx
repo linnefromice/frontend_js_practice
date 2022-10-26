@@ -11,6 +11,8 @@ const Layouts: NextPage = () => {
       <L.Autobot />
       <h2>Clamping card</h2>
       <L.ClampingCard />
+      <h2>Deconstructed pancake</h2>
+      <L.DeconstructedPancake />
     </div>
   )
 }
