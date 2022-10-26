@@ -13,6 +13,8 @@ const Layouts: NextPage = () => {
       <L.ClampingCard />
       <h2>Deconstructed pancake</h2>
       <L.DeconstructedPancake />
+      <h2>Holy grail layout</h2>
+      <L.HolyGrailLayout />
     </div>
   )
 }

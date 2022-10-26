@@ -125,3 +125,62 @@ export const DeconstructedPancake = styled(DeconstructedPancakeRaw)`
     gap: 1rem;
   }
 `
+
+const HolyGrailLayoutRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <header className="section coral">Header</header>
+        <div className="left-side section blue">Left Sidebar</div>
+        <main className="section green">Main Content</main>
+        <div className="right-side section yellow">Right Sidebar</div>
+        <footer className="section coral">Footer</footer>
+      </div>
+    </div>
+  )
+}
+
+export const HolyGrailLayout = styled(HolyGrailLayoutRaw)`
+  .parent {
+    height: 20vh;
+    display: grid;
+    grid-template: auto 1fr auto / auto 1fr auto;
+  }
+  header {
+    grid-column: 1 / 4;
+  }
+  .left-side {
+    grid-column: 1 / 2;
+  }
+  main {
+    grid-column: 2 / 3;
+  }
+  .right-side {
+    grid-column: 3 / 4;
+  }
+  footer {
+    grid-column: 1 / 4;
+  }
+  /* for coloring */
+  .section {
+    padding-top: 4px;
+    padding-left: 4px;
+    border: 1px dotted;
+  }
+  .coral {
+    background-color: coral;
+    border-color: red;
+  }
+  .blue {
+    background-color: lightblue;
+    border: blue;
+  }
+  .green {
+    background-color: lightgreen;
+    border: green;
+  }
+  .yellow {
+    background-color: lightyellow;
+    border: yellow;
+  }
+`
