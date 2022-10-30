@@ -235,3 +235,31 @@ export const LineUp = styled(LineUpRaw)`
     margin: 0;
   }
 `
+
+const PancakeStackRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <header className="section yellow">Header</header>
+        <main className="section blue">Main</main>
+        <footer className="section green">Footer</footer>
+      </div>
+    </div>
+  )
+}
+
+export const PancakeStack = styled(PancakeStackRaw)`
+  .parent {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    height: 20vh; /* Just for parent demo size */
+  }
+  .section {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .yellow { background-color: coral; }
+  .blue { background-color: lightblue; }
+  .green { background-color: lightgreen; }
+`

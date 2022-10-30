@@ -17,6 +17,8 @@ const Layouts: NextPage = () => {
       <L.HolyGrailLayout />
       <h2>Line up</h2>
       <L.LineUp />
+      <h2>Pancake stack</h2>
+      <L.PancakeStack />
     </div>
   )
 }
