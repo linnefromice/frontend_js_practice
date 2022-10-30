@@ -184,3 +184,54 @@ export const HolyGrailLayout = styled(HolyGrailLayoutRaw)`
     border: yellow;
   }
 `
+
+const LineUpRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="container">
+        <div className="card">
+          <h3>Title - Card 1</h3>
+          <p contentEditable>Medium length description with a few more words here.</p>
+          <div className="visual"/>
+        </div>
+        <div className="card">
+          <h3>Title - Card 2</h3>
+          <p contentEditable>Long Description. Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+          <div className="visual"/>
+        </div>
+        <div className="card">
+          <h3>Title - Card 3</h3>
+          <p contentEditable>Short Description.</p>
+          <div className="visual"/>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const LineUp = styled(LineUpRaw)`
+  .container {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: space-between;
+
+    border: 1px solid blue;
+    background-color: lightblue;
+  }
+  .visual {
+    height: 100px;
+    width: 100%;
+
+    border: 1px solid green;
+    background-color: lightgreen;
+  }
+  h3 {
+    margin: 0;
+  }
+`
