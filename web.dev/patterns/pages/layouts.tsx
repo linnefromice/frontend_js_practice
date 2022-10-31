@@ -21,6 +21,8 @@ const Layouts: NextPage = () => {
       <L.PancakeStack />
       <h2>RAM (Repeat, Auto, Minmax)</h2>
       <L.Ram />
+      <h2>Sidebar says</h2>
+      <L.SidebarSays />
     </div>
   )
 }

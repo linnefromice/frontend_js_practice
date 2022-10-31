@@ -290,3 +290,25 @@ export const Ram = styled(RamRaw)`
     border-radius: 8px;
   }
 `
+
+const SidebarSaysRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <div className="section yellow">Min: 100% / Max: 25%</div>
+        <div className="section blue">
+          This element takes the second grid position (1fr), meaning it takes up the rest of the remaining space.
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const SidebarSays = styled(SidebarSaysRaw)`
+  .parent {
+    display: grid;
+    grid-template-columns: minmax(100px, 25%) 1fr;
+  }
+  .yellow { background-color: coral; }
+  .blue { background-color: lightblue; }
+`
