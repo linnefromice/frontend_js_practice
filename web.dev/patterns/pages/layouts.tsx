@@ -19,6 +19,8 @@ const Layouts: NextPage = () => {
       <L.LineUp />
       <h2>Pancake stack</h2>
       <L.PancakeStack />
+      <h2>RAM (Repeat, Auto, Minmax)</h2>
+      <L.Ram />
     </div>
   )
 }

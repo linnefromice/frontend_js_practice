@@ -263,3 +263,30 @@ export const PancakeStack = styled(PancakeStackRaw)`
   .blue { background-color: lightblue; }
   .green { background-color: lightgreen; }
 `
+
+const RamRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent white">
+        <div className="box">1</div>
+        <div className="box">2</div>
+        <div className="box">3</div>
+        <div className="box">4</div>
+      </div>
+    </div>
+  )
+}
+
+export const Ram = styled(RamRaw)`
+  .parent {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .box {
+    height: 48px;
+    background-color: plum;
+    border: 1px solid purple;
+    border-radius: 8px;
+  }
+`
