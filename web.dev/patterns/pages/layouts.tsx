@@ -23,6 +23,8 @@ const Layouts: NextPage = () => {
       <L.Ram />
       <h2>Sidebar says</h2>
       <L.SidebarSays />
+      <h2>12-Span Grid</h2>
+      <L.TwelveSpanGrid />
     </div>
   )
 }

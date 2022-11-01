@@ -312,3 +312,42 @@ export const SidebarSays = styled(SidebarSaysRaw)`
   .yellow { background-color: coral; }
   .blue { background-color: lightblue; }
 `
+
+const TwelveSpanGridRaw: FC<{ className?: string }> = (props) => {
+  return (
+    <div {...props}>
+      <div className="parent">
+        <div className="span-12 section coral">Span 12</div>
+        <div className="span-6 section green">Span 6</div>
+        <div className="span-4 section yellow">Span 4</div>
+        <div className="span-2 section blue">Span 2</div>
+      </div>
+    </div>
+  )
+}
+
+export const TwelveSpanGrid = styled(TwelveSpanGridRaw)`
+  .parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .section {
+    border: 1px solid gray;
+  }
+  .span-12 {
+    grid-column: 1 / span 12;
+  }
+  .span-6 {
+    grid-column: 1 / span 6;
+  }
+  .span-4 {
+    grid-column: 4 / span 4;
+  }
+  .span-2 {
+    grid-column: 3 / span 2;
+  }
+  .coral { background-color: coral; }
+  .green { background-color: lightgreen; }
+  .yellow { background-color: lightyellow; }
+  .blue { background-color: lightblue; }
+`
