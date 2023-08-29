@@ -1,10 +1,12 @@
 import './App.css';
+import { Banner } from './components/Banner';
 import { Row } from './components/Row';
 import { requests } from './utils/request';
 
 function App() {
   return (
     <div className="App">
+      <Banner />
       <Row
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
