@@ -1,0 +1,9 @@
+{
+  "name": "@quickstart_1/client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@trpc/client": "^10.38.2",
+    "@types/node": "^18.16.16"
+  }
+}
