@@ -19,3 +19,15 @@
   background-color: whitesmoke;
   border: 1px solid silver;
 }
+
+.cell-active {
+  background-color: lightcoral;
+}
+
+.cell-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
