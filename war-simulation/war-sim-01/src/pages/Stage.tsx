@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Stage.css"
+import "./Stage.scss"
 
 const INITIAL_COORDINATE = [3, 2]; // NOTE: coordinte start is 0
 const ROW_NUM = 5
@@ -51,14 +51,25 @@ export const Stage = () => {
         <div className="action-menu">
           <ul>
             <li>
-              <button onClick={() => setActiveActionOption("MOVE")}>移動</button>
+              <button
+                className="action-btn action-btn-active"
+                onClick={() => setActiveActionOption("MOVE")}
+              >
+                移動
+              </button>
             </li>
             <li>
               {/* TODO: interact */}
-              <button onClick={() => setActiveActionOption("ATTACK")}>攻撃</button>
+              <button
+                className="action-btn"
+                onClick={() => setActiveActionOption("ATTACK")}
+              >
+                攻撃
+              </button>
             </li>
             <li>
               <button
+                className="action-btn"
                 onClick={() => {
                   setActiveActionOption(null)
                   setIsOpenActionMenu(false)
