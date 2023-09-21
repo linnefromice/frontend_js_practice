@@ -1,6 +1,8 @@
-import { useReducer } from 'react'
+import { Reducer, useReducer, useCallback } from 'react'
 
-const reducer = (state, action) => {
+type StateType = { count: number };
+type ActionType = "INCREMENT" | "DECREMENT";
+const reducer: Reducer<StateType, ActionType> = (state, action) => {
   if (action === 'INCREMENT') {
     return { count: state.count + 1 };
   } else {
@@ -9,19 +11,21 @@ const reducer = (state, action) => {
 }
 
 const initialState = { count: 0 };
-const Counter = () => {
+const Counter: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const increment = useCallback(() => dispatch('INCREMENT'), []);
+  const decrement = useCallback(() => dispatch('DECREMENT'), []);
 
   return (
     <div>
       <h1>Counter</h1>
       <h2>カウント: {state.count}</h2>
-      <button onClick={() => dispatch('INCREMENT')}>+</button>
-      <button onClick={() => dispatch('DECREMENT')}>-</button>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
     </div>
   )
 }
 
-const App = () => <Counter />
+const App: React.FC = () => <Counter />
 
 export default App
