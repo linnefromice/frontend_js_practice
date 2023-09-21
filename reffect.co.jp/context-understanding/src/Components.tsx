@@ -20,12 +20,14 @@ export const ComponentB = () => {
 };
 
 export const ComponentC = () => {
-  const count = useContext(UserCount);
+  const { count, setCount } = useContext(UserCount);
 
   return (
     <div>
       <p>Component C</p>
       <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <button onClick={() => setCount(count - 1)}>-</button>
     </div>
   );
 };
