@@ -1,19 +1,30 @@
-import { createContext, useState } from "react"
+import { Reducer, createContext, useReducer } from "react"
 import { ComponentA } from "./Components"
 
+type StateType = {
+  count: number
+}
+
 export const UserCount = createContext({
-  count: 0,
-  setCount: (_: number) => {}
+  state: { count: 0 },
+  dispatch: (_: string) => {}
 })
 
 const App = () => {
-  const [count, setCount] = useState(10);
-  const value = { count, setCount }
+  const reducer: Reducer<StateType, string> = (state, action) => {
+    if (action == "INCREMENT") {
+      return { count: state.count + 1 }
+    } else {
+      return { count: state.count - 1 }
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, { count: 0 })
 
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>Learn useContext</h1>
-      <UserCount.Provider value={value}>
+      <UserCount.Provider value={{state, dispatch}}>
         <ComponentA />
       </UserCount.Provider>
     </div>

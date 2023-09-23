@@ -20,14 +20,14 @@ export const ComponentB = () => {
 };
 
 export const ComponentC = () => {
-  const { count, setCount } = useContext(UserCount);
+  const { state, dispatch } = useContext(UserCount);
 
   return (
     <div>
       <p>Component C</p>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(count - 1)}>-</button>
+      <p>{state.count}</p>
+      <button onClick={() => dispatch("INCREMENT")}>+</button>
+      <button onClick={() => dispatch("DECREMENT")}>-</button>
     </div>
   );
 };
