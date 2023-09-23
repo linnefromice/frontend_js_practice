@@ -2,8 +2,9 @@ import { Reducer, createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
 
 const INITIAL_COORDINATE: [number, number] = [3, 2]; // NOTE: coordinte start is 0
-const ROW_NUM = 5
+const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 7
+const RANGE = 2
 
 const ACTION_OPTIONS = ["MOVE", "ATTACK"] as const
 type ActionOptionType = typeof ACTION_OPTIONS[number]
@@ -89,9 +90,9 @@ const StageContent = () => {
           <div key={`row.${y}`} className="row">
             {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => {
               const idx = x * ROW_NUM + y;
-              const isLocated = state.coordinate[0] === x && state.coordinate[1] === y;
               const key = `cell.${idx}`
-              return isLocated ? (
+              const isLocated = state.coordinate[0] === x && state.coordinate[1] === y;
+              if (isLocated) return (
                 <div
                   key={key}
                   className="cell cell-active"
@@ -99,7 +100,20 @@ const StageContent = () => {
                 >
                   <div className="cell-content">🤖</div>
                 </div>
-              )  : (
+              );
+              if (state.activeActionOption === "ATTACK") {
+                const diffX = Math.abs(state.coordinate[0] - x);
+                const diffY = Math.abs(state.coordinate[1] - y);
+                const isWithinRange = diffX + diffY <= RANGE;
+                if (isWithinRange) return (
+                  <div
+                    key={key}
+                    className="cell cell-range"
+                    onClick={() => dispatch({ type: "CLOSE_MENU" })}
+                  />
+                )
+              }
+              return (
                 <div
                   key={key}
                   className="cell"
@@ -108,7 +122,7 @@ const StageContent = () => {
                     : undefined
                   }
                 />
-              )
+              );
             })}
           </div>
         ))}
