@@ -119,23 +119,22 @@ const StageContent = () => {
 }
 
 const ActionMenu = () => {
-  const { dispatch } = useContext(ActionContext);
+  const { state, dispatch } = useContext(ActionContext);
 
   return (
     <div className="action-menu">
       <ul>
         <li>
           <button
-            className="action-btn"
+            className={state.activeActionOption === "MOVE" ? "action-btn action-btn-active" : "action-btn"}
             onClick={() => dispatch({ type: "SELECT_MOVE" })}
           >
             移動
           </button>
         </li>
         <li>
-          {/* TODO: interact */}
           <button
-            className="action-btn"
+            className={state.activeActionOption === "ATTACK" ? "action-btn action-btn-active" : "action-btn"}
             onClick={() => dispatch({ type: "SELECT_ATTACK" })}
           >
             攻撃
