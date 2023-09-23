@@ -1,17 +1,86 @@
-import { useState } from "react";
+import { Reducer, createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
 
-const INITIAL_COORDINATE = [3, 2]; // NOTE: coordinte start is 0
+const INITIAL_COORDINATE: [number, number] = [3, 2]; // NOTE: coordinte start is 0
 const ROW_NUM = 5
 const CELL_NUM_IN_ROW = 7
 
 const ACTION_OPTIONS = ["MOVE", "ATTACK"] as const
 type ActionOptionType = typeof ACTION_OPTIONS[number]
 
+type StateType = {
+  isOpenActionMenu: boolean
+  activeActionOption: ActionOptionType | null
+  coordinate: [number, number]
+}
+const ACTIONS = ["OPEN_MENU", "CLOSE_MENU", "SELECT_MOVE", "SELECT_ATTACK", "DO_MOVE", "DO_ATTACK"] as const
+type ActionType = typeof ACTIONS[number];
+
+const initialState: StateType = {
+  isOpenActionMenu: false,
+  activeActionOption: null,
+  coordinate: INITIAL_COORDINATE,
+}
+
+const ActionContext = createContext({
+  state: initialState,
+  dispatch: (_: { type: ActionType, payload?: { x: number, y: number } }) => {},
+});
+
+const reducer: Reducer<
+  StateType,
+  { type: ActionType, payload?: { x: number, y: number } }
+> = (state, action) => {
+  const { type, payload } = action
+  switch (type) {
+    case "OPEN_MENU":
+      return {
+        ...state,
+        isOpenActionMenu: true,
+        activeActionOption: null,
+      }
+    case "CLOSE_MENU":
+      return {
+        ...state,
+        isOpenActionMenu: false,
+        activeActionOption: null,
+      }
+    case "SELECT_MOVE":
+      return {
+        ...state,
+        activeActionOption: "MOVE",
+      }
+    case "DO_MOVE":
+      if (payload === undefined) return state
+      return {
+        isOpenActionMenu: false,
+        activeActionOption: null,
+        coordinate: [payload.x, payload.y],
+      }
+    case "SELECT_ATTACK":
+      return {
+        ...state,
+        activeActionOption: "ATTACK",
+      }
+    case "DO_ATTACK":
+      return state // todo
+    default:
+      return state
+  }
+}
+
 export const Stage = () => {
-  const [isOpenActionMenu, setIsOpenActionMenu] = useState(false)
-  const [activeActionOption, setActiveActionOption] = useState<ActionOptionType | null>(null)
-  const [coordinate, setCoordinate] = useState(INITIAL_COORDINATE)
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <ActionContext.Provider value={{ state, dispatch }}>
+      <StageContent />
+    </ActionContext.Provider>
+  )
+}
+
+const StageContent = () => {
+  const { state, dispatch } = useContext(ActionContext);
 
   return (
     <div className="root">
@@ -20,13 +89,13 @@ export const Stage = () => {
           <div key={`row.${y}`} className="row">
             {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => {
               const idx = x * ROW_NUM + y;
-              const isLocated = coordinate[0] === x && coordinate[1] === y;
+              const isLocated = state.coordinate[0] === x && state.coordinate[1] === y;
               const key = `cell.${idx}`
               return isLocated ? (
                 <div
                   key={key}
                   className="cell cell-active"
-                  onClick={() => setIsOpenActionMenu(true)}
+                  onClick={() => dispatch({ type: "OPEN_MENU" })}
                 >
                   <div className="cell-content">🤖</div>
                 </div>
@@ -34,11 +103,8 @@ export const Stage = () => {
                 <div
                   key={key}
                   className="cell"
-                  onClick={activeActionOption == "MOVE"
-                    ? () => {
-                      setCoordinate([x, y])
-                      setActiveActionOption(null)
-                    }
+                  onClick={state.activeActionOption == "MOVE"
+                    ? () => dispatch({ type: "DO_MOVE", payload: { x, y } })
                     : undefined
                   }
                 />
@@ -47,40 +113,43 @@ export const Stage = () => {
           </div>
         ))}
       </div>
-      {isOpenActionMenu && (
-        <div className="action-menu">
-          <ul>
-            <li>
-              <button
-                className="action-btn action-btn-active"
-                onClick={() => setActiveActionOption("MOVE")}
-              >
-                移動
-              </button>
-            </li>
-            <li>
-              {/* TODO: interact */}
-              <button
-                className="action-btn"
-                onClick={() => setActiveActionOption("ATTACK")}
-              >
-                攻撃
-              </button>
-            </li>
-            <li>
-              <button
-                className="action-btn"
-                onClick={() => {
-                  setActiveActionOption(null)
-                  setIsOpenActionMenu(false)
-                }}
-              >
-                閉じる
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
+      {state.isOpenActionMenu && <ActionMenu />}
+    </div>
+  )
+}
+
+const ActionMenu = () => {
+  const { dispatch } = useContext(ActionContext);
+
+  return (
+    <div className="action-menu">
+      <ul>
+        <li>
+          <button
+            className="action-btn"
+            onClick={() => dispatch({ type: "SELECT_MOVE" })}
+          >
+            移動
+          </button>
+        </li>
+        <li>
+          {/* TODO: interact */}
+          <button
+            className="action-btn"
+            onClick={() => dispatch({ type: "SELECT_ATTACK" })}
+          >
+            攻撃
+          </button>
+        </li>
+        <li>
+          <button
+            className="action-btn"
+            onClick={() => dispatch({ type: "CLOSE_MENU" })}
+          >
+            閉じる
+          </button>
+        </li>
+      </ul>
     </div>
   )
 }
