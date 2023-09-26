@@ -1,31 +1,33 @@
 import { Reducer, createContext, useContext, useReducer } from "react";
 import FighterJetIcon from "../assets/fighterJet.svg?react";
 import "./Stage.scss"
+import { ActionOptionType, ActionType, OrientationType, UnitType, UnitStatusType } from "../types";
 
-const INITIAL_COORDINATE: [number, number] = [3, 2]; // NOTE: coordinte start is 0
 const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 7
-const RANGE = 2
-
-const ACTION_OPTIONS = ["MOVE", "ATTACK"] as const
-type ActionOptionType = typeof ACTION_OPTIONS[number]
-const ORIENTATIONS = ["UP", "DOWN", "LEFT", "RIGHT"] as const
-type OrientationType = typeof ORIENTATIONS[number]
 
 type StateType = {
   isOpenActionMenu: boolean
   activeActionOption: ActionOptionType | null
-  coordinate: [number, number]
-  orientation: OrientationType
+  unit: UnitType
+  unitStatus: UnitStatusType
 }
-const ACTIONS = ["OPEN_MENU", "CLOSE_MENU", "SELECT_MOVE", "SELECT_ATTACK", "DO_MOVE", "DO_ATTACK"] as const
-type ActionType = typeof ACTIONS[number];
 
 const initialState: StateType = {
   isOpenActionMenu: false,
   activeActionOption: null,
-  coordinate: INITIAL_COORDINATE,
-  orientation: "UP",
+  unit: {
+    id: 1,
+    name: "acecombat",
+    unit_type: 1,
+    movement_range: 3,
+    attack_range: 2,
+  },
+  unitStatus: {
+    coordinate: { x: 3, y: 2 },
+    previousCoordinate: { x: 3, y: 2 },
+    initialCoordinate: { x: 3, y: 2 },
+  }
 }
 
 const ActionContext = createContext({
@@ -75,16 +77,17 @@ const reducer: Reducer<
         return state;
       }
 
-      const orientation = calculateOrientation(
-        { x: payload.x, y: payload.y },
-        { x: state.coordinate[0], y: state.coordinate[1] }
-      );
+      const currentCoordinate = state.unitStatus.coordinate;
 
       return {
         isOpenActionMenu: false,
         activeActionOption: null,
-        coordinate: [payload.x, payload.y],
-        orientation
+        unit: state.unit,
+        unitStatus: {
+          ...state.unitStatus,
+          previousCoordinate: currentCoordinate,
+          coordinate: { x: payload.x, y: payload.y },
+        }
       }
     }
     case "SELECT_ATTACK":
@@ -130,32 +133,41 @@ const Cell = ({ x, y }: { x: number, y: number }) => {
   const { state, dispatch } = useContext(ActionContext);
 
   const key = `cell.x${x}y${y}`
-  const isLocated = state.coordinate[0] === x && state.coordinate[1] === y;
+  const currentCoordinate = state.unitStatus.coordinate;
+  const isLocated = currentCoordinate.x === x && currentCoordinate.y === y;
 
-  let classForOrientation = "";
-  if (state.orientation === "RIGHT") classForOrientation = "rotate-90";
-  if (state.orientation === "DOWN") classForOrientation = "rotate-180";
-  if (state.orientation === "LEFT") classForOrientation = "rotate-270";
+  if (isLocated) {
+    const orientation = calculateOrientation(
+      state.unitStatus.coordinate,
+      state.unitStatus.previousCoordinate
+    );
 
-  if (isLocated) return (
-    <div
+    let classForOrientation = "";
+    if (orientation === "RIGHT") classForOrientation = "rotate-90";
+    if (orientation === "DOWN") classForOrientation = "rotate-180";
+    if (orientation === "LEFT") classForOrientation = "rotate-270";
+  
+    return (
+      <div
       key={key}
       className="cell cell-active"
       onClick={() => dispatch({ type: "OPEN_MENU" })}
-    >
-      <div className="cell-content">
-        <FighterJetIcon
-          className={classForOrientation}
-          width={24}
-          height={24}
-        />
+      >
+        <div className="cell-content">
+          <FighterJetIcon
+            className={classForOrientation}
+            width={24}
+            height={24}
+          />
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
+
   if (state.activeActionOption === "ATTACK") {
-    const diffX = Math.abs(state.coordinate[0] - x);
-    const diffY = Math.abs(state.coordinate[1] - y);
-    const isWithinRange = diffX + diffY <= RANGE;
+    const diffX = Math.abs(currentCoordinate.x - x);
+    const diffY = Math.abs(currentCoordinate.y - y);
+    const isWithinRange = diffX + diffY <= state.unit.attack_range;
     if (isWithinRange) return (
       <div
         key={key}
