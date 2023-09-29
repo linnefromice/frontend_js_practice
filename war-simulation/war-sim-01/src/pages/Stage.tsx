@@ -1,40 +1,62 @@
 import { Reducer, createContext, useContext, useReducer } from "react";
 import FighterJetIcon from "../assets/fighterJet.svg?react";
 import "./Stage.scss"
-import { ActionOptionType, ActionType, OrientationType, UnitType, UnitStatusType } from "../types";
+import { ActionType, OrientationType, PayloadType, StateType, UnitType } from "../types";
 
 const ROW_NUM = 9
-const CELL_NUM_IN_ROW = 7
-
-type StateType = {
-  isOpenActionMenu: boolean
-  activeActionOption: ActionOptionType | null
-  unit: UnitType
-  unitStatus: UnitStatusType
-}
+const CELL_NUM_IN_ROW = 12
 
 const initialState: StateType = {
-  isOpenActionMenu: false,
-  activeActionOption: null,
-  unit: {
-    id: 1,
-    name: "acecombat",
-    unit_type: 1,
-    movement_range: 3,
-    attack_range: 2,
+  actionMenu: {
+    isOpen: false,
+    targetUnitId: null,
+    activeActionOption: null,
   },
-  unitStatus: {
-    coordinate: { x: 3, y: 2 },
-    previousCoordinate: { x: 3, y: 2 },
-    initialCoordinate: { x: 3, y: 2 },
-  }
+  units: [
+    {
+      spec: {
+        id: 1,
+        name: "VF-25F",
+        unit_type: 1,
+        movement_range: 3,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 5, y: 2 },
+        previousCoordinate: { x: 5, y: 2 },
+        initialCoordinate: { x: 5, y: 2 },
+      }
+    },
+    {
+      spec: {
+        id: 2,
+        name: "VF-25G",
+        unit_type: 1,
+        movement_range: 2,
+        attack_range: 5,
+      },
+      status: {
+        coordinate: { x: 7, y: 2 },
+        previousCoordinate: { x: 7, y: 2 },
+        initialCoordinate: { x: 7, y: 2 },
+      }
+    },
+    {
+      spec: {
+        id: 3,
+        name: "VF-25S",
+        unit_type: 1,
+        movement_range: 4,
+        attack_range: 4,
+      },
+      status: {
+        coordinate: { x: 6, y: 1 },
+        previousCoordinate: { x: 6, y: 2 },
+        initialCoordinate: { x: 6, y: 2 },
+      }
+    }
+  ]
 }
-
-const ActionContext = createContext({
-  state: initialState,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  dispatch: (_: { type: ActionType, payload?: { x: number, y: number } }) => {},
-});
 
 const calculateOrientation = (
   current: { x: number, y: number },
@@ -49,51 +71,104 @@ const calculateOrientation = (
   }
 }
 
+const loadUnit = (
+  id: number,
+  units: UnitType[]
+): UnitType => {
+  const filtered = units.filter((unit) => unit.spec.id === id);
+  if (filtered.length === 0) throw new Error(`Unit not found: ${id}`);
+  if (filtered.length > 1) throw new Error(`Duplicate unit: ${id}`);
+  return filtered[0];
+}
+
+const updateUnit = (
+  updatedUnit: UnitType,
+  previousUnits: UnitType[]
+): UnitType[] => {
+  const newUnits = previousUnits.map((previous) => {
+    if (previous.spec.id === updatedUnit.spec.id) {
+      return updatedUnit;
+    } else {
+      return previous;
+    }
+  });
+
+  return newUnits;
+}
+
 const reducer: Reducer<
   StateType,
-  { type: ActionType, payload?: { x: number, y: number } }
+  {
+    type: ActionType,
+    payload?: PayloadType
+  }
 > = (state, action) => {
   const { type, payload } = action
+
+  if (type == "CLOSE_MENU") {
+    return {
+      ...state,
+      actionMenu: {
+        isOpen: false,
+        targetUnitId: null,
+        activeActionOption: null,  
+      }
+    }
+  }
+
+  if (payload?.id === undefined) return state;
+  if (type == "OPEN_MENU") {
+    return {
+      ...state,
+      actionMenu: {
+        isOpen: true,
+        targetUnitId: payload.id,
+        activeActionOption: null,  
+      }
+    }
+  }
+
+  const unit = loadUnit(payload.id, state.units);
+
   switch (type) {
-    case "OPEN_MENU":
-      return {
-        ...state,
-        isOpenActionMenu: true,
-        activeActionOption: null,
-      }
-    case "CLOSE_MENU":
-      return {
-        ...state,
-        isOpenActionMenu: false,
-        activeActionOption: null,
-      }
     case "SELECT_MOVE":
       return {
         ...state,
-        activeActionOption: "MOVE",
+        actionMenu: {
+          isOpen: true,
+          targetUnitId: payload.id,
+          activeActionOption: "MOVE",
+        }
       }
     case "DO_MOVE": {
-      if (payload === undefined) {
-        return state;
-      }
-
-      const currentCoordinate = state.unitStatus.coordinate;
-
-      return {
-        isOpenActionMenu: false,
-        activeActionOption: null,
-        unit: state.unit,
-        unitStatus: {
-          ...state.unitStatus,
-          previousCoordinate: currentCoordinate,
+      if (payload.x === undefined || payload.y === undefined) return state;
+      const updatedUnit = {
+        ...unit,
+        status: {
+          ...unit.status,
+          previousCoordinate: unit.status.coordinate,
           coordinate: { x: payload.x, y: payload.y },
         }
+      }
+      const updatedUnits = updateUnit(updatedUnit, state.units);
+      return {
+        ...state,
+        actionMenu: {
+          isOpen: false,
+          targetUnitId: null,
+          activeActionOption: null,
+        },
+        units: updatedUnits,
       }
     }
     case "SELECT_ATTACK":
       return {
         ...state,
-        activeActionOption: "ATTACK",
+        actionMenu: {
+          isOpen: true,
+          targetUnitId: payload.id,
+          activeActionOption: "ATTACK",
+        }
       }
     case "DO_ATTACK":
       return state // todo
@@ -101,6 +176,13 @@ const reducer: Reducer<
       return state
   }
 }
+
+const ActionContext = createContext({
+  state: initialState,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  dispatch: (_: { type: ActionType, payload?: PayloadType }) => {},
+});
+
 
 export const Stage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -115,31 +197,43 @@ export const Stage = () => {
 const StageContent = () => {
   const { state } = useContext(ActionContext);
 
+  const unitsCoordinates = state.units.reduce((map, unit) => {
+    const { x, y } = unit.status.coordinate;
+    const mapKey = `x${x}y${y}`
+    if (map.has(mapKey)) {
+      throw new Error(`Duplicate coordinates: ${x},${y} oldUnit=${map.get(mapKey)} newUnit=${unit.spec.id}`)
+    }
+    map.set(mapKey, unit.spec.id);
+    return map;
+  }, new Map<string, number>())
+
   return (
     <div className="root">
       <div className="stage">
         {Array.from({ length: ROW_NUM }).map((_, y) => (
           <div key={`row.${y}`} className="row">
-            {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => <Cell x={x} y={y} />)}
+            {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => {
+              const unitId = unitsCoordinates.get(`x${x}y${y}`);
+              return <Cell x={x} y={y} unitId={unitId}/>
+            })}
           </div>
         ))}
       </div>
-      {state.isOpenActionMenu && <ActionMenu />}
+      {state.actionMenu.isOpen && <ActionMenu />}
     </div>
   )
 }
 
-const Cell = ({ x, y }: { x: number, y: number }) => {
-  const { state, dispatch } = useContext(ActionContext);
-
+const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }) => {
+  const { state: { units, actionMenu }, dispatch } = useContext(ActionContext);
   const key = `cell.x${x}y${y}`
-  const currentCoordinate = state.unitStatus.coordinate;
-  const isLocated = currentCoordinate.x === x && currentCoordinate.y === y;
 
-  if (isLocated) {
+  if (unitId) {
+    const { status } = loadUnit(unitId, units);
+
     const orientation = calculateOrientation(
-      state.unitStatus.coordinate,
-      state.unitStatus.previousCoordinate
+      status.coordinate,
+      status.previousCoordinate
     );
 
     let classForOrientation = "";
@@ -151,7 +245,10 @@ const Cell = ({ x, y }: { x: number, y: number }) => {
       <div
       key={key}
       className="cell cell-active"
-      onClick={() => dispatch({ type: "OPEN_MENU" })}
+      onClick={() => dispatch({
+        type: "OPEN_MENU",
+        payload: { id: unitId }
+      })}
       >
         <div className="cell-content">
           <FighterJetIcon
@@ -164,48 +261,77 @@ const Cell = ({ x, y }: { x: number, y: number }) => {
     )
   }
 
-  if (state.activeActionOption === "ATTACK") {
-    const diffX = Math.abs(currentCoordinate.x - x);
-    const diffY = Math.abs(currentCoordinate.y - y);
-    const isWithinRange = diffX + diffY <= state.unit.attack_range;
-    if (isWithinRange) return (
-      <div
-        key={key}
-        className="cell cell-range"
-        onClick={() => dispatch({ type: "CLOSE_MENU" })}
-      />
-    )
+  if (actionMenu.targetUnitId) {
+    const { spec, status } = loadUnit(actionMenu.targetUnitId, units);
+
+    if (actionMenu.activeActionOption === "MOVE") {
+      const diffX = Math.abs(status.coordinate.x - x);
+      const diffY = Math.abs(status.coordinate.y - y);
+      const isWithinRange = diffX + diffY <= spec.movement_range;
+      if (isWithinRange) return (
+        <div
+          key={key}
+          className="cell cell-move-range"
+          onClick={
+            () => dispatch({
+              type: "DO_MOVE",
+              payload: {
+                id: spec.id,
+                x,
+                y,
+              }
+            })
+          }
+        />
+      )
+    }
+  
+    if (actionMenu.activeActionOption === "ATTACK") {
+      const diffX = Math.abs(status.coordinate.x - x);
+      const diffY = Math.abs(status.coordinate.y - y);
+      const isWithinRange = diffX + diffY <= spec.attack_range;
+      if (isWithinRange) return (
+        <div
+          key={key}
+          className="cell cell-attack-range"
+          onClick={() => dispatch({ type: "CLOSE_MENU" })}
+        />
+      )
+    }
   }
+
   return (
     <div
       key={key}
       className="cell"
-      onClick={state.activeActionOption == "MOVE"
-        ? () => dispatch({ type: "DO_MOVE", payload: { x, y } })
-        : undefined
-      }
     />
   );
 }
 
 const ActionMenu = () => {
-  const { state, dispatch } = useContext(ActionContext);
+  const { state: { actionMenu }, dispatch } = useContext(ActionContext);
 
   return (
     <div className="action-menu">
       <ul>
         <li>
           <button
-            className={state.activeActionOption === "MOVE" ? "action-btn action-btn-active" : "action-btn"}
-            onClick={() => dispatch({ type: "SELECT_MOVE" })}
+            className={actionMenu.activeActionOption === "MOVE" ? "action-btn action-btn-active" : "action-btn"}
+            onClick={() => dispatch({
+              type: "SELECT_MOVE",
+              payload: { id: actionMenu.targetUnitId || undefined }
+            })}
           >
             移動
           </button>
         </li>
         <li>
           <button
-            className={state.activeActionOption === "ATTACK" ? "action-btn action-btn-active" : "action-btn"}
-            onClick={() => dispatch({ type: "SELECT_ATTACK" })}
+            className={actionMenu.activeActionOption === "ATTACK" ? "action-btn action-btn-active" : "action-btn"}
+            onClick={() => dispatch({
+              type: "SELECT_ATTACK",
+              payload: { id: actionMenu.targetUnitId || undefined }
+            })}
           >
             攻撃
           </button>
