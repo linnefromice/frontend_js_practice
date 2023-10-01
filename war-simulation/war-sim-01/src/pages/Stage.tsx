@@ -1,5 +1,7 @@
 import { Reducer, createContext, useContext, useReducer } from "react";
 import FighterJetIcon from "../assets/fighterJet.svg?react";
+import ArmyTankIcon from "../assets/armyTank.svg?react";
+import BattleSoldierIcon from "../assets/battleSoldier.svg?react";
 import "./Stage.scss"
 import { ActionType, OrientationType, PayloadType, StateType, UnitType } from "../types";
 
@@ -51,10 +53,94 @@ const initialState: StateType = {
       },
       status: {
         coordinate: { x: 6, y: 1 },
-        previousCoordinate: { x: 6, y: 2 },
-        initialCoordinate: { x: 6, y: 2 },
+        previousCoordinate: { x: 6, y: 1 },
+        initialCoordinate: { x: 6, y: 1 },
       }
-    }
+    },
+    {
+      spec: {
+        id: 4,
+        name: "TANK-1",
+        unit_type: 2,
+        movement_range: 2,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 4, y: 4 },
+        previousCoordinate: { x: 4, y: 4 },
+        initialCoordinate: { x: 4, y: 4 },
+      }
+    },
+    {
+      spec: {
+        id: 5,
+        name: "TANK-2",
+        unit_type: 2,
+        movement_range: 2,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 8, y: 4 },
+        previousCoordinate: { x: 8, y: 4 },
+        initialCoordinate: { x: 8, y: 4 },
+      }
+    },
+    {
+      spec: {
+        id: 6,
+        name: "SOLDIER-1",
+        unit_type: 3,
+        movement_range: 1,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 3, y: 5 },
+        previousCoordinate: { x: 3, y: 5 },
+        initialCoordinate: { x: 3, y: 5 },
+      }
+    },
+    {
+      spec: {
+        id: 7,
+        name: "SOLDIER-2",
+        unit_type: 3,
+        movement_range: 1,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 5, y: 5 },
+        previousCoordinate: { x: 5, y: 5 },
+        initialCoordinate: { x: 5, y: 5 },
+      }
+    },
+    {
+      spec: {
+        id: 8,
+        name: "SOLDIER-3",
+        unit_type: 3,
+        movement_range: 1,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 7, y: 5 },
+        previousCoordinate: { x: 7, y: 5 },
+        initialCoordinate: { x: 7, y: 5 },
+      }
+    },
+    {
+      spec: {
+        id: 9,
+        name: "SOLDIER-4",
+        unit_type: 3,
+        movement_range: 1,
+        attack_range: 2,
+      },
+      status: {
+        coordinate: { x: 9, y: 5 },
+        previousCoordinate: { x: 9, y: 5 },
+        initialCoordinate: { x: 9, y: 5 },
+      }
+    },
   ]
 }
 
@@ -229,32 +315,35 @@ const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }) => {
   const key = `cell.x${x}y${y}`
 
   if (unitId) {
-    const { status } = loadUnit(unitId, units);
+    const { spec, status } = loadUnit(unitId, units);
 
     const orientation = calculateOrientation(
       status.coordinate,
       status.previousCoordinate
     );
 
-    let classForOrientation = "";
-    if (orientation === "RIGHT") classForOrientation = "rotate-90";
-    if (orientation === "DOWN") classForOrientation = "rotate-180";
-    if (orientation === "LEFT") classForOrientation = "rotate-270";
+    const cellClassName = actionMenu.targetUnitId === unitId
+      ? "cell cell-active-unit"
+      : "cell cell-unit";
+
+    let cellContentClassForOrientation = "";
+    if (orientation === "RIGHT") cellContentClassForOrientation = "rotate-90";
+    if (orientation === "DOWN") cellContentClassForOrientation = "rotate-180";
+    if (orientation === "LEFT") cellContentClassForOrientation = "rotate-270";
   
     return (
       <div
       key={key}
-      className="cell cell-active"
+      className={cellClassName}
       onClick={() => dispatch({
         type: "OPEN_MENU",
         payload: { id: unitId }
       })}
       >
         <div className="cell-content">
-          <FighterJetIcon
-            className={classForOrientation}
-            width={24}
-            height={24}
+          <UnitIcon
+            unitType={spec.unit_type}
+            className={cellContentClassForOrientation}
           />
         </div>
       </div>
@@ -347,4 +436,30 @@ const ActionMenu = () => {
       </ul>
     </div>
   )
+}
+
+const UnitIcon = ({ unitType, className }: { unitType: number, className: string }) => {
+  const props = {
+    width: 24,
+    height: 24,
+    className,
+  }
+
+  if (unitType === 1) {
+    return (
+      <FighterJetIcon {...props} />
+    )
+  }
+  if (unitType === 2) {
+    return (
+      <ArmyTankIcon {...props} />
+    )
+  }
+  if (unitType === 3) {
+    return (
+      <BattleSoldierIcon {...props}/>
+    )
+  }
+
+  return <></>
 }
