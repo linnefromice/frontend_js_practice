@@ -1,9 +1,8 @@
-import { Reducer, createContext, useContext, useReducer } from "react";
-import FighterJetIcon from "../assets/fighterJet.svg?react";
-import ArmyTankIcon from "../assets/armyTank.svg?react";
-import BattleSoldierIcon from "../assets/battleSoldier.svg?react";
+import { createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
-import { ActionType, OrientationType, PayloadType, StateType, UnitType } from "../types";
+import { ActionType, PayloadType, StateType } from "../../types";
+import { UnitIcon } from "./components";
+import { calculateOrientation, loadUnit, reducer } from "./logics";
 
 const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 12
@@ -142,125 +141,6 @@ const initialState: StateType = {
       }
     },
   ]
-}
-
-const calculateOrientation = (
-  current: { x: number, y: number },
-  previous: { x: number, y: number }
-): OrientationType => {
-  const diffX = current.x - previous.x;
-  const diffY = current.y - previous.y;
-  if (Math.abs(diffY) >= Math.abs(diffX)) {
-    return diffY > 0 ? "DOWN" : "UP";
-  } else {
-    return diffX > 0 ? "RIGHT" : "LEFT";
-  }
-}
-
-const loadUnit = (
-  id: number,
-  units: UnitType[]
-): UnitType => {
-  const filtered = units.filter((unit) => unit.spec.id === id);
-  if (filtered.length === 0) throw new Error(`Unit not found: ${id}`);
-  if (filtered.length > 1) throw new Error(`Duplicate unit: ${id}`);
-  return filtered[0];
-}
-
-const updateUnit = (
-  updatedUnit: UnitType,
-  previousUnits: UnitType[]
-): UnitType[] => {
-  const newUnits = previousUnits.map((previous) => {
-    if (previous.spec.id === updatedUnit.spec.id) {
-      return updatedUnit;
-    } else {
-      return previous;
-    }
-  });
-
-  return newUnits;
-}
-
-const reducer: Reducer<
-  StateType,
-  {
-    type: ActionType,
-    payload?: PayloadType
-  }
-> = (state, action) => {
-  const { type, payload } = action
-
-  if (type == "CLOSE_MENU") {
-    return {
-      ...state,
-      actionMenu: {
-        isOpen: false,
-        targetUnitId: null,
-        activeActionOption: null,  
-      }
-    }
-  }
-
-  if (payload?.id === undefined) return state;
-  if (type == "OPEN_MENU") {
-    return {
-      ...state,
-      actionMenu: {
-        isOpen: true,
-        targetUnitId: payload.id,
-        activeActionOption: null,  
-      }
-    }
-  }
-
-  const unit = loadUnit(payload.id, state.units);
-
-  switch (type) {
-    case "SELECT_MOVE":
-      return {
-        ...state,
-        actionMenu: {
-          isOpen: true,
-          targetUnitId: payload.id,
-          activeActionOption: "MOVE",
-        }
-      }
-    case "DO_MOVE": {
-      if (payload.x === undefined || payload.y === undefined) return state;
-      const updatedUnit = {
-        ...unit,
-        status: {
-          ...unit.status,
-          previousCoordinate: unit.status.coordinate,
-          coordinate: { x: payload.x, y: payload.y },
-        }
-      }
-      const updatedUnits = updateUnit(updatedUnit, state.units);
-      return {
-        ...state,
-        actionMenu: {
-          isOpen: false,
-          targetUnitId: null,
-          activeActionOption: null,
-        },
-        units: updatedUnits,
-      }
-    }
-    case "SELECT_ATTACK":
-      return {
-        ...state,
-        actionMenu: {
-          isOpen: true,
-          targetUnitId: payload.id,
-          activeActionOption: "ATTACK",
-        }
-      }
-    case "DO_ATTACK":
-      return state // todo
-    default:
-      return state
-  }
 }
 
 const ActionContext = createContext({
@@ -436,30 +316,4 @@ const ActionMenu = () => {
       </ul>
     </div>
   )
-}
-
-const UnitIcon = ({ unitType, className }: { unitType: number, className: string }) => {
-  const props = {
-    width: 24,
-    height: 24,
-    className,
-  }
-
-  if (unitType === 1) {
-    return (
-      <FighterJetIcon {...props} />
-    )
-  }
-  if (unitType === 2) {
-    return (
-      <ArmyTankIcon {...props} />
-    )
-  }
-  if (unitType === 3) {
-    return (
-      <BattleSoldierIcon {...props}/>
-    )
-  }
-
-  return <></>
 }
