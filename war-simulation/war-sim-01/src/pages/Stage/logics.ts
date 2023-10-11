@@ -113,8 +113,30 @@ export const reducer: Reducer<
           activeActionOption: "ATTACK",
         }
       }
-    case "DO_ATTACK":
-      return state // todo
+    case "DO_ATTACK": {
+      if (state.actionMenu.targetUnitId === null || payload.id === null) return state;
+      const attacking = loadUnit(state.actionMenu.targetUnitId, state.units);
+
+      const updatedUnit = {
+        ...unit,
+        status: {
+          ...unit.status,
+          hp: unit.status.hp - 100 * attacking.spec.id,
+          // TODO: calculate damage (use attack power)
+          // TODO: remove unit if hp <= 0
+        }
+      }
+      const updatedUnits = updateUnit(updatedUnit, state.units);
+      return {
+        ...state,
+        actionMenu: {
+          isOpen: false,
+          targetUnitId: null,
+          activeActionOption: null,
+        },
+        units: updatedUnits,
+      }
+    }
     default:
       return state
   }

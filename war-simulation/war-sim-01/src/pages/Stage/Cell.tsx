@@ -10,8 +10,8 @@ const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean
   return diffX + diffY <= range;
 }
 
-const CellWithUnit = ({ x, y, unitId, key }: { x: number, y: number, unitId: number, key: string }) => {
-  const { state: { units, actionMenu }, dispatch } = useContext(ActionContext);
+const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, onClick: () => void }) => {
+  const { state: { units, actionMenu } } = useContext(ActionContext);
   const { spec, status } = loadUnit(unitId, units);
 
   const orientation = calculateOrientation(
@@ -32,10 +32,7 @@ const CellWithUnit = ({ x, y, unitId, key }: { x: number, y: number, unitId: num
     <div
     key={key}
     className={cellClassName}
-    onClick={() => dispatch({
-      type: "OPEN_MENU",
-      payload: { id: unitId }
-    })}
+    onClick={onClick}
     >
       <div className="cell-content">
         <UnitIcon
@@ -55,7 +52,14 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
 
   if (actionMenu.targetUnitId) {
     if (actionMenu.targetUnitId === unitId) {
-      return <CellWithUnit x={x} y={y} unitId={unitId} key={key} /> // TODO: consider background by action
+      return <CellWithUnit
+        unitId={unitId}
+        key={key}
+        onClick={() => dispatch({
+          type: "OPEN_MENU",
+          payload: { id: unitId }
+        })}
+      /> // TODO: consider background by action
     }
 
     const { spec, status } = loadUnit(actionMenu.targetUnitId, units);
@@ -63,7 +67,11 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
     if (actionMenu.activeActionOption === "MOVE") {
       if (isWithinRange(status.coordinate, { x, y }, spec.movement_range)) {
         return unitId
-          ? <CellWithUnit x={x} y={y} unitId={unitId} key={key} /> // TODO: consider background not to move
+          ? <CellWithUnit
+              unitId={unitId}
+              key={key}
+              onClick={() => null}
+            />
           : <div
               key={key}
               className="cell cell-move-range"
@@ -83,7 +91,14 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
     if (actionMenu.activeActionOption === "ATTACK") {
       if (isWithinRange(status.coordinate, { x, y }, spec.attack_range)) {
         return unitId
-          ? <CellWithUnit x={x} y={y} unitId={unitId} key={key} /> // TODO: attack
+          ? <CellWithUnit
+              unitId={unitId}
+              key={key}
+              onClick={() => dispatch({
+                type: "DO_ATTACK",
+                payload: { id: unitId }
+              })}
+            />
           : <div
               key={key}
               className="cell cell-attack-range"
@@ -94,7 +109,14 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
   }
 
   if (unitId) {
-    return <CellWithUnit x={x} y={y} unitId={unitId} key={key} />
+    return <CellWithUnit
+      unitId={unitId}
+      key={key}
+      onClick={() => dispatch({
+        type: "OPEN_MENU",
+        payload: { id: unitId }
+      })}
+    />
   }
 
   return (
