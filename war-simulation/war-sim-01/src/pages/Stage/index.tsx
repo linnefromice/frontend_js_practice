@@ -1,8 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
 import { ActionType, PayloadType, StateType } from "../../types";
-import { UnitIcon } from "./components";
-import { calculateOrientation, loadUnit, reducer } from "./logics";
+import { reducer } from "./logics";
+import { Cell } from "./Cell";
 
 const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 12
@@ -21,8 +21,10 @@ const initialState: StateType = {
         unit_type: 1,
         movement_range: 3,
         attack_range: 2,
+        max_hp: 1000,
       },
       status: {
+        hp: 1000,
         coordinate: { x: 5, y: 2 },
         previousCoordinate: { x: 5, y: 2 },
         initialCoordinate: { x: 5, y: 2 },
@@ -35,8 +37,10 @@ const initialState: StateType = {
         unit_type: 1,
         movement_range: 2,
         attack_range: 5,
+        max_hp: 1000,
       },
       status: {
+        hp: 1000,
         coordinate: { x: 7, y: 2 },
         previousCoordinate: { x: 7, y: 2 },
         initialCoordinate: { x: 7, y: 2 },
@@ -49,8 +53,10 @@ const initialState: StateType = {
         unit_type: 1,
         movement_range: 4,
         attack_range: 4,
+        max_hp: 1000,
       },
       status: {
+        hp: 1000,
         coordinate: { x: 6, y: 1 },
         previousCoordinate: { x: 6, y: 1 },
         initialCoordinate: { x: 6, y: 1 },
@@ -63,8 +69,10 @@ const initialState: StateType = {
         unit_type: 2,
         movement_range: 2,
         attack_range: 2,
+        max_hp: 2000,
       },
       status: {
+        hp: 2000,
         coordinate: { x: 4, y: 4 },
         previousCoordinate: { x: 4, y: 4 },
         initialCoordinate: { x: 4, y: 4 },
@@ -77,8 +85,10 @@ const initialState: StateType = {
         unit_type: 2,
         movement_range: 2,
         attack_range: 2,
+        max_hp: 2000,
       },
       status: {
+        hp: 2000,
         coordinate: { x: 8, y: 4 },
         previousCoordinate: { x: 8, y: 4 },
         initialCoordinate: { x: 8, y: 4 },
@@ -91,8 +101,10 @@ const initialState: StateType = {
         unit_type: 3,
         movement_range: 1,
         attack_range: 2,
+        max_hp: 200,
       },
       status: {
+        hp: 200,
         coordinate: { x: 3, y: 5 },
         previousCoordinate: { x: 3, y: 5 },
         initialCoordinate: { x: 3, y: 5 },
@@ -105,8 +117,10 @@ const initialState: StateType = {
         unit_type: 3,
         movement_range: 1,
         attack_range: 2,
+        max_hp: 200,
       },
       status: {
+        hp: 200,
         coordinate: { x: 5, y: 5 },
         previousCoordinate: { x: 5, y: 5 },
         initialCoordinate: { x: 5, y: 5 },
@@ -119,8 +133,10 @@ const initialState: StateType = {
         unit_type: 3,
         movement_range: 1,
         attack_range: 2,
+        max_hp: 200,
       },
       status: {
+        hp: 200,
         coordinate: { x: 7, y: 5 },
         previousCoordinate: { x: 7, y: 5 },
         initialCoordinate: { x: 7, y: 5 },
@@ -133,8 +149,10 @@ const initialState: StateType = {
         unit_type: 3,
         movement_range: 1,
         attack_range: 2,
+        max_hp: 200,
       },
       status: {
+        hp: 200,
         coordinate: { x: 9, y: 5 },
         previousCoordinate: { x: 9, y: 5 },
         initialCoordinate: { x: 9, y: 5 },
@@ -143,7 +161,7 @@ const initialState: StateType = {
   ]
 }
 
-const ActionContext = createContext({
+export const ActionContext = createContext({
   state: initialState,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   dispatch: (_: { type: ActionType, payload?: PayloadType }) => {},
@@ -188,93 +206,6 @@ const StageContent = () => {
       {state.actionMenu.isOpen && <ActionMenu />}
     </div>
   )
-}
-
-const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }) => {
-  const { state: { units, actionMenu }, dispatch } = useContext(ActionContext);
-  const key = `cell.x${x}y${y}`
-
-  if (unitId) {
-    const { spec, status } = loadUnit(unitId, units);
-
-    const orientation = calculateOrientation(
-      status.coordinate,
-      status.previousCoordinate
-    );
-
-    const cellClassName = actionMenu.targetUnitId === unitId
-      ? "cell cell-active-unit"
-      : "cell cell-unit";
-
-    let cellContentClassForOrientation = "";
-    if (orientation === "RIGHT") cellContentClassForOrientation = "rotate-90";
-    if (orientation === "DOWN") cellContentClassForOrientation = "rotate-180";
-    if (orientation === "LEFT") cellContentClassForOrientation = "rotate-270";
-  
-    return (
-      <div
-      key={key}
-      className={cellClassName}
-      onClick={() => dispatch({
-        type: "OPEN_MENU",
-        payload: { id: unitId }
-      })}
-      >
-        <div className="cell-content">
-          <UnitIcon
-            unitType={spec.unit_type}
-            className={cellContentClassForOrientation}
-          />
-        </div>
-      </div>
-    )
-  }
-
-  if (actionMenu.targetUnitId) {
-    const { spec, status } = loadUnit(actionMenu.targetUnitId, units);
-
-    if (actionMenu.activeActionOption === "MOVE") {
-      const diffX = Math.abs(status.coordinate.x - x);
-      const diffY = Math.abs(status.coordinate.y - y);
-      const isWithinRange = diffX + diffY <= spec.movement_range;
-      if (isWithinRange) return (
-        <div
-          key={key}
-          className="cell cell-move-range"
-          onClick={
-            () => dispatch({
-              type: "DO_MOVE",
-              payload: {
-                id: spec.id,
-                x,
-                y,
-              }
-            })
-          }
-        />
-      )
-    }
-  
-    if (actionMenu.activeActionOption === "ATTACK") {
-      const diffX = Math.abs(status.coordinate.x - x);
-      const diffY = Math.abs(status.coordinate.y - y);
-      const isWithinRange = diffX + diffY <= spec.attack_range;
-      if (isWithinRange) return (
-        <div
-          key={key}
-          className="cell cell-attack-range"
-          onClick={() => dispatch({ type: "CLOSE_MENU" })}
-        />
-      )
-    }
-  }
-
-  return (
-    <div
-      key={key}
-      className="cell"
-    />
-  );
 }
 
 const ActionMenu = () => {

@@ -32,6 +32,14 @@
     background-color: rgba(255, 0, 0, 0.125);
   }
 
+  &-unit-status-md {
+    font-size: 12px;
+  }
+
+  &-unit-status-sm {
+    font-size: 4px;
+  }
+
   &-active-unit {
     background-color: rgba(255, 0, 0, 0.375);
   }
@@ -50,6 +58,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 }
 

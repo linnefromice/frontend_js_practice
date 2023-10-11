@@ -34,14 +34,16 @@ export type UnitSpecType = {
   unit_type: number;
   movement_range: number;
   attack_range: number;
+  max_hp: number;
 }
 
-type Coordinate = {
+export type Coordinate = {
   x: number;
   y: number;
 }
 
 export type UnitStatusType = {
+  hp: number;
   coordinate: Coordinate;
   previousCoordinate: Coordinate;
   initialCoordinate: Coordinate;
