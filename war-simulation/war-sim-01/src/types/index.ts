@@ -35,6 +35,7 @@ export type UnitSpecType = {
   movement_range: number;
   attack_range: number;
   max_hp: number;
+  attack: number;
 }
 
 export type Coordinate = {

@@ -22,6 +22,7 @@ const initialState: StateType = {
         movement_range: 3,
         attack_range: 2,
         max_hp: 1000,
+        attack: 400,
       },
       status: {
         hp: 1000,
@@ -38,6 +39,7 @@ const initialState: StateType = {
         movement_range: 2,
         attack_range: 5,
         max_hp: 1000,
+        attack: 400,
       },
       status: {
         hp: 1000,
@@ -54,6 +56,7 @@ const initialState: StateType = {
         movement_range: 4,
         attack_range: 4,
         max_hp: 1000,
+        attack: 400,
       },
       status: {
         hp: 1000,
@@ -70,6 +73,7 @@ const initialState: StateType = {
         movement_range: 2,
         attack_range: 2,
         max_hp: 2000,
+        attack: 200,
       },
       status: {
         hp: 2000,
@@ -86,6 +90,7 @@ const initialState: StateType = {
         movement_range: 2,
         attack_range: 2,
         max_hp: 2000,
+        attack: 200,
       },
       status: {
         hp: 2000,
@@ -102,6 +107,7 @@ const initialState: StateType = {
         movement_range: 1,
         attack_range: 2,
         max_hp: 200,
+        attack: 50,
       },
       status: {
         hp: 200,
@@ -118,6 +124,7 @@ const initialState: StateType = {
         movement_range: 1,
         attack_range: 2,
         max_hp: 200,
+        attack: 50,
       },
       status: {
         hp: 200,
@@ -134,6 +141,7 @@ const initialState: StateType = {
         movement_range: 1,
         attack_range: 2,
         max_hp: 200,
+        attack: 50,
       },
       status: {
         hp: 200,
@@ -150,6 +158,7 @@ const initialState: StateType = {
         movement_range: 1,
         attack_range: 2,
         max_hp: 200,
+        attack: 50,
       },
       status: {
         hp: 200,

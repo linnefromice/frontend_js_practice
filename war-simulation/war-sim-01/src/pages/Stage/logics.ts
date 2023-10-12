@@ -121,8 +121,7 @@ export const reducer: Reducer<
         ...unit,
         status: {
           ...unit.status,
-          hp: unit.status.hp - 100 * attacking.spec.id,
-          // TODO: calculate damage (use attack power)
+          hp: unit.status.hp - attacking.spec.attack,
           // TODO: remove unit if hp <= 0
         }
       }
