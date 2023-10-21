@@ -1,5 +1,6 @@
 import { Reducer } from "react";
-import { UnitType, OrientationType, StateType, ActionType, PayloadType } from "../../types";
+import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player } from "../../types";
+import { PLAYERS } from ".";
 
 export const calculateOrientation = (
   current: { x: number, y: number },
@@ -14,6 +15,25 @@ export const calculateOrientation = (
   }
 }
 
+// Player
+export const getPlayer = (id: number, players: Player[]) => {
+  const idx = getIdxInPlayer(id, players);
+  return players[idx];
+}
+
+export const nextPlayer = (id: number, players: Player[]) => {
+  const idx = getIdxInPlayer(id, players);
+  const nextIdx = (idx + 1) % players.length;
+  return players[nextIdx];
+}
+
+const getIdxInPlayer = (id: number, players: Player[]) => {
+  const idx = players.findIndex((player) => player.id === id);
+  if (idx === -1) throw new Error(`Player not found: ${id}`);
+  return idx;
+}
+
+// Unit
 export const loadUnit = (
   id: number,
   units: UnitType[]
@@ -39,6 +59,14 @@ export const updateUnit = (
   return newUnits;
 }
 
+export const removeUnit = (
+  units: UnitType[],
+  targetId: number
+): UnitType[] => {
+  const remains = units.filter((unit) => unit.spec.id !== targetId);
+  return remains;
+};
+
 export const reducer: Reducer<
   StateType,
   {
@@ -56,6 +84,18 @@ export const reducer: Reducer<
         targetUnitId: null,
         activeActionOption: null,  
       }
+    }
+  }
+
+  if (type == "TURN_END") {
+    return {
+      ...state,
+      actionMenu: {
+        isOpen: false,
+        targetUnitId: null,
+        activeActionOption: null,
+      },
+      activePlayerId: nextPlayer(state.activePlayerId, PLAYERS).id,
     }
   }
 
@@ -117,15 +157,19 @@ export const reducer: Reducer<
       if (state.actionMenu.targetUnitId === null || payload.id === null) return state;
       const attacking = loadUnit(state.actionMenu.targetUnitId, state.units);
 
-      const updatedUnit = {
-        ...unit,
-        status: {
-          ...unit.status,
-          hp: unit.status.hp - attacking.spec.attack,
-          // TODO: remove unit if hp <= 0
-        }
-      }
-      const updatedUnits = updateUnit(updatedUnit, state.units);
+      const remainHp = unit.status.hp - attacking.spec.attack;
+      const newUnits = remainHp > 0
+        ? (() => {
+          const updatedUnit = {
+            ...unit,
+            status: {
+              ...unit.status,
+              hp: unit.status.hp - attacking.spec.attack,
+            }
+          }
+          return updateUnit(updatedUnit, state.units);
+        })() : removeUnit(state.units, unit.spec.id);
+
       return {
         ...state,
         actionMenu: {
@@ -133,7 +177,7 @@ export const reducer: Reducer<
           targetUnitId: null,
           activeActionOption: null,
         },
-        units: updatedUnits,
+        units: newUnits,
       }
     }
     default:

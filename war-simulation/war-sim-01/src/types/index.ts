@@ -4,13 +4,14 @@ export type ActionOptionType = typeof ACTION_OPTIONS[number]
 const ORIENTATIONS = ["UP", "DOWN", "LEFT", "RIGHT"] as const
 export type OrientationType = typeof ORIENTATIONS[number]
 
-const ACTIONS = ["OPEN_MENU", "CLOSE_MENU", "SELECT_MOVE", "SELECT_ATTACK", "DO_MOVE", "DO_ATTACK"] as const
+const ACTIONS = ["OPEN_MENU", "CLOSE_MENU", "TURN_END", "SELECT_MOVE", "SELECT_ATTACK", "DO_MOVE", "DO_ATTACK"] as const
 export type ActionType = typeof ACTIONS[number];
 
 // State
-export type UnitType = { spec: UnitSpecType, status: UnitStatusType }
+export type UnitType = { spec: UnitSpecType, status: UnitStatusType, playerId: number }
 
 export type StateType = {
+  activePlayerId: number
   actionMenu: {
     isOpen: boolean
     targetUnitId: number | null
@@ -24,6 +25,12 @@ export type PayloadType = {
   x?: number,
   y?: number
   // TODO: info for attack (skill, target unit id, damage, etc)
+}
+
+// Player Model
+export type Player = {
+  id: number;
+  name: string;
 }
 
 // Unit Model

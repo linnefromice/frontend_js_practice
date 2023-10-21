@@ -1,13 +1,24 @@
 import { createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
-import { ActionType, PayloadType, StateType } from "../../types";
-import { reducer } from "./logics";
+import { ActionType, PayloadType, Player, StateType } from "../../types";
+import { getPlayer, reducer } from "./logics";
 import { Cell } from "./Cell";
 
 const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 12
+export const PLAYERS: Player[] = [
+  {
+    id: 1,
+    name: "Hero",
+  },
+  {
+    id: 2,
+    name: "Villan",
+  },
+]
 
 const initialState: StateType = {
+  activePlayerId: 1,
   actionMenu: {
     isOpen: false,
     targetUnitId: null,
@@ -29,7 +40,8 @@ const initialState: StateType = {
         coordinate: { x: 5, y: 2 },
         previousCoordinate: { x: 5, y: 2 },
         initialCoordinate: { x: 5, y: 2 },
-      }
+      },
+      playerId: 1,
     },
     {
       spec: {
@@ -46,7 +58,8 @@ const initialState: StateType = {
         coordinate: { x: 7, y: 2 },
         previousCoordinate: { x: 7, y: 2 },
         initialCoordinate: { x: 7, y: 2 },
-      }
+      },
+      playerId: 1,
     },
     {
       spec: {
@@ -63,7 +76,8 @@ const initialState: StateType = {
         coordinate: { x: 6, y: 1 },
         previousCoordinate: { x: 6, y: 1 },
         initialCoordinate: { x: 6, y: 1 },
-      }
+      },
+      playerId: 1,
     },
     {
       spec: {
@@ -80,7 +94,8 @@ const initialState: StateType = {
         coordinate: { x: 4, y: 4 },
         previousCoordinate: { x: 4, y: 4 },
         initialCoordinate: { x: 4, y: 4 },
-      }
+      },
+      playerId: 2,
     },
     {
       spec: {
@@ -97,7 +112,8 @@ const initialState: StateType = {
         coordinate: { x: 8, y: 4 },
         previousCoordinate: { x: 8, y: 4 },
         initialCoordinate: { x: 8, y: 4 },
-      }
+      },
+      playerId: 2,
     },
     {
       spec: {
@@ -114,7 +130,8 @@ const initialState: StateType = {
         coordinate: { x: 3, y: 5 },
         previousCoordinate: { x: 3, y: 5 },
         initialCoordinate: { x: 3, y: 5 },
-      }
+      },
+      playerId: 2,
     },
     {
       spec: {
@@ -131,7 +148,8 @@ const initialState: StateType = {
         coordinate: { x: 5, y: 5 },
         previousCoordinate: { x: 5, y: 5 },
         initialCoordinate: { x: 5, y: 5 },
-      }
+      },
+      playerId: 2,
     },
     {
       spec: {
@@ -148,7 +166,8 @@ const initialState: StateType = {
         coordinate: { x: 7, y: 5 },
         previousCoordinate: { x: 7, y: 5 },
         initialCoordinate: { x: 7, y: 5 },
-      }
+      },
+      playerId: 2,
     },
     {
       spec: {
@@ -165,7 +184,8 @@ const initialState: StateType = {
         coordinate: { x: 9, y: 5 },
         previousCoordinate: { x: 9, y: 5 },
         initialCoordinate: { x: 9, y: 5 },
-      }
+      },
+      playerId: 2,
     },
   ]
 }
@@ -202,6 +222,7 @@ const StageContent = () => {
 
   return (
     <div className="root">
+      <p>{`PLAYER: ${JSON.stringify(getPlayer(state.activePlayerId, PLAYERS))}`}</p>
       <div className="stage">
         {Array.from({ length: ROW_NUM }).map((_, y) => (
           <div key={`row.${y}`} className="row">
@@ -251,6 +272,14 @@ const ActionMenu = () => {
             onClick={() => dispatch({ type: "CLOSE_MENU" })}
           >
             閉じる
+          </button>
+        </li>
+        <li>
+          <button
+            className="action-btn"
+            onClick={() => dispatch({ type: "TURN_END" })}
+          >
+            確定
           </button>
         </li>
       </ul>
