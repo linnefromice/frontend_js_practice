@@ -1,21 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
 import "./Stage.scss"
-import { ActionType, PayloadType, Player, StateType } from "../../types";
+import { ActionType, PLAYERS, PayloadType, StateType } from "../../types";
 import { getPlayer, reducer } from "./logics";
 import { Cell } from "./Cell";
 
 const ROW_NUM = 9
 const CELL_NUM_IN_ROW = 12
-export const PLAYERS: Player[] = [
-  {
-    id: 1,
-    name: "Hero",
-  },
-  {
-    id: 2,
-    name: "Villan",
-  },
-]
 
 const initialState: StateType = {
   activePlayerId: 1,

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ActionContext } from ".";
-import { calculateOrientation, loadUnit } from "./logics";
+import { calculateOrientation, getPlayer, loadUnit } from "./logics";
 import { UnitIcon } from "./components";
-import { Coordinate } from "../../types";
+import { Coordinate, PLAYERS } from "../../types";
 
 const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean => {
   const diffX = Math.abs(src.x - dst.x);
@@ -12,7 +12,8 @@ const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean
 
 const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, onClick: () => void }) => {
   const { state: { units, actionMenu } } = useContext(ActionContext);
-  const { spec, status } = loadUnit(unitId, units);
+  const { spec, status, playerId } = loadUnit(unitId, units);
+  const { rgb } = getPlayer(playerId, PLAYERS)
 
   const orientation = calculateOrientation(
     status.coordinate,
@@ -22,6 +23,9 @@ const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, o
   const cellClassName = actionMenu.targetUnitId === unitId
     ? "cell cell-active-unit"
     : "cell cell-unit";
+  const bgColor = actionMenu.targetUnitId === unitId
+    ? `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.375)`
+    : `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.125)`;
 
   let cellContentClassForOrientation = "";
   if (orientation === "RIGHT") cellContentClassForOrientation = "rotate-90";
@@ -30,9 +34,10 @@ const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, o
 
   return (
     <div
-    key={key}
-    className={cellClassName}
-    onClick={onClick}
+      key={key}
+      className={cellClassName}
+      style={{ backgroundColor: bgColor }}
+      onClick={onClick}
     >
       <div className="cell-content">
         <UnitIcon

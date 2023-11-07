@@ -1,3 +1,16 @@
+export const PLAYERS: Player[] = [
+  {
+    id: 1,
+    name: "Hero",
+    rgb: [0, 0, 255] // blue
+  },
+  {
+    id: 2,
+    name: "Villan",
+    rgb: [255, 0, 0] // red
+  },
+]
+
 const ACTION_OPTIONS = ["MOVE", "ATTACK"] as const
 export type ActionOptionType = typeof ACTION_OPTIONS[number]
 
@@ -31,6 +44,7 @@ export type PayloadType = {
 export type Player = {
   id: number;
   name: string;
+  rgb: [number, number, number];
 }
 
 // Unit Model

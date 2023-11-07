@@ -29,7 +29,11 @@
   border: 1px solid silver;
 
   &-unit {
-    background-color: rgba(255, 0, 0, 0.125);
+    background-color: rgba(255, 0, 0, 0.125); // override by player's color
+  }
+
+  &-active-unit {
+    background-color: rgba(255, 0, 0, 0.375); // override by player's color
   }
 
   &-unit-status-md {
@@ -38,10 +42,6 @@
 
   &-unit-status-sm {
     font-size: 4px;
-  }
-
-  &-active-unit {
-    background-color: rgba(255, 0, 0, 0.375);
   }
 
   &-move-range {

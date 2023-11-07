@@ -1,6 +1,5 @@
 import { Reducer } from "react";
 import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player } from "../../types";
-import { PLAYERS } from ".";
 
 export const calculateOrientation = (
   current: { x: number, y: number },
