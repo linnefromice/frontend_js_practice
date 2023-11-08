@@ -2,7 +2,7 @@ import FighterJetIcon from "../../assets/fighterJet.svg?react";
 import ArmyTankIcon from "../../assets/armyTank.svg?react";
 import BattleSoldierIcon from "../../assets/battleSoldier.svg?react";
 
-export const UnitIcon = ({ unitType, className }: { unitType: number, className: string }) => {
+export const UnitIcon = ({ unitType, className }: { unitType: number, className: string }): JSX.Element => {
   const props = {
     width: 24,
     height: 24,

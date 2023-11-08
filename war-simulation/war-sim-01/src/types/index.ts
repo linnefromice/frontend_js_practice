@@ -34,7 +34,7 @@ export type StateType = {
 }
 
 export type PayloadType = {
-  id?: number,
+  id?: number, // unit id
   x?: number,
   y?: number
   // TODO: info for attack (skill, target unit id, damage, etc)

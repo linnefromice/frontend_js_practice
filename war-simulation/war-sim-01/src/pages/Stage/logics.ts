@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player } from "../../types";
+import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player, PLAYERS } from "../../types";
 
 export const calculateOrientation = (
   current: { x: number, y: number },
@@ -99,7 +99,12 @@ export const reducer: Reducer<
   }
 
   if (payload?.id === undefined) return state;
+
+  const unit = loadUnit(payload.id, state.units);
+
   if (type == "OPEN_MENU") {
+    if (unit.playerId !== state.activePlayerId) return state;
+
     return {
       ...state,
       actionMenu: {
@@ -110,10 +115,10 @@ export const reducer: Reducer<
     }
   }
 
-  const unit = loadUnit(payload.id, state.units);
-
   switch (type) {
     case "SELECT_MOVE":
+      if (unit.playerId !== state.activePlayerId) return state;
+
       return {
         ...state,
         actionMenu: {
@@ -144,6 +149,8 @@ export const reducer: Reducer<
       }
     }
     case "SELECT_ATTACK":
+      if (unit.playerId !== state.activePlayerId) return state;
+
       return {
         ...state,
         actionMenu: {
