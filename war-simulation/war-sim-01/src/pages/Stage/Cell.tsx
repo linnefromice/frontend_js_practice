@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { ActionContext } from ".";
 import { calculateOrientation, getPlayer, loadUnit } from "./logics";
 import { UnitIcon } from "./components";
-import { Coordinate, PLAYERS } from "../../types";
+import { Coordinate } from "../../types";
+import { PLAYERS } from "../../constants";
 
 const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean => {
   const diffX = Math.abs(src.x - dst.x);
@@ -94,7 +95,8 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
       }
     }
     if (actionMenu.activeActionOption === "ATTACK") {
-      if (isWithinRange(status.coordinate, { x, y }, spec.attack_range)) {
+      const attack_range = spec.armaments[0].range; // temp
+      if (isWithinRange(status.coordinate, { x, y }, attack_range)) {
         return unitId
           ? <CellWithUnit
               unitId={unitId}

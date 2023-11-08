@@ -1,5 +1,6 @@
 import { Reducer } from "react";
-import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player, PLAYERS } from "../../types";
+import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player } from "../../types";
+import { PLAYERS } from "../../constants";
 
 export const calculateOrientation = (
   current: { x: number, y: number },
@@ -163,14 +164,15 @@ export const reducer: Reducer<
       if (state.actionMenu.targetUnitId === null || payload.id === null) return state;
       const attacking = loadUnit(state.actionMenu.targetUnitId, state.units);
 
-      const remainHp = unit.status.hp - attacking.spec.attack;
+      const armament = attacking.spec.armaments[0]; // temp
+      const remainHp = unit.status.hp - armament.value;
       const newUnits = remainHp > 0
         ? (() => {
           const updatedUnit = {
             ...unit,
             status: {
               ...unit.status,
-              hp: unit.status.hp - attacking.spec.attack,
+              hp: remainHp,
             }
           }
           return updateUnit(updatedUnit, state.units);

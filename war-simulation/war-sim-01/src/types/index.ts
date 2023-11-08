@@ -1,16 +1,3 @@
-export const PLAYERS: Player[] = [
-  {
-    id: 1,
-    name: "Hero",
-    rgb: [0, 0, 255] // blue
-  },
-  {
-    id: 2,
-    name: "Villan",
-    rgb: [255, 0, 0] // red
-  },
-]
-
 const ACTION_OPTIONS = ["MOVE", "ATTACK"] as const
 export type ActionOptionType = typeof ACTION_OPTIONS[number]
 
@@ -34,7 +21,8 @@ export type StateType = {
 }
 
 export type PayloadType = {
-  id?: number, // unit id
+  // NOTE: OpenMenu, the unit to be manipulated for Move, and the unit to be attacked for Attack.
+  id?: number,
   x?: number,
   y?: number
   // TODO: info for attack (skill, target unit id, damage, etc)
@@ -54,9 +42,14 @@ export type UnitSpecType = {
   // 1: fighterjet, 2: tank, 3: soldier
   unit_type: number;
   movement_range: number;
-  attack_range: number;
   max_hp: number;
-  attack: number;
+  armaments: Armament[];
+}
+
+export type Armament = {
+  name: string;
+  value: number;
+  range: number;
 }
 
 export type Coordinate = {
