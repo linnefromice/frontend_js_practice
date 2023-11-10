@@ -48,21 +48,28 @@ const StageContent = () => {
     return map;
   }, new Map<string, number>())
 
+  const activePlayer = getPlayer(state.activePlayerId, PLAYERS);
+
   return (
-    <div className="root">
-      <p>{`PLAYER: ${JSON.stringify(getPlayer(state.activePlayerId, PLAYERS))}`}</p>
-      <div className="stage">
-        {Array.from({ length: ROW_NUM }).map((_, y) => (
-          <div key={`row.${y}`} className="row">
-            {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => {
-              const unitId = unitsCoordinates.get(`x${x}y${y}`);
-              return <Cell x={x} y={y} unitId={unitId}/>
-            })}
-          </div>
-        ))}
+    <>
+      <div className="player-info">
+        <p>{`ID: ${activePlayer.id}`}</p>
+        <p>{`name: ${activePlayer.name}`}</p>
       </div>
-      {state.actionMenu.isOpen && <ActionMenu />}
-    </div>
+      <div className="play-area">
+        <div className="stage">
+          {Array.from({ length: ROW_NUM }).map((_, y) => (
+            <div key={`row.${y}`} className="row">
+              {Array.from({ length: CELL_NUM_IN_ROW }).map((_, x) => {
+                const unitId = unitsCoordinates.get(`x${x}y${y}`);
+                return <Cell x={x} y={y} unitId={unitId}/>
+              })}
+            </div>
+          ))}
+        </div>
+        {state.actionMenu.isOpen && <ActionMenu />}
+      </div>
+    </>
   )
 }
 
@@ -71,46 +78,36 @@ const ActionMenu = () => {
 
   return (
     <div className="action-menu">
-      <ul>
-        <li>
-          <button
-            className={actionMenu.activeActionOption === "MOVE" ? "action-btn action-btn-active" : "action-btn"}
-            onClick={() => dispatch({
-              type: "SELECT_MOVE",
-              payload: { id: actionMenu.targetUnitId || undefined }
-            })}
-          >
-            移動
-          </button>
-        </li>
-        <li>
-          <button
-            className={actionMenu.activeActionOption === "ATTACK" ? "action-btn action-btn-active" : "action-btn"}
-            onClick={() => dispatch({
-              type: "SELECT_ATTACK",
-              payload: { id: actionMenu.targetUnitId || undefined }
-            })}
-          >
-            攻撃
-          </button>
-        </li>
-        <li>
-          <button
-            className="action-btn"
-            onClick={() => dispatch({ type: "CLOSE_MENU" })}
-          >
-            閉じる
-          </button>
-        </li>
-        <li>
-          <button
-            className="action-btn"
-            onClick={() => dispatch({ type: "TURN_END" })}
-          >
-            確定
-          </button>
-        </li>
-      </ul>
+      <button
+        className={actionMenu.activeActionOption === "MOVE" ? "action-menu-btn action-menu-btn-active" : "action-menu-btn"}
+        onClick={() => dispatch({
+          type: "SELECT_MOVE",
+          payload: { running_unit_id: actionMenu.targetUnitId || undefined } // todo: guard undefined at upper level
+        })}
+      >
+        移動
+      </button>
+      <button
+        className={actionMenu.activeActionOption === "ATTACK" ? "action-menu-btn action-menu-btn-active" : "action-menu-btn"}
+        onClick={() => dispatch({
+          type: "SELECT_ATTACK",
+          payload: { running_unit_id: actionMenu.targetUnitId || undefined } // todo: guard undefined at upper level
+        })}
+      >
+        攻撃
+      </button>
+      <button
+        className="action-menu-btn"
+        onClick={() => dispatch({ type: "TURN_END" })}
+      >
+        確定
+      </button>
+      <button
+        className="action-menu-btn"
+        onClick={() => dispatch({ type: "CLOSE_MENU" })}
+      >
+        閉じる
+      </button>
     </div>
   )
 }
