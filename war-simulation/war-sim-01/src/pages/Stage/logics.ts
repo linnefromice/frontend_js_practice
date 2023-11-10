@@ -83,6 +83,7 @@ export const reducer: Reducer<
         isOpen: false,
         targetUnitId: null,
         activeActionOption: nextActionOptionFromPayloadType(type),
+        selectedArmamentIdx: null,
       }
     }
   }
@@ -94,6 +95,7 @@ export const reducer: Reducer<
         isOpen: false,
         targetUnitId: null,
         activeActionOption: nextActionOptionFromPayloadType(type),
+        selectedArmamentIdx: null,
       },
       activePlayerId: nextPlayer(state.activePlayerId, PLAYERS).id,
     }
@@ -105,13 +107,26 @@ export const reducer: Reducer<
   // Check if the unit_in_action is owned by the player
   if (unit_in_action.playerId !== state.activePlayerId) return state;
 
-  if (["OPEN_MENU", "SELECT_MOVE", "SELECT_ATTACK"].includes(type)) {
+  if (type === "OPEN_MENU") {
     return {
       ...state,
       actionMenu: {
         isOpen: true,
         targetUnitId: unit_in_action.spec.id,
         activeActionOption: nextActionOptionFromPayloadType(type),
+        selectedArmamentIdx: null,
+      }
+    }
+  }
+
+  if (type === "SELECT_MOVE") {
+    return {
+      ...state,
+      actionMenu: {
+        isOpen: true,
+        targetUnitId: unit_in_action.spec.id,
+        activeActionOption: nextActionOptionFromPayloadType(type),
+        selectedArmamentIdx: null,
       }
     }
   }
@@ -128,8 +143,21 @@ export const reducer: Reducer<
           isOpen: false,
           targetUnitId: null,
           activeActionOption: nextActionOptionFromPayloadType(type),
+          selectedArmamentIdx: null,
         },
         units: newUnits,
+      }
+    }
+    case "SELECT_ATTACK": {
+      const action = payload.action as PayloadAttackActionType;
+      return {
+        ...state,
+        actionMenu: {
+          isOpen: true,
+          targetUnitId: unit_in_action.spec.id,
+          activeActionOption: nextActionOptionFromPayloadType(type),
+          selectedArmamentIdx: action.armament_idx,
+        }
       }
     }
     case "DO_ATTACK": {
@@ -140,6 +168,7 @@ export const reducer: Reducer<
           isOpen: false,
           targetUnitId: null,
           activeActionOption: nextActionOptionFromPayloadType(type),
+          selectedArmamentIdx: null,
         },
         units: newUnits,
       }

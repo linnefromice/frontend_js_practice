@@ -16,6 +16,7 @@ export type StateType = {
     isOpen: boolean
     targetUnitId: number | null
     activeActionOption: ActionOptionType | null
+    selectedArmamentIdx: number | null // temp: only for SELECT_ATTACK
   }
   units: UnitType[]
 }

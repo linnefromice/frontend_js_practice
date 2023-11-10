@@ -1,7 +1,7 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import "./Stage.scss"
 import { ActionType, PayloadType, StateType } from "../../types";
-import { getPlayer, reducer } from "./logics";
+import { getPlayer, loadUnit, reducer } from "./logics";
 import { Cell } from "./Cell";
 import { INITIAL_UNITS, PLAYERS } from "../../constants";
 
@@ -14,6 +14,7 @@ const initialState: StateType = {
     isOpen: false,
     targetUnitId: null,
     activeActionOption: null,
+    selectedArmamentIdx: null
   },
   units: INITIAL_UNITS,
 }
@@ -74,28 +75,60 @@ const StageContent = () => {
 }
 
 const ActionMenu = () => {
-  const { state: { actionMenu }, dispatch } = useContext(ActionContext);
+  const { state: { units, actionMenu }, dispatch } = useContext(ActionContext);
+  const [isAttacking, setIsAttacking] = useState(false);
+
+  const targetUnitId = actionMenu.targetUnitId;
+  if (!targetUnitId) return <></>
+
+  const { spec } = loadUnit(targetUnitId, units);
 
   return (
     <div className="action-menu">
       <button
         className={actionMenu.activeActionOption === "MOVE" ? "action-menu-btn action-menu-btn-active" : "action-menu-btn"}
-        onClick={() => dispatch({
-          type: "SELECT_MOVE",
-          payload: { running_unit_id: actionMenu.targetUnitId || undefined } // todo: guard undefined at upper level
-        })}
+        onClick={() => {
+          setIsAttacking(false);
+          dispatch({
+            type: "SELECT_MOVE",
+            payload: { running_unit_id: spec.id }
+          });
+        }}
       >
         移動
       </button>
       <button
-        className={actionMenu.activeActionOption === "ATTACK" ? "action-menu-btn action-menu-btn-active" : "action-menu-btn"}
-        onClick={() => dispatch({
-          type: "SELECT_ATTACK",
-          payload: { running_unit_id: actionMenu.targetUnitId || undefined } // todo: guard undefined at upper level
-        })}
+        className={isAttacking ? "action-menu-btn action-menu-btn-selected" : "action-menu-btn"}
+        onClick={() => setIsAttacking(!isAttacking)}
       >
         攻撃
       </button>
+      {isAttacking && <div className="action-sub-menu">
+        {spec.armaments.map((armament, idx) => (
+          <>
+            <button
+              key={`action-sub-menu.${idx}`}
+              className={actionMenu.activeActionOption === "ATTACK" && actionMenu.selectedArmamentIdx === idx
+                ? "action-menu-btn action-menu-btn-active"
+                : "action-menu-btn"
+              }
+              onClick={() => dispatch({
+                type: "SELECT_ATTACK",
+                payload: {
+                  running_unit_id: spec.id,
+                  action: {
+                    target_unit_id: targetUnitId,
+                    armament_idx: idx,
+                  }
+                }
+              })}
+            >
+              {armament.name}
+            </button>
+            <span style={{ fontSize: "4px" }}>{`POW: ${armament.value} / RANGE: ${armament.range}`}</span>
+          </>
+        ))}
+      </div>}
       <button
         className="action-menu-btn"
         onClick={() => dispatch({ type: "TURN_END" })}

@@ -98,7 +98,8 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
       }
     }
     if (actionMenu.activeActionOption === "ATTACK") {
-      const attack_range = spec.armaments[0].range; // temp
+      const selectedArmamentIdx = actionMenu.selectedArmamentIdx || 0; // temp
+      const attack_range = spec.armaments[selectedArmamentIdx].range;
       if (isWithinRange(status.coordinate, { x, y }, attack_range)) {
         return unitId
           ? <CellWithUnit
@@ -110,7 +111,7 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
                   running_unit_id: targetUnitId,
                   action: {
                     target_unit_id: unitId,
-                    armament_idx: 0 // temp
+                    armament_idx: selectedArmamentIdx
                   } as PayloadAttackActionType
                 }
               })}
