@@ -1,5 +1,11 @@
 import { Armament, Player, UnitType } from "../types";
 
+const coordinates = (x: number, y: number) => ({
+  coordinate: { x, y },
+  previousCoordinate: { x, y },
+  initialCoordinate: { x, y },
+});
+
 export const PLAYERS: Player[] = [
   {
     id: 1,
@@ -75,11 +81,9 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 1000,
-      coordinate: { x: 5, y: 2 },
-      previousCoordinate: { x: 5, y: 2 },
-      initialCoordinate: { x: 5, y: 2 },
+      ...coordinates(5, 2)
     },
-    playerId: 1,
+    playerId: 2,
   },
   {
     spec: {
@@ -92,11 +96,9 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 1000,
-      coordinate: { x: 7, y: 2 },
-      previousCoordinate: { x: 7, y: 2 },
-      initialCoordinate: { x: 7, y: 2 },
+      ...coordinates(7, 2)
     },
-    playerId: 1,
+    playerId: 2,
   },
   {
     spec: {
@@ -109,11 +111,9 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 1000,
-      coordinate: { x: 6, y: 1 },
-      previousCoordinate: { x: 6, y: 1 },
-      initialCoordinate: { x: 6, y: 1 },
+      ...coordinates(6, 1)
     },
-    playerId: 1,
+    playerId: 2,
   },
   {
     spec: {
@@ -126,9 +126,7 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 2000,
-      coordinate: { x: 4, y: 4 },
-      previousCoordinate: { x: 4, y: 4 },
-      initialCoordinate: { x: 4, y: 4 },
+      ...coordinates(3, 3)
     },
     playerId: 2,
   },
@@ -143,9 +141,7 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 2000,
-      coordinate: { x: 8, y: 4 },
-      previousCoordinate: { x: 8, y: 4 },
-      initialCoordinate: { x: 8, y: 4 },
+      ...coordinates(9, 3)
     },
     playerId: 2,
   },
@@ -160,9 +156,7 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 200,
-      coordinate: { x: 3, y: 5 },
-      previousCoordinate: { x: 3, y: 5 },
-      initialCoordinate: { x: 3, y: 5 },
+      ...coordinates(2, 4)
     },
     playerId: 2,
   },
@@ -177,9 +171,7 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 200,
-      coordinate: { x: 5, y: 5 },
-      previousCoordinate: { x: 5, y: 5 },
-      initialCoordinate: { x: 5, y: 5 },
+      ...coordinates(4, 4)
     },
     playerId: 2,
   },
@@ -194,9 +186,7 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 200,
-      coordinate: { x: 7, y: 5 },
-      previousCoordinate: { x: 7, y: 5 },
-      initialCoordinate: { x: 7, y: 5 },
+      ...coordinates(8, 4)
     },
     playerId: 2,
   },
@@ -211,10 +201,68 @@ export const INITIAL_UNITS: UnitType[] = [
     },
     status: {
       hp: 200,
-      coordinate: { x: 9, y: 5 },
-      previousCoordinate: { x: 9, y: 5 },
-      initialCoordinate: { x: 9, y: 5 },
+      ...coordinates(10, 4)
     },
     playerId: 2,
+  },
+  {
+    spec: {
+      id: 10,
+      name: "VF-171",
+      unit_type: 1,
+      movement_range: 3,
+      max_hp: 800,
+      armaments: getAraments(1),
+    },
+    status: {
+      hp: 800,
+      ...coordinates(3, 8)
+    },
+    playerId: 1,
+  },
+  {
+    spec: {
+      id: 11,
+      name: "VF-171",
+      unit_type: 1,
+      movement_range: 2,
+      max_hp: 800,
+      armaments: getAraments(1),
+    },
+    status: {
+      hp: 800,
+      ...coordinates(5, 8)
+    },
+    playerId: 1,
+  },
+  {
+    spec: {
+      id: 12,
+      name: "VF-171",
+      unit_type: 1,
+      movement_range: 4,
+      max_hp: 800,
+      armaments: getAraments(1),
+    },
+    status: {
+      hp: 800,
+      ...coordinates(7, 8)
+    },
+    playerId: 1,
+  },
+  {
+    spec: {
+      id: 13,
+      name: "VF-171",
+      unit_type: 1,
+      movement_range: 4,
+      max_hp: 800,
+      armaments: getAraments(1),
+    },
+    status: {
+      hp: 800,
+      ...coordinates(9, 8)
+    },
+    playerId: 1,
   },
 ];

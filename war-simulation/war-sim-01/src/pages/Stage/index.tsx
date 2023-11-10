@@ -5,8 +5,8 @@ import { INITIAL_ACTION_MENU, getPlayer, loadUnit, reducer } from "./logics";
 import { Cell } from "./Cell";
 import { INITIAL_UNITS, PLAYERS } from "../../constants";
 
-const ROW_NUM = 9
-const CELL_NUM_IN_ROW = 12
+const ROW_NUM = 10
+const CELL_NUM_IN_ROW = 13
 
 const initialState: StateType = {
   activePlayerId: 1,
