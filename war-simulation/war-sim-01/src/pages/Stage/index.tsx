@@ -76,7 +76,7 @@ const ActionMenu = () => {
   const targetUnitId = actionMenu.targetUnitId;
   if (!targetUnitId) return <></>
 
-  const { spec } = loadUnit(targetUnitId, units);
+  const { spec, status } = loadUnit(targetUnitId, units);
 
   return (
     <div className="action-menu">
@@ -92,6 +92,7 @@ const ActionMenu = () => {
             payload: { running_unit_id: spec.id }
           });
         }}
+        disabled={status.moved}
       >
         移動
       </button>
@@ -101,6 +102,7 @@ const ActionMenu = () => {
           : "action-menu-btn"
         }
         onClick={() => setIsAttacking(!isAttacking)}
+        disabled={status.attacked}
       >
         攻撃
       </button>
@@ -123,6 +125,7 @@ const ActionMenu = () => {
                   }
                 }
               })}
+              disabled={status.attacked}
             >
               {armament.name}
             </button>
@@ -130,6 +133,7 @@ const ActionMenu = () => {
           </>
         ))}
       </div>}
+      <p style={{ color: "gray"}}>{`----------------`}</p>
       <button
         className="action-menu-btn"
         onClick={() => dispatch({ type: "TURN_END" })}

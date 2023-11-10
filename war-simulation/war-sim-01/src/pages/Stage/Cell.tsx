@@ -24,9 +24,11 @@ const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, o
   const cellClassName = actionMenu.targetUnitId === unitId
     ? "cell cell-active-unit"
     : "cell cell-unit";
-  const bgColor = actionMenu.targetUnitId === unitId
-    ? `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.375)`
-    : `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.125)`;
+  const bgColor = status.moved && status.attacked
+    ? "rgba(0, 0, 0, 0.125)"
+    : actionMenu.targetUnitId === unitId
+      ? `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.375)`
+      : `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.125)`;
 
   let cellContentClassForOrientation = "";
   if (orientation === "RIGHT") cellContentClassForOrientation = "rotate-90";

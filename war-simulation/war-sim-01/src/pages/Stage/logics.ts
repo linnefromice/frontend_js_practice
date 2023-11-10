@@ -94,6 +94,16 @@ export const reducer: Reducer<
   }
 
   if (type == "TURN_END") {
+    // recover executed status
+    const resettedUnits = state.units.map((unit) => ({
+      ...unit,
+      status: {
+        ...unit.status,
+        moved: false,
+        attacked: false,
+      }
+    }))
+
     return {
       ...state,
       actionMenu: {
@@ -101,6 +111,7 @@ export const reducer: Reducer<
         activeActionOption: nextActionOptionFromPayloadType(type),
       },
       activePlayerId: nextPlayer(state.activePlayerId, PLAYERS).id,
+      units: resettedUnits
     }
   }
 
@@ -190,6 +201,7 @@ const updateUnitsByMove = (oldUnits: UnitType[], unit_in_action: UnitType, paylo
       ...unit_in_action.status,
       previousCoordinate: unit_in_action.status.coordinate,
       coordinate: { x: payloadAction.x, y: payloadAction.y },
+      moved: true,
     }
   }
   return updateUnit(updatedUnit, oldUnits);
@@ -200,6 +212,8 @@ const updateUnitsByAttack = (oldUnits: UnitType[], unit_in_action: UnitType, pay
 
   const armament = unit_in_action.spec.armaments[payloadAction.armament_idx];
   const remainHp = attacked.status.hp - armament.value;
+
+  // update for attacked
   const newUnits = remainHp > 0
     ? (() => {
       const updatedUnit = {
@@ -212,5 +226,14 @@ const updateUnitsByAttack = (oldUnits: UnitType[], unit_in_action: UnitType, pay
       return updateUnit(updatedUnit, oldUnits);
     })() : removeUnit(oldUnits, attacked.spec.id);
 
-  return newUnits
+  // update for attacking
+  const updatedAttacking = {
+    ...unit_in_action,
+    status: {
+      ...unit_in_action.status,
+      moved: true, // NOTE: cannot move after an attack.
+      attacked: true,
+    }
+  }
+  return updateUnit(updatedAttacking, newUnits)
 }

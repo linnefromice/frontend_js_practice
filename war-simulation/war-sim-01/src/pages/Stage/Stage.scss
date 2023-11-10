@@ -97,6 +97,11 @@
         background-color: #B2B2FF;
         border: 2px solid #e5e5ff; // lavender
       }
+
+      &:disabled {
+        background-color: #D8D8D8;
+        border: 2px solid #E5E5E5;
+      }
     }
   }
 

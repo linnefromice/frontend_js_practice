@@ -69,5 +69,7 @@ export type UnitStatusType = {
   coordinate: Coordinate;
   previousCoordinate: Coordinate;
   initialCoordinate: Coordinate;
+  moved: boolean;
+  attacked: boolean;
 }
 

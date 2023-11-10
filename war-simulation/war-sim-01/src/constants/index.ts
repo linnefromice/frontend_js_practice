@@ -1,10 +1,18 @@
-import { Armament, Player, UnitType } from "../types";
+import { Armament, Coordinate, Player, UnitType } from "../types";
 
-const coordinates = (x: number, y: number) => ({
-  coordinate: { x, y },
-  previousCoordinate: { x, y },
-  initialCoordinate: { x, y },
+const coordinates = (coordinate: Coordinate) => ({
+  coordinate,
+  previousCoordinate: coordinate,
+  initialCoordinate: coordinate,
 });
+const initialStatus = (hp: number, coordinate: Coordinate) => (
+  {
+    hp,
+    ...coordinates(coordinate),
+    moved: false,
+    attacked: false,
+  }
+);
 
 export const PLAYERS: Player[] = [
   {
@@ -79,10 +87,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 1000,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 1000,
-      ...coordinates(5, 2)
-    },
+    status: initialStatus(1000, { x: 5, y: 2 }),
     playerId: 2,
   },
   {
@@ -94,10 +99,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 1000,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 1000,
-      ...coordinates(7, 2)
-    },
+    status: initialStatus(1000, { x: 7, y: 2 }),
     playerId: 2,
   },
   {
@@ -109,10 +111,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 1000,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 1000,
-      ...coordinates(6, 1)
-    },
+    status: initialStatus(1000, { x: 6, y: 1 }),
     playerId: 2,
   },
   {
@@ -124,10 +123,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 2000,
       armaments: getAraments(2),
     },
-    status: {
-      hp: 2000,
-      ...coordinates(3, 3)
-    },
+    status: initialStatus(2000, { x: 3, y: 3 }),
     playerId: 2,
   },
   {
@@ -139,10 +135,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 2000,
       armaments: getAraments(2),
     },
-    status: {
-      hp: 2000,
-      ...coordinates(9, 3)
-    },
+    status: initialStatus(2000, { x: 9, y: 3 }),
     playerId: 2,
   },
   {
@@ -154,10 +147,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 200,
       armaments: getAraments(3),
     },
-    status: {
-      hp: 200,
-      ...coordinates(2, 4)
-    },
+    status: initialStatus(200, { x: 2, y: 4 }),
     playerId: 2,
   },
   {
@@ -169,10 +159,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 200,
       armaments: getAraments(3),
     },
-    status: {
-      hp: 200,
-      ...coordinates(4, 4)
-    },
+    status: initialStatus(200, { x: 4, y: 4 }),
     playerId: 2,
   },
   {
@@ -184,10 +171,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 200,
       armaments: getAraments(3),
     },
-    status: {
-      hp: 200,
-      ...coordinates(8, 4)
-    },
+    status: initialStatus(200, { x: 8, y: 4 }),
     playerId: 2,
   },
   {
@@ -199,10 +183,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 200,
       armaments: getAraments(3),
     },
-    status: {
-      hp: 200,
-      ...coordinates(10, 4)
-    },
+    status: initialStatus(200, { x: 10, y: 4 }),
     playerId: 2,
   },
   {
@@ -214,10 +195,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 800,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 800,
-      ...coordinates(3, 8)
-    },
+    status: initialStatus(800, { x: 3, y: 8 }),
     playerId: 1,
   },
   {
@@ -229,10 +207,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 800,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 800,
-      ...coordinates(5, 8)
-    },
+    status: initialStatus(800, { x: 5, y: 8 }),
     playerId: 1,
   },
   {
@@ -244,10 +219,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 800,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 800,
-      ...coordinates(7, 8)
-    },
+    status: initialStatus(800, { x: 7, y: 8 }),
     playerId: 1,
   },
   {
@@ -259,10 +231,7 @@ export const INITIAL_UNITS: UnitType[] = [
       max_hp: 800,
       armaments: getAraments(1),
     },
-    status: {
-      hp: 800,
-      ...coordinates(9, 8)
-    },
+    status: initialStatus(800, { x: 9, y: 8 }),
     playerId: 1,
   },
 ];
