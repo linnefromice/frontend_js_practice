@@ -80,7 +80,7 @@
     align-items: flex-start;
 
     &-btn {
-      width: 108px; // 84px;
+      width: 108px;
       margin: 4px;
       padding: 8px 16px;
       background-color: #808080; // gray
@@ -107,6 +107,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+
+    &-description {
+      font-size: 4px;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, useState } from "react";
 import "./Stage.scss"
 import { ActionType, PayloadType, StateType } from "../../types";
-import { getPlayer, loadUnit, reducer } from "./logics";
+import { INITIAL_ACTION_MENU, getPlayer, loadUnit, reducer } from "./logics";
 import { Cell } from "./Cell";
 import { INITIAL_UNITS, PLAYERS } from "../../constants";
 
@@ -10,12 +10,7 @@ const CELL_NUM_IN_ROW = 12
 
 const initialState: StateType = {
   activePlayerId: 1,
-  actionMenu: {
-    isOpen: false,
-    targetUnitId: null,
-    activeActionOption: null,
-    selectedArmamentIdx: null
-  },
+  actionMenu: INITIAL_ACTION_MENU,
   units: INITIAL_UNITS,
 }
 
@@ -86,7 +81,10 @@ const ActionMenu = () => {
   return (
     <div className="action-menu">
       <button
-        className={actionMenu.activeActionOption === "MOVE" ? "action-menu-btn action-menu-btn-active" : "action-menu-btn"}
+        className={actionMenu.activeActionOption === "MOVE"
+          ? "action-menu-btn action-menu-btn-active"
+          : "action-menu-btn"
+        }
         onClick={() => {
           setIsAttacking(false);
           dispatch({
@@ -98,7 +96,10 @@ const ActionMenu = () => {
         移動
       </button>
       <button
-        className={isAttacking ? "action-menu-btn action-menu-btn-selected" : "action-menu-btn"}
+        className={isAttacking
+          ? "action-menu-btn action-menu-btn-selected"
+          : "action-menu-btn"
+        }
         onClick={() => setIsAttacking(!isAttacking)}
       >
         攻撃
@@ -125,7 +126,7 @@ const ActionMenu = () => {
             >
               {armament.name}
             </button>
-            <span style={{ fontSize: "4px" }}>{`POW: ${armament.value} / RANGE: ${armament.range}`}</span>
+            <span className="action-sub-menu-description">{`POW: ${armament.value} / RANGE: ${armament.range}`}</span>
           </>
         ))}
       </div>}

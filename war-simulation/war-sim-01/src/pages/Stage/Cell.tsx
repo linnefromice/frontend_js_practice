@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ActionContext } from ".";
 import { calculateOrientation, getPlayer, loadUnit } from "./logics";
-import { UnitIcon } from "./components";
+import { UnitIcon } from "./UnitIcon";
 import { Coordinate, PayloadAttackActionType, PayloadMoveActionType } from "../../types";
 import { PLAYERS } from "../../constants";
 
@@ -78,7 +78,7 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
               unitId={unitId}
               key={key}
               onClick={() => null}
-            />
+            /> // NOTE: unable to move where the unit is.
           : <div
               key={key}
               className="cell cell-move-range"
@@ -94,7 +94,7 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
                   }
                 })
               }
-            /> // TODO: separate to component (logic remains the same.)
+            />
       }
     }
     if (actionMenu.activeActionOption === "ATTACK") {
@@ -120,7 +120,7 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
               key={key}
               className="cell cell-attack-range"
               onClick={() => dispatch({ type: "CLOSE_MENU" })}
-            /> // TODO: not to attack
+            /> // NOTE: not to attack / TODO: clean
       }
     }
   }

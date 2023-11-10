@@ -1,6 +1,13 @@
 import { Reducer } from "react";
-import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player, PayloadMoveActionType, PayloadAttackActionType, ActionOptionType } from "../../types";
+import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player, PayloadMoveActionType, PayloadAttackActionType, ActionOptionType, StateActionMenuType } from "../../types";
 import { PLAYERS } from "../../constants";
+
+export const INITIAL_ACTION_MENU: StateActionMenuType = {
+  isOpen: false,
+  targetUnitId: null,
+  activeActionOption: null,
+  selectedArmamentIdx: null,
+}
 
 export const calculateOrientation = (
   current: { x: number, y: number },
@@ -80,10 +87,8 @@ export const reducer: Reducer<
     return {
       ...state,
       actionMenu: {
-        isOpen: false,
-        targetUnitId: null,
+        ...INITIAL_ACTION_MENU,
         activeActionOption: nextActionOptionFromPayloadType(type),
-        selectedArmamentIdx: null,
       }
     }
   }
@@ -92,10 +97,8 @@ export const reducer: Reducer<
     return {
       ...state,
       actionMenu: {
-        isOpen: false,
-        targetUnitId: null,
+        ...INITIAL_ACTION_MENU,
         activeActionOption: nextActionOptionFromPayloadType(type),
-        selectedArmamentIdx: null,
       },
       activePlayerId: nextPlayer(state.activePlayerId, PLAYERS).id,
     }
@@ -140,10 +143,8 @@ export const reducer: Reducer<
       return {
         ...state,
         actionMenu: {
-          isOpen: false,
-          targetUnitId: null,
+          ...INITIAL_ACTION_MENU,
           activeActionOption: nextActionOptionFromPayloadType(type),
-          selectedArmamentIdx: null,
         },
         units: newUnits,
       }
@@ -165,10 +166,8 @@ export const reducer: Reducer<
       return {
         ...state,
         actionMenu: {
-          isOpen: false,
-          targetUnitId: null,
+          ...INITIAL_ACTION_MENU,
           activeActionOption: nextActionOptionFromPayloadType(type),
-          selectedArmamentIdx: null,
         },
         units: newUnits,
       }

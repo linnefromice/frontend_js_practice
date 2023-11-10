@@ -12,13 +12,14 @@ export type UnitType = { spec: UnitSpecType, status: UnitStatusType, playerId: n
 
 export type StateType = {
   activePlayerId: number
-  actionMenu: {
-    isOpen: boolean
-    targetUnitId: number | null
-    activeActionOption: ActionOptionType | null
-    selectedArmamentIdx: number | null // temp: only for SELECT_ATTACK
-  }
+  actionMenu: StateActionMenuType
   units: UnitType[]
+}
+export type StateActionMenuType = {
+  isOpen: boolean
+  targetUnitId: number | null
+  activeActionOption: ActionOptionType | null
+  selectedArmamentIdx: number | null // temp: only for SELECT_ATTACK
 }
 
 export type PayloadType = {
