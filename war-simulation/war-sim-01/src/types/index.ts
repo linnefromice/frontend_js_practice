@@ -21,11 +21,16 @@ export type StateType = {
 }
 
 export type PayloadType = {
-  // NOTE: OpenMenu, the unit to be manipulated for Move, and the unit to be attacked for Attack.
-  id?: number,
-  x?: number,
-  y?: number
-  // TODO: info for attack (skill, target unit id, damage, etc)
+  running_unit_id?: number,
+  action?: PayloadMoveActionType | PayloadAttackActionType
+}
+export type PayloadMoveActionType = {
+  x: number,
+  y: number,
+}
+export type PayloadAttackActionType = {
+  target_unit_id: number,
+  armament_idx: number,
 }
 
 // Player Model

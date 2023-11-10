@@ -1,5 +1,5 @@
 import { Reducer } from "react";
-import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player } from "../../types";
+import { UnitType, OrientationType, StateType, ActionType, PayloadType, Player, PayloadMoveActionType, PayloadAttackActionType, ActionOptionType } from "../../types";
 import { PLAYERS } from "../../constants";
 
 export const calculateOrientation = (
@@ -82,7 +82,7 @@ export const reducer: Reducer<
       actionMenu: {
         isOpen: false,
         targetUnitId: null,
-        activeActionOption: null,  
+        activeActionOption: nextActionOptionFromPayloadType(type),
       }
     }
   }
@@ -93,97 +93,53 @@ export const reducer: Reducer<
       actionMenu: {
         isOpen: false,
         targetUnitId: null,
-        activeActionOption: null,
+        activeActionOption: nextActionOptionFromPayloadType(type),
       },
       activePlayerId: nextPlayer(state.activePlayerId, PLAYERS).id,
     }
   }
 
-  if (payload?.id === undefined) return state;
+  if (payload?.running_unit_id === undefined) return state;
+  const unit_in_action = loadUnit(payload.running_unit_id, state.units);
 
-  const unit = loadUnit(payload.id, state.units);
+  // Check if the unit_in_action is owned by the player
+  if (unit_in_action.playerId !== state.activePlayerId) return state;
 
-  if (type == "OPEN_MENU") {
-    if (unit.playerId !== state.activePlayerId) return state;
-
+  if (["OPEN_MENU", "SELECT_MOVE", "SELECT_ATTACK"].includes(type)) {
     return {
       ...state,
       actionMenu: {
         isOpen: true,
-        targetUnitId: payload.id,
-        activeActionOption: null,  
+        targetUnitId: unit_in_action.spec.id,
+        activeActionOption: nextActionOptionFromPayloadType(type),
       }
     }
   }
 
-  switch (type) {
-    case "SELECT_MOVE":
-      if (unit.playerId !== state.activePlayerId) return state;
+  // Check if action exists
+  if (payload.action === undefined) return state;
 
-      return {
-        ...state,
-        actionMenu: {
-          isOpen: true,
-          targetUnitId: payload.id,
-          activeActionOption: "MOVE",
-        }
-      }
+  switch (type) {
     case "DO_MOVE": {
-      if (payload.x === undefined || payload.y === undefined) return state;
-      const updatedUnit = {
-        ...unit,
-        status: {
-          ...unit.status,
-          previousCoordinate: unit.status.coordinate,
-          coordinate: { x: payload.x, y: payload.y },
-        }
-      }
-      const updatedUnits = updateUnit(updatedUnit, state.units);
+      const newUnits = updateUnitsByMove(state.units, unit_in_action, payload.action as PayloadMoveActionType); // NOTE: need to type guard
       return {
         ...state,
         actionMenu: {
           isOpen: false,
           targetUnitId: null,
-          activeActionOption: null,
+          activeActionOption: nextActionOptionFromPayloadType(type),
         },
-        units: updatedUnits,
+        units: newUnits,
       }
     }
-    case "SELECT_ATTACK":
-      if (unit.playerId !== state.activePlayerId) return state;
-
-      return {
-        ...state,
-        actionMenu: {
-          isOpen: true,
-          targetUnitId: payload.id,
-          activeActionOption: "ATTACK",
-        }
-      }
     case "DO_ATTACK": {
-      if (state.actionMenu.targetUnitId === null || payload.id === null) return state;
-      const attacking = loadUnit(state.actionMenu.targetUnitId, state.units);
-
-      const armament = attacking.spec.armaments[0]; // temp
-      const remainHp = unit.status.hp - armament.value;
-      const newUnits = remainHp > 0
-        ? (() => {
-          const updatedUnit = {
-            ...unit,
-            status: {
-              ...unit.status,
-              hp: remainHp,
-            }
-          }
-          return updateUnit(updatedUnit, state.units);
-        })() : removeUnit(state.units, unit.spec.id);
-
+      const newUnits = updateUnitsByAttack(state.units, unit_in_action, payload.action as PayloadAttackActionType); // NOTE: need to type guard
       return {
         ...state,
         actionMenu: {
           isOpen: false,
           targetUnitId: null,
-          activeActionOption: null,
+          activeActionOption: nextActionOptionFromPayloadType(type),
         },
         units: newUnits,
       }
@@ -191,4 +147,42 @@ export const reducer: Reducer<
     default:
       return state
   }
+}
+
+const nextActionOptionFromPayloadType = (type: ActionType): ActionOptionType | null => {
+  if (type === "SELECT_MOVE") return "MOVE";
+  if (type === "SELECT_ATTACK") return "ATTACK";
+  return null;
+}
+
+const updateUnitsByMove = (oldUnits: UnitType[], unit_in_action: UnitType, payloadAction: PayloadMoveActionType): UnitType[] => {
+  const updatedUnit = {
+    ...unit_in_action,
+    status: {
+      ...unit_in_action.status,
+      previousCoordinate: unit_in_action.status.coordinate,
+      coordinate: { x: payloadAction.x, y: payloadAction.y },
+    }
+  }
+  return updateUnit(updatedUnit, oldUnits);
+}
+
+const updateUnitsByAttack = (oldUnits: UnitType[], unit_in_action: UnitType, payloadAction: PayloadAttackActionType): UnitType[] => {
+  const attacked = loadUnit(payloadAction.target_unit_id, oldUnits);
+
+  const armament = unit_in_action.spec.armaments[payloadAction.armament_idx];
+  const remainHp = attacked.status.hp - armament.value;
+  const newUnits = remainHp > 0
+    ? (() => {
+      const updatedUnit = {
+        ...attacked,
+        status: {
+          ...attacked.status,
+          hp: remainHp,
+        }
+      }
+      return updateUnit(updatedUnit, oldUnits);
+    })() : removeUnit(oldUnits, attacked.spec.id);
+
+  return newUnits
 }

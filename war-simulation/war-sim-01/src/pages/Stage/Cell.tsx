@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ActionContext } from ".";
 import { calculateOrientation, getPlayer, loadUnit } from "./logics";
 import { UnitIcon } from "./components";
-import { Coordinate } from "../../types";
+import { Coordinate, PayloadAttackActionType, PayloadMoveActionType } from "../../types";
 import { PLAYERS } from "../../constants";
 
 const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean => {
@@ -57,18 +57,19 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
   const key = `cell.x${x}y${y}`
 
   if (actionMenu.targetUnitId) {
-    if (actionMenu.targetUnitId === unitId) {
+    const targetUnitId = actionMenu.targetUnitId;
+    if (targetUnitId === unitId) {
       return <CellWithUnit
         unitId={unitId}
         key={key}
         onClick={() => dispatch({
           type: "OPEN_MENU",
-          payload: { id: unitId }
+          payload: { running_unit_id: unitId }
         })}
       /> // TODO: consider background by action
     }
 
-    const { spec, status } = loadUnit(actionMenu.targetUnitId, units);
+    const { spec, status } = loadUnit(targetUnitId, units);
 
     if (actionMenu.activeActionOption === "MOVE") {
       if (isWithinRange(status.coordinate, { x, y }, spec.movement_range)) {
@@ -85,9 +86,11 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
                 () => dispatch({
                   type: "DO_MOVE",
                   payload: {
-                    id: spec.id,
-                    x,
-                    y,
+                    running_unit_id: spec.id,
+                    action: {
+                      x,
+                      y
+                    } as PayloadMoveActionType
                   }
                 })
               }
@@ -103,7 +106,13 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
               key={key}
               onClick={() => dispatch({
                 type: "DO_ATTACK",
-                payload: { id: unitId }
+                payload: {
+                  running_unit_id: targetUnitId,
+                  action: {
+                    target_unit_id: unitId,
+                    armament_idx: 0 // temp
+                  } as PayloadAttackActionType
+                }
               })}
             />
           : <div
@@ -121,7 +130,7 @@ export const Cell = ({ x, y, unitId }: { x: number, y: number, unitId?: number }
       key={key}
       onClick={() => dispatch({
         type: "OPEN_MENU",
-        payload: { id: unitId }
+        payload: { running_unit_id: unitId }
       })}
     />
   }
