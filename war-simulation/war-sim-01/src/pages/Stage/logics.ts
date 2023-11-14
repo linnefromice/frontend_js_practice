@@ -95,14 +95,23 @@ export const reducer: Reducer<
 
   if (type == "TURN_END") {
     // recover executed status
-    const resettedUnits = state.units.map((unit) => ({
-      ...unit,
-      status: {
-        ...unit.status,
-        moved: false,
-        attacked: false,
+    const resettedUnits = state.units.map((unit) => {
+
+      // NOTE: recover en only for the active player
+      const en = unit.playerId == state.activePlayerId
+        ? Math.min(unit.status.en + unit.spec.max_en * 0.1, unit.spec.max_en)
+        : unit.status.en;
+
+      return {
+        ...unit,
+        status: {
+          ...unit.status,
+          en,
+          moved: false,
+          attacked: false,
+        }
       }
-    }))
+    })
 
     return {
       ...state,
@@ -227,10 +236,13 @@ const updateUnitsByAttack = (oldUnits: UnitType[], unit_in_action: UnitType, pay
     })() : removeUnit(oldUnits, attacked.spec.id);
 
   // update for attacking
+  const remainEn = unit_in_action.status.en - armament.consumed_en; // NOTE: need to check if en is enough / TODO: validation
+
   const updatedAttacking = {
     ...unit_in_action,
     status: {
       ...unit_in_action.status,
+      en: remainEn,
       moved: true, // NOTE: cannot move after an attack.
       attacked: true,
     }

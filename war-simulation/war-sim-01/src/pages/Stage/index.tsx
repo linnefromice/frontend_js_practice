@@ -125,11 +125,11 @@ const ActionMenu = () => {
                   }
                 }
               })}
-              disabled={status.attacked}
+              disabled={status.attacked || armament.consumed_en > status.en}
             >
               {armament.name}
             </button>
-            <span className="action-sub-menu-description">{`POW: ${armament.value} / RANGE: ${armament.range}`}</span>
+            <span className="action-sub-menu-description">{`POW: ${armament.value} / EN: ${armament.consumed_en} / RANGE: ${armament.range}`}</span>
           </>
         ))}
       </div>}
