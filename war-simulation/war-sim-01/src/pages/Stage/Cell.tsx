@@ -11,6 +11,11 @@ const isWithinRange = (src: Coordinate, dst: Coordinate, range: number): boolean
   return diffX + diffY <= range;
 }
 
+const statusColor = (current: number, max: number): string => {
+  if (current === max) return "#93C572"; // pistachio
+  if (current <= max * 0.5) return "#FFAA33"; // yellow orange
+  return "";
+}
 const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, onClick: () => void }) => {
   const { state: { units, actionMenu } } = useContext(ActionContext);
   const { spec, status, playerId } = loadUnit(unitId, units);
@@ -51,12 +56,22 @@ const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, o
         </div>
         <div className="cell-content-text">
           <div>
-            <span className="cell-unit-status-sm">{status.hp}</span>
-            <span className="cell-unit-status-xs">{`/${spec.max_hp}`}</span>
+            <span
+              className="cell-unit-status-sm"
+              style={{ color: statusColor(status.hp, spec.max_hp) }}
+            >
+              {status.hp}
+            </span>
+            <span className="cell-unit-status-xs" style={{ color: "gray" }}>{`/${spec.max_hp}`}</span>
           </div>
           <div>
-            <span className="cell-unit-status-sm">{status.en}</span>
-            <span className="cell-unit-status-xs">{`/${spec.max_en}`}</span>
+            <span
+              className="cell-unit-status-sm"
+              style={{ color: statusColor(status.en, spec.max_en) }}
+            >
+              {status.en}
+            </span>
+            <span className="cell-unit-status-xs" style={{ color: "gray" }}>{`/${spec.max_en}`}</span>
           </div>
         </div>
       </div>
