@@ -50,6 +50,7 @@ export type UnitSpecType = {
   unit_type: number;
   movement_range: number;
   max_hp: number;
+  max_en: number;
   armaments: Armament[];
 }
 
@@ -57,6 +58,7 @@ export type Armament = {
   name: string;
   value: number;
   range: number;
+  consumed_en: number;
 }
 
 export type Coordinate = {
@@ -66,6 +68,7 @@ export type Coordinate = {
 
 export type UnitStatusType = {
   hp: number;
+  en: number;
   coordinate: Coordinate;
   previousCoordinate: Coordinate;
   initialCoordinate: Coordinate;

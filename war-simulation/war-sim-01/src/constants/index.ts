@@ -5,9 +5,10 @@ const coordinates = (coordinate: Coordinate) => ({
   previousCoordinate: coordinate,
   initialCoordinate: coordinate,
 });
-const initialStatus = (hp: number, coordinate: Coordinate) => (
+const initialStatus = (hp: number, en: number, coordinate: Coordinate) => (
   {
     hp,
+    en,
     ...coordinates(coordinate),
     moved: false,
     attacked: false,
@@ -31,41 +32,48 @@ const FIGHTER_ARMAMENTS: Armament[] = [
   {
     name: "Machine gun",
     value: 200,
-    range: 2
+    range: 2,
+    consumed_en: 50,
   },
   {
     name: "Missile",
     value: 400,
-    range: 3
+    range: 3,
+    consumed_en: 100,
   }
 ]
 const ARMY_TANK_ARMAMENTS: Armament[] = [
   {
     name: "Machine gun",
     value: 200,
-    range: 2
+    range: 2,
+    consumed_en: 75,
   },
   {
     name: "Cannon",
     value: 500,
-    range: 4
+    range: 4,
+    consumed_en: 150,
   }
 ]
 const BATTLE_SOLDIER_ARMAMENTS: Armament[] = [
   {
     name: "Assault rifle",
     value: 100,
-    range: 2
+    range: 2,
+    consumed_en: 10,
   },
   {
     name: "Grenade launcher",
     value: 300,
-    range: 2
+    range: 2,
+    consumed_en: 20,
   },
   {
     name: "Suicide drone",
     value: 500,
-    range: 3
+    range: 3,
+    consumed_en: 75,
   },
 ]
 
@@ -85,9 +93,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 3,
       max_hp: 1000,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(1000, { x: 5, y: 2 }),
+    status: initialStatus(1000, 200, { x: 5, y: 2 }),
     playerId: 2,
   },
   {
@@ -97,9 +106,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 2,
       max_hp: 1000,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(1000, { x: 7, y: 2 }),
+    status: initialStatus(1000, 200, { x: 7, y: 2 }),
     playerId: 2,
   },
   {
@@ -109,9 +119,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 4,
       max_hp: 1000,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(1000, { x: 6, y: 1 }),
+    status: initialStatus(1000, 200, { x: 6, y: 1 }),
     playerId: 2,
   },
   {
@@ -121,9 +132,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 2,
       movement_range: 2,
       max_hp: 2000,
+      max_en: 400,
       armaments: getAraments(2),
     },
-    status: initialStatus(2000, { x: 3, y: 3 }),
+    status: initialStatus(2000, 400, { x: 3, y: 3 }),
     playerId: 2,
   },
   {
@@ -133,9 +145,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 2,
       movement_range: 2,
       max_hp: 2000,
+      max_en: 400,
       armaments: getAraments(2),
     },
-    status: initialStatus(2000, { x: 9, y: 3 }),
+    status: initialStatus(2000, 400, { x: 9, y: 3 }),
     playerId: 2,
   },
   {
@@ -145,9 +158,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 3,
       movement_range: 1,
       max_hp: 200,
+      max_en: 100,
       armaments: getAraments(3),
     },
-    status: initialStatus(200, { x: 2, y: 4 }),
+    status: initialStatus(200, 100, { x: 2, y: 4 }),
     playerId: 2,
   },
   {
@@ -157,9 +171,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 3,
       movement_range: 1,
       max_hp: 200,
+      max_en: 100,
       armaments: getAraments(3),
     },
-    status: initialStatus(200, { x: 4, y: 4 }),
+    status: initialStatus(200, 100, { x: 4, y: 4 }),
     playerId: 2,
   },
   {
@@ -169,9 +184,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 3,
       movement_range: 1,
       max_hp: 200,
+      max_en: 100,
       armaments: getAraments(3),
     },
-    status: initialStatus(200, { x: 8, y: 4 }),
+    status: initialStatus(200, 100, { x: 8, y: 4 }),
     playerId: 2,
   },
   {
@@ -181,9 +197,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 3,
       movement_range: 1,
       max_hp: 200,
+      max_en: 100,
       armaments: getAraments(3),
     },
-    status: initialStatus(200, { x: 10, y: 4 }),
+    status: initialStatus(200, 100, { x: 10, y: 4 }),
     playerId: 2,
   },
   {
@@ -193,9 +210,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 3,
       max_hp: 800,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(800, { x: 3, y: 8 }),
+    status: initialStatus(800, 200, { x: 3, y: 8 }),
     playerId: 1,
   },
   {
@@ -205,9 +223,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 2,
       max_hp: 800,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(800, { x: 5, y: 8 }),
+    status: initialStatus(800, 200, { x: 5, y: 8 }),
     playerId: 1,
   },
   {
@@ -217,9 +236,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 4,
       max_hp: 800,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(800, { x: 7, y: 8 }),
+    status: initialStatus(800, 200, { x: 7, y: 8 }),
     playerId: 1,
   },
   {
@@ -229,9 +249,10 @@ export const INITIAL_UNITS: UnitType[] = [
       unit_type: 1,
       movement_range: 4,
       max_hp: 800,
+      max_en: 200,
       armaments: getAraments(1),
     },
-    status: initialStatus(800, { x: 9, y: 8 }),
+    status: initialStatus(800, 200, { x: 9, y: 8 }),
     playerId: 1,
   },
 ];

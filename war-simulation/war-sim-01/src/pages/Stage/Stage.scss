@@ -51,6 +51,10 @@
   }
 
   &-unit-status-sm {
+    font-size: 8px;
+  }
+
+  &-unit-status-xs {
     font-size: 4px;
   }
 
@@ -69,6 +73,21 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    &-image {
+      flex-grow: 1;
+    }
+
+    &-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      div {
+        line-height: 0.75rem;
+      }
+    }
   }
 }
 

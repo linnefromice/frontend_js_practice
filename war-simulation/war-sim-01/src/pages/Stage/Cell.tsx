@@ -43,12 +43,22 @@ const CellWithUnit = ({ unitId, key, onClick }: { unitId: number, key: string, o
       onClick={onClick}
     >
       <div className="cell-content">
-        <UnitIcon
-          unitType={spec.unit_type}
-          className={cellContentClassForOrientation}
-        />
-        <div className="cell-unit-status-md">{status.hp}</div>
-        <div className="cell-unit-status-sm">{`/ ${spec.max_hp}`}</div>
+        <div className="cell-content-image">
+          <UnitIcon
+            unitType={spec.unit_type}
+            className={cellContentClassForOrientation}
+          />
+        </div>
+        <div className="cell-content-text">
+          <div>
+            <span className="cell-unit-status-sm">{status.hp}</span>
+            <span className="cell-unit-status-xs">{`/${spec.max_hp}`}</span>
+          </div>
+          <div>
+            <span className="cell-unit-status-sm">{status.en}</span>
+            <span className="cell-unit-status-xs">{`/${spec.max_en}`}</span>
+          </div>
+        </div>
       </div>
     </div>
   )

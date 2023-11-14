@@ -4,8 +4,8 @@ import BattleSoldierIcon from "../../assets/battleSoldier.svg?react";
 
 export const UnitIcon = ({ unitType, className }: { unitType: number, className: string }): JSX.Element => {
   const props = {
-    width: 24,
-    height: 24,
+    width: 28,
+    height: 28,
     className,
   }
 
