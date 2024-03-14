@@ -1,17 +1,20 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Form, json, useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import { getContact } from "~/data";
+import { getContact } from "../data";
 
-export const loader = async ({params}: LoaderFunctionArgs) => {
+export const loader = async ({
+  params,
+}: LoaderFunctionArgs) => {
   invariant(params.contactId, "Missing contactId param");
   const contact = await getContact(params.contactId);
   if (!contact) {
-    throw new Response("Not Found", {status: 404});
+    throw new Response("Not Found", { status: 404 });
   }
   return json({ contact });
-}
+};
 
 export default function EditContact() {
   const { contact } = useLoaderData<typeof loader>();
@@ -22,17 +25,17 @@ export default function EditContact() {
         <span>Name</span>
         <input
           defaultValue={contact.first}
-          aria-label="First Name"
+          aria-label="First name"
           name="first"
           type="text"
           placeholder="First"
         />
         <input
+          aria-label="Last name"
           defaultValue={contact.last}
-          aria-label="Last Name"
           name="last"
-          type="text"
           placeholder="Last"
+          type="text"
         />
       </p>
       <label>
@@ -57,7 +60,7 @@ export default function EditContact() {
       <label>
         <span>Notes</span>
         <textarea
-          aria-label="Notes"
+          defaultValue={contact.notes}
           name="notes"
           rows={6}
         />
@@ -67,5 +70,5 @@ export default function EditContact() {
         <button type="button">Cancel</button>
       </p>
     </Form>
-  )
+  );
 }
