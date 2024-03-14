@@ -33,6 +33,8 @@ export default function App() {
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const submit = useSubmit();
+  const searching = navigation.location
+    && new URLSearchParams(navigation.location.search).has("q");
 
   useEffect(() => {
     const searchField = document.getElementById("q");
@@ -56,17 +58,30 @@ export default function App() {
             <Form
               id="search-form"
               role="search"
-              onChange={(event) => submit(event.currentTarget)}
+              onChange={(event) => {
+                const isFirstSearch = q === null;
+                submit(event.currentTarget, {
+                  replace: !isFirstSearch
+                })
+              }}
             >
               <input
                 aria-label="Search contacts"
+                className={searching && !searching
+                  ? "loading"
+                  : ""
+                }
                 defaultValue={q || ""}
                 id="q"
                 name="q"
                 placeholder="Search"
                 type="search"
               />
-              <div id="search-spinner" aria-hidden hidden={true} />
+              <div
+                id="search-spinner"
+                aria-hidden
+                hidden={!searching}
+              />
             </Form>
             <Form method="post">
               <button type="submit">New</button>
