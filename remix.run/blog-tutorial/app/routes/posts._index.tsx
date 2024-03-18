@@ -26,6 +26,9 @@ const Posts = () => {
             </Link>
           </li>
         ))}
+        <Link to="admin" className="text-red-600 underline">
+          Admin
+        </Link>
       </ul>
     </div>
   );
