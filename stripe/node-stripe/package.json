@@ -17,11 +17,17 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "ts-node": "ts-node"
   },
   "devDependencies": {
+    "@types/node": "20.11.5",
     "gts": "^5.3.0",
-    "typescript": "~5.4.3",
-    "@types/node": "20.11.5"
+    "typescript": "~5.4.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "stripe": "^15.0.0",
+    "ts-node": "^10.9.2"
   }
 }
