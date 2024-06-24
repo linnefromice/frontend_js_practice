@@ -1,5 +1,5 @@
 import "./App.css";
-import "./chat-notification.css";
+import { ChatIcon } from "./ChatIcon";
 
 function App() {
   return (
@@ -9,23 +9,5 @@ function App() {
     </div>
   );
 }
-
-const ChatIcon = () => {
-  return (
-    <div className="chat-notification">
-      <div className="chat-notification-logo-wrapper">
-        <img
-          className="chat-notification-logo"
-          src="/logos/chat-icon.png"
-          alt="Chat icon"
-        />
-      </div>
-      <div className="chat-notification-content">
-        <h4 className="chat-notification-title">ChitChat</h4>
-        <p className="chat-notification-message">You have a new message!</p>
-      </div>
-    </div>
-  );
-};
 
 export default App;
