@@ -13,7 +13,29 @@ const execute = async () => {
   const customer = await StripeCustomer.get(stripe, {
     customerId: CUSTOMER_ID,
   });
-  console.dir(customer, { depth: null });
+
+  // const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
+  //   customerId: customer.id,
+  // });
+  // console.dir(subscriptions, { depth: null });
+  // const created = await StripeSubscription.create(stripe, {
+  //   customerId: customer.id,
+  //   items: [
+  //     {
+  //       price: DUMMY_SUBSCRIPTIONS.plus.prices.short,
+  //     },
+  //   ],
+  // });
+  // console.log(`Created subscription: ${created.id}`);
+  // console.dir(created.items.data, { depth: null });
+
+  // const updated = await StripeSubscription.replaceItem(stripe, {
+  //   subscriptionId: created.id,
+  //   replacedItemId: created.items.data[0].id,
+  //   toPriceId: DUMMY_SUBSCRIPTIONS.premium.prices.short,
+  // });
+  // console.log(`Updated subscription: ${updated.id}`);
+  // console.dir(updated.items.data, { depth: null });
 };
 
 console.log("Starting the script");
