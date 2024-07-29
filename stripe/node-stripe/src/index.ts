@@ -17,12 +17,12 @@ const execute = async () => {
     customerId: CUSTOMER_ID,
   });
 
-  // const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
-  //   customerId: customer.id,
-  // });
-  // console.dir(subscriptions, { depth: null });
-  // const subscription0 = subscriptions.data[0];
-  // console.dir(subscription0, { depth: null });
+  const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
+    customerId: customer.id,
+  });
+  console.dir(subscriptions, { depth: null });
+  const subscription0 = subscriptions.data[0];
+  console.dir(subscription0, { depth: null });
 
   const created = await StripeSubscription.create(stripe, {
     customerId: customer.id,
