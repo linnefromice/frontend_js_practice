@@ -17,36 +17,44 @@ const execute = async () => {
     customerId: CUSTOMER_ID,
   });
 
-  const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
-    customerId: customer.id,
-  });
-  // console.dir(subscriptions, { depth: null });
-  const subscription0 = subscriptions.data[0];
-  console.dir(subscription0, { depth: null });
-
-  // const created = await StripeSubscription.create(stripe, {
+  // const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
   //   customerId: customer.id,
-  //   items: [
-  //     {
-  //       price: DUMMY_SUBSCRIPTIONS.plus.prices.short,
-  //     },
-  //   ],
   // });
-  // console.log(`Created subscription: ${created.id}`);
-  // console.dir(created.items.data, { depth: null });
+  // console.dir(subscriptions, { depth: null });
+  // const subscription0 = subscriptions.data[0];
+  // console.dir(subscription0, { depth: null });
 
-  // const updated = await StripeSubscription.replaceItem(stripe, {
-  //   subscriptionId: created.id,
-  //   replacedItemId: created.items.data[0].id,
-  //   toPriceId: DUMMY_SUBSCRIPTIONS.premium.prices.short,
+  const created = await StripeSubscription.create(stripe, {
+    customerId: customer.id,
+    items: [
+      {
+        price: DUMMY_SUBSCRIPTIONS.plus.prices.short,
+      },
+    ],
+  });
+  console.log(`Created subscription: ${created.id}`);
+  console.dir(created.items.data, { depth: null });
+
+  const updated = await StripeSubscription.replaceItem(stripe, {
+    subscriptionId: created.id,
+    replacedItemId: created.items.data[0].id,
+    toPriceId: DUMMY_SUBSCRIPTIONS.premium.prices.short,
+  });
+  console.log(`Updated subscription: ${updated.id}`);
+  console.dir(updated.items.data, { depth: null });
+
+  // const scheduleds = await StripeSubscriptionSchedule.listFromCustomer(stripe, {
+  //   customerId: customer.id,
   // });
-  // console.log(`Updated subscription: ${updated.id}`);
-  // console.dir(updated.items.data, { depth: null });
+  // const scheduled = scheduleds.data[0];
+  // const canceled = await StripeSubscriptionSchedule.cancel(stripe, {
+  //   scheduleId: scheduled.id,
+  // });
+  // console.dir(canceled, { depth: null });
 
   const scheduled = await scheduleSubscriptionToSwitch(stripe, {
-    subscriptionId: subscription0.id,
-    priceId: DUMMY_SUBSCRIPTIONS.plus.prices.short,
-    startDate: subscription0.current_period_end, // note: to start immediately after the current subscription
+    subscriptionId: updated.id,
+    nextPriceId: DUMMY_SUBSCRIPTIONS.plus.prices.short,
   });
   console.dir(scheduled, { depth: null });
 };
