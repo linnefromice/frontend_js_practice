@@ -73,49 +73,71 @@ const retrieveSubscription = async (subscriptionId: string) => {
   console.log(subscription.items.data);
 };
 
-const executeSubscriptionSchedule = async (
-  customerId: string,
-  subscriptionId: string
-) => {
-  // create a new subscription schedule
-  // const scheduled = await stripe.subscriptionSchedules.create({
-  //   // customer: customerId,
-  //   from_subscription: subscriptionId,
-  // });
-  // console.dir(scheduled, {
-  //   depth: null,
-  // });
-  // update the subscription schedule to change the phase (new item)
-  await stripe.subscriptionSchedules.update(
-    "sub_sched_1PhmyHP7LyQtEQaS5DqM1OzP",
-    {
-      phases: [
-        {
-          items: [
-            {
-              price: PRICE.plus.month,
-            },
-          ],
-          start_date: 1722048092,
-        },
-      ],
-    }
-  );
-};
-
 const execute = async () => {
+  //// Create Customer
+  // const customer = await stripe.customers.create({
+  //   name: 'linnefromparu',
+  //   email: 'linnefromparu@gmail.com',
+  // });
+  // console.log(customer);
+  //// Get Customer
   const customer = await stripe.customers.retrieve(CUSTOMER_ID);
   console.log(customer);
+  // Create PaymentIntent
+  // const setupIntent = await stripe.setupIntents.create({
+  //   automatic_payment_methods: {
+  //     allow_redirects: "always",
+  //     enabled: true,
+  //   },
+  //   customer: "cus_Pu5Hz668V0l38x",
+  //   use_stripe_sdk: true,
+  //   confirm: false,
+  //   payment_method_types: ["card", ""],
+  // });
+  // console.log(setupIntent);
 
-  // await executeSubscription(customer.id);
-  // await retrieveSubscription("sub_1Ph0ZcP7LyQtEQaSgLDdaU94");
-  await executeSubscriptionSchedule(
-    customer.id,
-    "sub_1Ph0ZcP7LyQtEQaSgLDdaU94"
-  );
+  // GET /v1/customers/:id
+  // const customer = await stripe.customers.retrieve("cus_Pu5Hz668V0l38x");
+  // console.log(JSON.stringify(customer, null, 2));
+  // await stripe.customers.update("cus_Pu5Hz668V0l38x", {
+  //   invoice_settings: {
+  //     default_payment_method: "pm_1P4JACP7LyQtEQaSu8lPRBeN",
+  //   },
+  // });
+
+  // GET /v1/customers/:id/payment_methods
+  // const res = await stripe.paymentMethods.list({
+  //   customer: "cus_Pu5Hz668V0l38x",
+  // });
+  // console.log(JSON.stringify(res, null, 2));
+
+  // minimum
+  // const paymentIntent = await stripe.paymentIntents.create({
+  //   customer: "cus_Pu2ihR0CYmLHgi",
+  //   description: "Upgrade Subscription: Plus -> Premium",
+  //   amount: 20000 - 10000,
+  //   currency: "usd",
+  //   confirm: true,
+  //   return_url: "https://example.com/success",
+  //   payment_method: "pm_1P4HjPP7LyQtEQaSO0iY0VRK",
+  //   // automatic_payment_methods: {
+  //   //   allow_redirects: "always",
+  //   //   enabled: true,
+  //   // },
+  // });
+  // console.log(JSON.stringify(paymentIntent, null, 2));
 };
 
 console.log("Starting the script");
 execute()
   .then(() => console.log("Finished the script"))
   .catch(console.error);
+
+// Customer
+// id: 'cus_Pu2ihR0CYmLHgi',
+// object: 'customer',
+
+// SetupIntent
+// id: 'seti_1P4Em1P7LyQtEQaSMORR8APU',
+// object: 'setup_intent',
+// client_secret: 'seti_1P4Em1P7LyQtEQaSMORR8APU_secret_Pu2rWHovH6A7Uh6aVU6Rp6JXlo1no8D',
