@@ -51,7 +51,7 @@ export namespace StripeSubscription {
           price: toPriceId,
         },
       ],
-      proration_behavior: "none",
+      proration_behavior: "none", // no proration
     });
   };
 }

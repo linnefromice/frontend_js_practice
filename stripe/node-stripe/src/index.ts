@@ -1,6 +1,9 @@
 import "dotenv/config";
 import Stripe from "stripe";
+import { DUMMY_SUBSCRIPTIONS } from "./constants";
 import { StripeCustomer } from "./stripe/customer";
+import { StripeSubscription } from "./stripe/subscription";
+import { scheduleSubscriptionToSwitch } from "./stripe/subscriptionSchedule";
 
 const { STRIPE_API_PUBLIC_KEY, STRIPE_API_SECRET_KEY } = process.env;
 if (!STRIPE_API_PUBLIC_KEY || !STRIPE_API_SECRET_KEY) {
@@ -14,10 +17,13 @@ const execute = async () => {
     customerId: CUSTOMER_ID,
   });
 
-  // const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
-  //   customerId: customer.id,
-  // });
+  const subscriptions = await StripeSubscription.listFromCustomer(stripe, {
+    customerId: customer.id,
+  });
   // console.dir(subscriptions, { depth: null });
+  const subscription0 = subscriptions.data[0];
+  console.dir(subscription0, { depth: null });
+
   // const created = await StripeSubscription.create(stripe, {
   //   customerId: customer.id,
   //   items: [
@@ -36,6 +42,13 @@ const execute = async () => {
   // });
   // console.log(`Updated subscription: ${updated.id}`);
   // console.dir(updated.items.data, { depth: null });
+
+  const scheduled = await scheduleSubscriptionToSwitch(stripe, {
+    subscriptionId: subscription0.id,
+    priceId: DUMMY_SUBSCRIPTIONS.plus.prices.short,
+    startDate: subscription0.current_period_end, // note: to start immediately after the current subscription
+  });
+  console.dir(scheduled, { depth: null });
 };
 
 console.log("Starting the script");
