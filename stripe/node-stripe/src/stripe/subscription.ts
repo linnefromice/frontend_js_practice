@@ -54,4 +54,26 @@ export namespace StripeSubscription {
       proration_behavior: "none", // no proration
     });
   };
+
+  export const cancelAtTheEndOfCurrentCycle = async (
+    stripe: Stripe,
+    args: {
+      subscriptionId: string;
+    }
+  ) => {
+    return await stripe.subscriptions.update(args.subscriptionId, {
+      cancel_at_period_end: true,
+    });
+  };
+
+  export const continueAfterCurrentCycle = async (
+    stripe: Stripe,
+    args: {
+      subscriptionId: string;
+    }
+  ) => {
+    return await stripe.subscriptions.update(args.subscriptionId, {
+      cancel_at_period_end: false,
+    });
+  };
 }
