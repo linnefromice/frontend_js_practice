@@ -1,5 +1,6 @@
 import "dotenv/config";
 import Stripe from "stripe";
+import { StripeCustomerPortal } from "./stripe/customerPortal";
 
 const { STRIPE_API_PUBLIC_KEY, STRIPE_API_SECRET_KEY } = process.env;
 if (!STRIPE_API_PUBLIC_KEY || !STRIPE_API_SECRET_KEY) {
@@ -7,36 +8,20 @@ if (!STRIPE_API_PUBLIC_KEY || !STRIPE_API_SECRET_KEY) {
 }
 const stripe = new Stripe(STRIPE_API_SECRET_KEY);
 const CUSTOMER_ID = process.env.CUSTOMER_ID as string;
-const CONFIG_ID = "bpc_1PhuDQP7LyQtEQaSJqQB6R9l";
+const CONFIG_ID = "bpc_1Pi6uPP7LyQtEQaSWmUjasRX";
 
-export const portalConfiguration = async () => {
-  return await stripe.billingPortal.configurations.create({
-    business_profile: {
-      headline: "Example, Inc.",
-      privacy_policy_url: "https://example.com/privacy",
-      terms_of_service_url: "https://example.com/terms",
-    },
-    features: {
-      customer_update: {
-        allowed_updates: ["address", "email", "name", "tax_id"],
-        enabled: true,
-      },
-      invoice_history: {
-        enabled: true,
-      },
-    },
-  });
-};
+// bpc_1Ph4BBP7LyQtEQaSTmVKZPru <- initial
+// bpc_1PhuDQP7LyQtEQaSJqQB6R9l <- example.inc
+// bpc_1Pi6njP7LyQtEQaSswjunX6s <- company
+// bpc_1Pi6syP7LyQtEQaS6O5y8lt1 <- company with payment_method_update.enabled = false
+// bpc_1Pi6uPP7LyQtEQaSWmUjasRX <- company with payment_method_update.enabled = true
 
 console.log("Starting the script > portalConfiguration");
-// portalConfiguration()
-// stripe.billingPortal.configurations.list()
-stripe.billingPortal.sessions
-  .create({
-    customer: CUSTOMER_ID,
-    configuration: CONFIG_ID,
-    return_url: "https://docs.stripe.com/",
-  })
+StripeCustomerPortal.session(stripe, {
+  customerId: CUSTOMER_ID,
+  configurationId: CONFIG_ID,
+  returnUrl: "https://app.chainsight.network/",
+})
   .then(v => {
     console.dir(v, { depth: null });
     console.log("Finished the script > portalConfiguration");
