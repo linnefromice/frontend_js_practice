@@ -46,6 +46,15 @@ export namespace StripeSubscriptionSchedule {
   ) => {
     return await stripe.subscriptionSchedules.cancel(args.scheduleId);
   };
+
+  export const release = async (
+    stripe: Stripe,
+    args: {
+      scheduleId: string;
+    }
+  ) => {
+    return await stripe.subscriptionSchedules.release(args.scheduleId);
+  };
 }
 
 export const scheduleSubscriptionToSwitch = async (
