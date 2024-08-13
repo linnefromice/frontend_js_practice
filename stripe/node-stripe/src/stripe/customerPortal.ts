@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { SUBSCRIPTIONS } from "../constants";
 
 const { STRIPE_CUSTOMER_PORTAL_PP_URL, STRIPE_CUSTOMER_PORTAL_TOS_URL } =
   process.env;
@@ -30,6 +31,7 @@ export namespace StripeCustomerPortal {
     ) => await stripe.billingPortal.configurations.retrieve(args.configId);
 
     export const create = async (stripe: Stripe) => {
+      const { plus, premium } = SUBSCRIPTIONS;
       return await stripe.billingPortal.configurations.create({
         business_profile: {
           headline: "Manage your Chainsight billing settings",
@@ -46,6 +48,25 @@ export namespace StripeCustomerPortal {
           },
           invoice_history: {
             enabled: true,
+          },
+          subscription_update: {
+            enabled: true,
+            default_allowed_updates: ["price"],
+            products: [
+              {
+                product: plus.id,
+                prices: [plus.prices.short, plus.prices.long],
+              },
+              {
+                product: premium.id,
+                prices: [premium.prices.short, premium.prices.long],
+              },
+            ],
+            proration_behavior: "create_prorations",
+          },
+          subscription_cancel: {
+            enabled: true,
+            mode: "immediately",
           },
         },
       });
