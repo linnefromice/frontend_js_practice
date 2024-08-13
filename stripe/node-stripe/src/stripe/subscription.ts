@@ -28,9 +28,22 @@ export namespace StripeSubscription {
     }
   ) => {
     const { customerId, items } = args;
+    const now = new Date();
+    const roundedNow =
+      Math.round(now.getTime() / (1000 * 60 * 60 * 24)) * 60 * 60 * 24;
+
     return await stripe.subscriptions.create({
       customer: customerId,
       items,
+      backdate_start_date: roundedNow,
+      // billing_cycle_anchor: roundedNow,
+      billing_cycle_anchor_config: {
+        day_of_month: now.getDate(),
+        hour: 0,
+        minute: 0,
+        second: 0,
+      },
+      proration_behavior: "none", // no proration
       expand: ["customer", "default_payment_method"],
     });
   };
