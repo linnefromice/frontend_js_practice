@@ -6,7 +6,6 @@ if (!STRIPE_API_PUBLIC_KEY || !STRIPE_API_SECRET_KEY) {
   throw new Error("Missing Stripe API keys");
 }
 const stripe = new Stripe(STRIPE_API_SECRET_KEY);
-const CUSTOMER_ID = process.env.CUSTOMER_ID as string;
 
 const createProduct = async () => {
   const product = await stripe.products.create({
@@ -40,15 +39,13 @@ const createProduct = async () => {
 //   url: null
 // }
 
-const previewInvoice = async () => {
+const previewInvoice = async (
+  price_data: Stripe.InvoiceCreatePreviewParams.InvoiceItem.PriceData
+) => {
   const invoice = await stripe.invoices.createPreview({
     invoice_items: [
       {
-        price_data: {
-          product: "prod_QksYCv3uJnMuXu",
-          currency: "usd",
-          unit_amount: 200000, // note: set to calculate the total amount
-        },
+        price_data,
         quantity: 1,
       },
     ],
@@ -58,30 +55,43 @@ const previewInvoice = async () => {
   return invoice;
 };
 
-const createImmediateInvoice = async () => {
+const createImmediateInvoice = async (
+  customer: string,
+  price_data: Stripe.InvoiceItemCreateParams.PriceData
+) => {
   const invoice = await stripe.invoices.create({
-    customer: CUSTOMER_ID,
+    customer,
     auto_advance: true,
   });
   await stripe.invoiceItems.create({
-    customer: CUSTOMER_ID,
-    price_data: {
-      product: "prod_QksYCv3uJnMuXu",
-      currency: "usd",
-      unit_amount: 200000,
-    },
+    customer,
+    price_data,
     invoice: invoice.id,
   });
   await stripe.invoices.pay(invoice.id);
 
-  const result = await stripe.invoices.retrieve(invoice.id);
-  console.log(`Created invoice: ${result.id}`);
+  return invoice.id;
+};
+
+const execute = async () => {
+  const customer = process.env.CUSTOMER_ID as string;
+  const price_data = {
+    product: "prod_QksYCv3uJnMuXu",
+    currency: "usd",
+    unit_amount: 200000, // note: set to calculate the total amount
+  };
+
+  const preview = await previewInvoice(price_data);
+  console.log(`Previewed invoice: ${preview.id}`);
+  console.dir(preview);
+  console.dir(preview.lines.data[0]);
+
+  const invoiceId = await createImmediateInvoice(customer, price_data);
+  console.log(`Payed invoice: ${invoiceId}`);
+  const result = await stripe.invoices.retrieve(invoiceId);
+  console.dir(result);
   console.dir(result.lines.data[0]);
-  return result;
 };
 
 console.log("Starting the script");
-createImmediateInvoice().then(res => {
-  console.dir(res);
-  console.log("Finished the script");
-});
+execute().then(() => console.log("Finished the script"));
