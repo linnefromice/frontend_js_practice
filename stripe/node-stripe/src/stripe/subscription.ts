@@ -26,8 +26,17 @@ export namespace StripeSubscription {
       customerId: string;
       items: Array<Stripe.SubscriptionCreateParams.Item>;
     }
+  ) => await createWithDefaultPaymentMethod(stripe, args);
+
+  export const createWithDefaultPaymentMethod = async (
+    stripe: Stripe,
+    args: {
+      customerId: string;
+      items: Array<Stripe.SubscriptionCreateParams.Item>;
+      defaultPaymentMethod?: string;
+    }
   ) => {
-    const { customerId, items } = args;
+    const { customerId, items, defaultPaymentMethod } = args;
     const now = new Date();
     const roundedNow =
       Math.round(now.getTime() / (1000 * 60 * 60 * 24)) * 60 * 60 * 24;
@@ -43,6 +52,7 @@ export namespace StripeSubscription {
         minute: 0,
         second: 0,
       },
+      default_payment_method: defaultPaymentMethod,
       proration_behavior: "none", // no proration
       expand: ["customer", "default_payment_method"],
     });

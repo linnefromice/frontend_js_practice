@@ -8,7 +8,7 @@ if (!STRIPE_API_PUBLIC_KEY || !STRIPE_API_SECRET_KEY) {
 }
 const stripe = new Stripe(STRIPE_API_SECRET_KEY);
 const CUSTOMER_ID = process.env.CUSTOMER_ID as string;
-const CONFIG_ID = "bpc_1PnBQRP7LyQtEQaS12kOZgYi";
+const CONFIG_ID = "bpc_1PozrkP7LyQtEQaSTvwHMdZb";
 
 // bpc_1Ph4BBP7LyQtEQaSTmVKZPru <- initial
 // bpc_1PhuDQP7LyQtEQaSJqQB6R9l <- example.inc
@@ -17,6 +17,7 @@ const CONFIG_ID = "bpc_1PnBQRP7LyQtEQaS12kOZgYi";
 // bpc_1Pi6uPP7LyQtEQaSWmUjasRX <- company with payment_method_update.enabled = true
 // bpc_1PnBBkP7LyQtEQaShhDU7I4L <- full-featured (subscription_cancel.mode = at_period_end)
 // bpc_1PnBQRP7LyQtEQaS12kOZgYi <- full-featured (subscription_cancel.mode = immediately)
+// bpc_1PozrkP7LyQtEQaSTvwHMdZb <- only customer_update,invoice_history without pp,tos
 
 // StripeCustomerPortal.Configuration.create(stripe)
 //   .then(v => {
@@ -25,9 +26,10 @@ const CONFIG_ID = "bpc_1PnBQRP7LyQtEQaS12kOZgYi";
 //   })
 //   .catch(console.error);
 
+// StripeCustomerPortal.Configuration.retrieve(stripe, { configId: CONFIG_ID })
 console.log("Starting the script > portalConfiguration");
 StripeCustomerPortal.session(stripe, {
-  customerId: CUSTOMER_ID,
+  customerId: CUSTOMER_ID, // "cus_QfHzPtZYMiaULa", // CUSTOMER_ID,
   configurationId: CONFIG_ID,
   returnUrl: "https://app.chainsight.network/",
 })

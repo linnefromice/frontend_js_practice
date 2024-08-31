@@ -35,39 +35,39 @@ export namespace StripeCustomerPortal {
       return await stripe.billingPortal.configurations.create({
         business_profile: {
           headline: "Manage your Chainsight billing settings",
-          privacy_policy_url: STRIPE_CUSTOMER_PORTAL_PP_URL,
-          terms_of_service_url: STRIPE_CUSTOMER_PORTAL_TOS_URL,
+          // privacy_policy_url: STRIPE_CUSTOMER_PORTAL_PP_URL,
+          // terms_of_service_url: STRIPE_CUSTOMER_PORTAL_TOS_URL,
         },
         features: {
           customer_update: {
             allowed_updates: ["address", "email", "name", "tax_id"],
             enabled: true,
           },
-          payment_method_update: {
-            enabled: true,
-          },
+          // payment_method_update: {
+          //   enabled: true,
+          // },
           invoice_history: {
             enabled: true,
           },
-          subscription_update: {
-            enabled: true,
-            default_allowed_updates: ["price"],
-            products: [
-              {
-                product: plus.id,
-                prices: [plus.prices.short, plus.prices.long],
-              },
-              {
-                product: premium.id,
-                prices: [premium.prices.short, premium.prices.long],
-              },
-            ],
-            proration_behavior: "create_prorations",
-          },
-          subscription_cancel: {
-            enabled: true,
-            mode: "immediately",
-          },
+          // subscription_update: {
+          //   enabled: true,
+          //   default_allowed_updates: ["price"],
+          //   products: [
+          //     {
+          //       product: plus.id,
+          //       prices: [plus.prices.short, plus.prices.long],
+          //     },
+          //     {
+          //       product: premium.id,
+          //       prices: [premium.prices.short, premium.prices.long],
+          //     },
+          //   ],
+          //   proration_behavior: "create_prorations",
+          // },
+          // subscription_cancel: {
+          //   enabled: true,
+          //   mode: "immediately",
+          // },
         },
       });
     };
